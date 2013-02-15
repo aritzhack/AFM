@@ -5,6 +5,7 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import afm.blocks.Blocks;
 import afm.command.CommandAFM;
+import afm.data.Properties;
 import afm.gui.GUIHandler;
 import afm.i18n.Localization;
 import afm.items.Items;
@@ -24,7 +25,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(name = Properties.Mod.NAME, modid = Properties.Mod.ID, version = Properties.Mod.VERSION)
+@Mod(name = Properties.MOD_NAME, modid = Properties.MOD_ID, version = Properties.VERSION)
 @NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { Properties.Network.CHANNEL }, packetHandler = PacketHandler.class)
 public class AFM {
 
@@ -32,19 +33,18 @@ public class AFM {
 
 	WorldGenerator worldGen = new WorldGenerator();
 
-	@Instance(Properties.Mod.ID)
+	@Instance(Properties.MOD_ID)
 	public static AFM afm = new AFM();
 
 	@SidedProxy(clientSide = "afm.proxy.ClientProxy", serverSide = "afm.proxy.CommonProxy")
 	public static CommonProxy proxy;
 
-	public static CreativeTabs tabAFM = new TabAFM(CreativeTabs.getNextID(),
-			"tabAFM");
+	public static CreativeTabs tabAFM = new TabAFM(CreativeTabs.getNextID(), "tabAFM");
 
 	public static GUIHandler guiHandler = new GUIHandler();
-	
+
 	@ServerStarting
-	public void serverStarting(FMLServerStartingEvent e){
+	public void serverStarting(FMLServerStartingEvent e) {
 		e.registerServerCommand(new CommandAFM());
 	}
 
@@ -54,12 +54,12 @@ public class AFM {
 		AFMLogger.init();
 
 		Properties.init(event.getSuggestedConfigurationFile());
-		
+
 		Localization.loadLocales();
 
 		MinecraftForge.EVENT_BUS.register(new EventHandler());
 
-		NetworkRegistry.instance().registerGuiHandler(afm, guiHandler);
+		NetworkRegistry.instance().registerGuiHandler(AFM.afm, AFM.guiHandler);
 	}
 
 	@Init
@@ -67,7 +67,7 @@ public class AFM {
 
 		this.showDebugGroup(true, event.getSide().toString());
 
-		proxy.registerTexuresAndRenderers();
+		AFM.proxy.registerTexuresAndRenderers();
 
 		Items.init();
 		Blocks.init();
@@ -79,11 +79,8 @@ public class AFM {
 
 	private void showDebugGroup(boolean opening, String side) {
 
-		String s = String.format(
-				"%s Initialization for Minecraft %s and Forge %s %s in %s",
-				Properties.Mod.NAME, Properties.Mod.MC_VERSION,
-				Properties.Mod.FORGE_VERSION, opening ? "started" : "finished",
-				side);
+		String s = String.format("%s Initialization for Minecraft %s and Forge %s %s in %s", Properties.MOD_NAME, Properties.MC_VERSION,
+				Properties.FORGE_VERSION, opening ? "started" : "finished", side);
 
 		// Just aesthetics...
 		String b1 = "", b2 = "";

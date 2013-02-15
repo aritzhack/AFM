@@ -3,16 +3,17 @@ package afm.gui.gui;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import afm.core.Properties;
-import afm.gui.container.ContainerSharedCrafting;
-import afm.tileEntity.TESharedCrafting;
+import afm.data.GUIData;
+import afm.data.Properties;
+import afm.gui.container.ContainerSharedWorkbench;
+import afm.tileEntity.TESharedWorkbench;
 
-public class GUISharedCrafting extends AFMGUI {
+public class GUISharedWorkbench extends AFMGUI {
 
-	public GUISharedCrafting(TESharedCrafting tileEntity,
+	public GUISharedWorkbench(TESharedWorkbench tileEntity,
 			InventoryPlayer invPlayer, World world) {
-		super(new ContainerSharedCrafting(tileEntity, invPlayer, world),
-				Properties.GUI.BG_SHAREDCRAFTING);
+		super(new ContainerSharedWorkbench(tileEntity, invPlayer, world),
+				GUIData.BG_SHAREDCRAFTING);
 	}
 
 	@Override

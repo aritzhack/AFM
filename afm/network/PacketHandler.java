@@ -24,11 +24,9 @@ public class PacketHandler implements IPacketHandler {
 	}
 
 	@Override
-	public void onPacketData(INetworkManager manager,
-			Packet250CustomPayload packet, Player player) {
+	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
 
-		DataInputStream packetData = new DataInputStream(
-				new ByteArrayInputStream(packet.data));
+		DataInputStream packetData = new DataInputStream(new ByteArrayInputStream(packet.data));
 
 		try {
 			this.packets.get(packetData.readByte()).handle(packetData, player);

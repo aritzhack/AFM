@@ -6,13 +6,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import afm.blocks.BlockContainerAFM;
 import afm.core.AFM;
-import afm.core.Properties;
+import afm.data.BlockData;
+import afm.data.GUIData;
+import afm.data.Properties;
 import afm.wip.tileEntity.TEFabricator;
 
 public class BlockFabricator extends BlockContainerAFM {
 
 	public BlockFabricator() {
-		super(Properties.Block.ID_FABRICATOR, Material.wood);
+		super(BlockData.ID_FABRICATOR, BlockData.NAME_FABRICATOR, Material.wood);
 	}
 
 	@Override
@@ -24,7 +26,7 @@ public class BlockFabricator extends BlockContainerAFM {
 		if (te == null || player.isSneaking())
 			return false;
 
-		player.openGui(AFM.afm, Properties.GUI.ID_FABRICATOR, world, x, y, z);
+		player.openGui(AFM.afm, GUIData.ID_FABRICATOR, world, x, y, z);
 		return true;
 	}
 

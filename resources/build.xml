@@ -4,11 +4,11 @@
 	<description>
         AFM (Aritzh's first mod) is, as it's name says, the first mod
         aritzh develops, using the Forge/FML APIs, and implementing as
-        many things as possible, therefore helping me (aritzh) making
+        many things as possible, helping me (aritzh) making
     	better mods in the future.
     </description>
 
-	<property name="mod.version.major" value="0.2" />
+	<property name="mod.version" value="0.2" />
 	<property name="mod.id" value="AFM" />
 
 	<property name="mcp.version" value="7.26" />
@@ -18,11 +18,6 @@
 	<property name="mcp.dir" value="../../.." />
 	<property name="src.dir" value="../" />
 	<property name="res.dir" value="${basedir}" />
-
-	<buildnumber file="${res.dir}/build.number" />
-	<propertyfile file="${res.dir}/build.number" />
-
-	<property name="mod.version" value="${mod.version.major}.${build.number}" />
 
 	<!-- Output folders -->
 	<property name="oldSource.dir" value="${mcp.dir}/../../source/${mod.version}/" />
@@ -45,7 +40,7 @@
 		</copy>
 	</target>
 
-	<target name="Compile and Build" description="Recompile, deobfuscates and package the code into a jar">
+	<target name="Compile and Build" description="Recompile, reobfuscates and package the code into a jar">
 
 		<echo>Compiling ${mod.id} version ${mod.version} for Forge/FML ${forge.version} and MC ${mc.version}, using MCP ${mcp.version}</echo>
 
@@ -84,6 +79,5 @@
 			<fileset refid="mcmod" />
 		</jar>
 	</target>
-
 
 </project>

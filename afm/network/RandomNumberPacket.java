@@ -5,7 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import afm.core.AFMLogger;
-import afm.core.Properties;
+import afm.data.Properties;
 import cpw.mods.fml.common.network.Player;
 
 public class RandomNumberPacket extends AFMPacket {
@@ -31,12 +31,10 @@ public class RandomNumberPacket extends AFMPacket {
 	}
 
 	@Override
-	public void handle(DataInputStream packetData, Player player)
-			throws IOException {
+	public void handle(DataInputStream packetData, Player player) throws IOException {
 		this.ran1 = packetData.readInt();
 		this.ran2 = packetData.readInt();
-		AFMLogger.log(String.format("Random numbers: %d, %d", this.ran1,
-				this.ran2));
+		AFMLogger.log(String.format("Random numbers: %d, %d", this.ran1, this.ran2));
 
 	}
 

@@ -1,6 +1,5 @@
 package afm.items;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemReed;
 import afm.core.AFMLogger;
 
@@ -12,7 +11,7 @@ public class Items {
 	public static void init() {
 		AFMLogger.log("Registering and initializing items");
 
-		quartz = new ItemQuartz();
+		Items.quartz = new ItemQuartz();
 
 	}
 }

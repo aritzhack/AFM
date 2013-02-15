@@ -7,7 +7,8 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import afm.core.Properties;
+import afm.data.ItemData;
+import afm.data.Properties;
 import afm.tileEntity.TETestChest;
 
 public class ContainerChestTest extends AFMContainer {
@@ -23,7 +24,7 @@ public class ContainerChestTest extends AFMContainer {
 
 				Slot s = new Slot(tileEntity, x + y * 9, 8 + x * 18,
 						18 + y * 18);
-				s.setBackgroundIconTexture(Properties.Item.TEXTURE);
+				s.setBackgroundIconTexture(ItemData.TEXTURE);
 				s.setBackgroundIconIndex(15);
 
 				addSlotToContainer(s);

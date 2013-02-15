@@ -9,30 +9,30 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import afm.core.AFM;
-import afm.core.Properties;
+import afm.data.BlockData;
+import afm.data.GUIData;
 import afm.tileEntity.TETestChest;
 
-public class DayDetector extends BlockContainerAFM {
+public class BlockDayDetector extends BlockContainerAFM {
 
-	public DayDetector() {
-		super(Properties.Block.ID_DAYDETECTOR,
-				Properties.Block.TEXTUREINDEX_DAYDETECTOR);
+	public BlockDayDetector() {
+		super(BlockData.ID_DAYDETECTOR, BlockData.NAME_DAY_DETECTOR, BlockData.TEXTUREINDEX_DAYDETECTOR);
 		this.setCreativeTab(AFM.tabAFM);
 	}
 
 	@Override
 	public String getTextureFile() {
-		return Properties.Block.TEXTURE;
+		return BlockData.TEXTURE;
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z,
-			EntityPlayer player, int i, float f, float g, float t) {
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float f, float g, float t) {
 		TileEntity tile_entity = world.getBlockTileEntity(x, y, z);
 
-		if (tile_entity == null || player.isSneaking()) return false;
+		if (tile_entity == null || player.isSneaking())
+			return false;
 
-		player.openGui(AFM.afm, Properties.GUI.ID_TESTCHEST, world, x, y, z);
+		player.openGui(AFM.afm, GUIData.ID_TESTCHEST, world, x, y, z);
 		return true;
 	}
 
@@ -47,7 +47,8 @@ public class DayDetector extends BlockContainerAFM {
 
 		TileEntity tile_entity = world.getBlockTileEntity(x, y, z);
 
-		if (!(tile_entity instanceof IInventory)) return;
+		if (!(tile_entity instanceof IInventory))
+			return;
 
 		IInventory inventory = (IInventory) tile_entity;
 
@@ -59,9 +60,7 @@ public class DayDetector extends BlockContainerAFM {
 				float ry = rand.nextFloat() * 0.6F + 0.1F;
 				float rz = rand.nextFloat() * 0.6F + 0.1F;
 
-				EntityItem entity_item = new EntityItem(world, x + rx, y + ry,
-						z + rz, new ItemStack(item.itemID, item.stackSize,
-								item.getItemDamage()));
+				EntityItem entity_item = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(item.itemID, item.stackSize, item.getItemDamage()));
 
 				float factor = 0.5F;
 

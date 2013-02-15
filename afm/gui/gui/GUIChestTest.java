@@ -7,7 +7,8 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
-import afm.core.Properties;
+import afm.data.GUIData;
+import afm.data.Properties;
 import afm.gui.container.ContainerChestTest;
 import afm.tileEntity.TETestChest;
 
@@ -16,7 +17,7 @@ public class GUIChestTest extends AFMGUI {
 	public GUIChestTest(TETestChest tile_entity,
 			InventoryPlayer player_inventory) {
 		super(new ContainerChestTest(tile_entity, player_inventory),
-				Properties.GUI.BG_TESTCHEST);
+				GUIData.BG_TESTCHEST);
 	}
 
 	@Override
