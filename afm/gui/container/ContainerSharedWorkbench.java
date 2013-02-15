@@ -9,16 +9,16 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.world.World;
-import afm.tileEntity.TESharedCrafting;
+import afm.tileEntity.TESharedWorkbench;
 
-public class ContainerSharedCrafting extends AFMContainer {
+public class ContainerSharedWorkbench extends AFMContainer {
 
 	public InventoryCrafting craftMatrix = new InventoryCrafting(this, 3, 3);
 	public IInventory craftResult = new InventoryCraftResult();
 	private final World world;
-	private final TESharedCrafting tileEntity;
+	private final TESharedWorkbench tileEntity;
 
-	public ContainerSharedCrafting(TESharedCrafting tileEntity,
+	public ContainerSharedWorkbench(TESharedWorkbench tileEntity,
 			InventoryPlayer invPlayer, World world) {
 		this.tileEntity = tileEntity;
 

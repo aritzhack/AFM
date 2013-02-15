@@ -1,6 +1,5 @@
 package afm.proxy;
 
-
 public class CommonProxy {
 
 	/**

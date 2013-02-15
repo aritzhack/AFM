@@ -2,13 +2,13 @@ package afm.blocks;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import afm.core.Properties;
+import afm.data.BlockData;
 import afm.tileEntity.TETestModel;
 
 public class BlockTestModel extends BlockContainerAFM {
 
 	public BlockTestModel() {
-		super(Properties.Block.ID_TESTMODEL);
+		super(BlockData.ID_TESTMODEL, BlockData.NAME_TESTMODEL);
 	}
 
 	@Override

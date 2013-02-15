@@ -8,7 +8,8 @@ import net.minecraftforge.client.ForgeHooksClient;
 
 import org.lwjgl.opengl.GL11;
 
-import afm.core.Properties;
+import afm.data.BlockData;
+import afm.data.Properties;
 
 public class ModelTestModel extends ModelBase {
     ModelRenderer TopCube;
@@ -47,7 +48,7 @@ public class ModelTestModel extends ModelBase {
       GL11.glDisable(GL11.GL_LIGHTING);
 
       GL11.glTranslated(x+.5, y-.5, z+.5);
-      ForgeHooksClient.bindTexture(Properties.Block.TEXTURE_TESTMODEL, 0);
+      ForgeHooksClient.bindTexture(BlockData.TEXTURE_TESTMODEL, 0);
 
       TopCube.render(scale);
       MidTube.render(scale);

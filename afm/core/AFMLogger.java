@@ -11,31 +11,31 @@ public class AFMLogger {
 	private static final Level defaultLevel = Level.INFO;
 
 	public static void init() {
-		logger.setParent(FMLLog.getLogger());
+		AFMLogger.logger.setParent(FMLLog.getLogger());
 	}
 
 	public static void log(Level level, String message) {
-		logger.log(level, message);
+		AFMLogger.logger.log(level, message);
 	}
 
 	public static void log(Level level, String message, Object... params) {
-		logger.log(level, String.format(message, params));
+		AFMLogger.logger.log(level, String.format(message, params));
 	}
 
 	public static void log(String message) {
-		logger.log(defaultLevel, message);
+		AFMLogger.logger.log(AFMLogger.defaultLevel, message);
 	}
 
 	public static void log(String message, Object... params) {
-		logger.log(defaultLevel, String.format(message, params));
+		AFMLogger.logger.log(AFMLogger.defaultLevel, String.format(message, params));
 	}
 
 	public static void log(String message, Throwable thrown) {
-		logger.log(defaultLevel, message, thrown);
+		AFMLogger.logger.log(AFMLogger.defaultLevel, message, thrown);
 	}
 
 	public static void log(Object o) {
-		log(String.valueOf(o));
+		AFMLogger.log(String.valueOf(o));
 	}
 
 }

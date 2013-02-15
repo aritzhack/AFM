@@ -1,60 +1,47 @@
 package afm.blocks;
 
 import afm.core.AFMLogger;
-import afm.items.ColouredGlassItem;
-import afm.items.TintedGlassItem;
+import afm.data.BlockData;
+import afm.items.ItemGlassColoured;
+import afm.items.ItemGlassTinted;
 import afm.wip.blocks.BlockFabricator;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class Blocks {
 
-	public static ColouredGlass colouredGlass;
-	public static TintedGlass tintedGlass;
-	public static OreAFM oreBlock;
-	public static DayDetector dayDetector;
-	public static BlockSharedCraftingTable sharedCrafting;
-	public static BlockTestModel blockTestModel;
-	public static BlockFabricator blockFabricator;
-	public static BlockLaser blockLaser;
+	public static BlockGlassColoured colouredGlass;
+	public static BlockGlassTinted tintedGlass;
+	public static BlockOreAFM oreAFM;
+	public static BlockDayDetector dayDetector;
+	public static BlockSharedWorkbench sharedWorkbench;
+	public static BlockTestModel testModel;
+	public static BlockFabricator fabricator;
+	public static BlockLaser laser;
 
 	public static void init() {
-		
+
 		AFMLogger.log("Registering and initializing blocks");
 
-		colouredGlass = new ColouredGlass();
-		tintedGlass = new TintedGlass();
-		oreBlock = new OreAFM();
-		dayDetector = new DayDetector();
-		sharedCrafting = new BlockSharedCraftingTable();
-		blockTestModel = new BlockTestModel();
-		blockFabricator = new BlockFabricator();
-		blockLaser = new BlockLaser();
-		
-		LanguageRegistry.addName(oreBlock, "AFM ore");
-		LanguageRegistry.addName(dayDetector, "Day Detector");
-		LanguageRegistry.addName(sharedCrafting, "Shared Crafting Table");
-		LanguageRegistry.addName(blockTestModel, "Test Model");
-		LanguageRegistry.addName(blockFabricator, "fabricator");
-		LanguageRegistry.addName(blockLaser, "Laser");
-		// LanguageRegistry.addName(new ItemStack(), "");
+		Blocks.colouredGlass = new BlockGlassColoured();
+		Blocks.tintedGlass = new BlockGlassTinted();
+		Blocks.oreAFM = new BlockOreAFM();
+		Blocks.dayDetector = new BlockDayDetector();
+		Blocks.sharedWorkbench = new BlockSharedWorkbench();
+		Blocks.testModel = new BlockTestModel();
+		Blocks.fabricator = new BlockFabricator();
+		Blocks.laser = new BlockLaser();
 
-		GameRegistry.registerBlock(colouredGlass, ColouredGlassItem.class,
-				"colouredGlass");
-		GameRegistry.registerBlock(tintedGlass, TintedGlassItem.class,
-				"tintedGlass");
-		GameRegistry.registerBlock(oreBlock, "tempOre");
-		GameRegistry.registerBlock(dayDetector, "dayDetector");
-		GameRegistry.registerBlock(sharedCrafting, "sharedCrafting");
-		GameRegistry.registerBlock(blockTestModel, "testModel");
-		GameRegistry.registerBlock(blockFabricator, "blockFabricator");
-		GameRegistry.registerBlock(blockLaser, "blockLaser");
+		GameRegistry.registerBlock(Blocks.colouredGlass, ItemGlassColoured.class, BlockData.NAME_COLOUREDGLASS);
+		GameRegistry.registerBlock(Blocks.tintedGlass, ItemGlassTinted.class, BlockData.NAME_TINTEDGLASS);
+		GameRegistry.registerBlock(Blocks.oreAFM, BlockData.NAME_ORE_AFM);
+		GameRegistry.registerBlock(Blocks.dayDetector, BlockData.NAME_DAY_DETECTOR);
+		GameRegistry.registerBlock(Blocks.sharedWorkbench, BlockData.NAME_SHARED_WORKBENCH);
+		GameRegistry.registerBlock(Blocks.testModel, BlockData.NAME_TESTMODEL);
+		GameRegistry.registerBlock(Blocks.fabricator, BlockData.NAME_FABRICATOR);
+		GameRegistry.registerBlock(Blocks.laser, BlockData.NAME_LASER);
 
-
-
-
-		colouredGlass.init();
-		oreBlock.init();
+		Blocks.colouredGlass.init();
+		Blocks.oreAFM.init();
 
 	}
 

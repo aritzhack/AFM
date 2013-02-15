@@ -3,27 +3,26 @@ package afm.blocks;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
-import afm.core.Properties;
-import afm.core.UtilAFM;
+import afm.data.BlockData;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ColouredGlass extends BlockAFM {
+public class BlockGlassTinted extends BlockAFM {
 
-	public ColouredGlass() {
-		super(Properties.Block.ID_COLOURED_GLASS);
-		this.setBlockName("colouredGlass");
+	public BlockGlassTinted() {
+		super(BlockData.ID_TINTED_GLASS, BlockData.NAME_TINTEDGLASS, Material.glass);
+		this.init();
 	}
 
 	@Override
 	public int getBlockTextureFromSideAndMetadata(int side, int metadata) {
-		return metadata + 16 * Properties.Block.TEXTUREROW_COLOURED_GLASS;
+		return metadata + 16 * BlockData.TEXTUREROW_TINTED_GLASS;
 	}
 
 	@Override
@@ -56,15 +55,13 @@ public class ColouredGlass extends BlockAFM {
 	 * 
 	 * @return this
 	 */
-	public ColouredGlass init() {
+	public BlockGlassTinted init() {
 		for (int meta = 0; meta < 16; meta++) {
 			ItemStack glass = new ItemStack(Block.glass, 1);
 			ItemStack output = new ItemStack(this, 1, meta);
 			ItemStack dye = new ItemStack(Item.dyePowder, 1, 15 - meta);
 
 			GameRegistry.addShapelessRecipe(output, glass, dye);
-			LanguageRegistry.addName(output,
-					UtilAFM.colorNames[output.getItemDamage()] + " Glass");
 		}
 		return this;
 	}
@@ -77,7 +74,7 @@ public class ColouredGlass extends BlockAFM {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getRenderBlockPass() {
-		return 0;
+		return 1;
 	}
 
 	@Override
@@ -86,21 +83,14 @@ public class ColouredGlass extends BlockAFM {
 	 * Returns true if the given side of this block type should be rendered, if the adjacent block is at the given
 	 * coordinates.  Args: blockAccess, x, y, z, side
 	 */
-	public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess,
-			int par2, int par3, int par4, int par5) {
+	public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
 		int var6 = par1IBlockAccess.getBlockId(par2, par3, par4);
-		return var6 == this.blockID ? false : super.shouldSideBeRendered(
-				par1IBlockAccess, par2, par3, par4, 1 - par5);
+		return var6 == this.blockID ? false : super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, 1 - par5);
 	}
 
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
-	}
-
-	@Override
-	public int getMobilityFlag() {
-		return 0;
 	}
 
 }

@@ -1,0 +1,53 @@
+####################################################
+###################### Blocks ######################
+####################################################
+
+tile.AFMLaser.name=Laser
+tile.AFMSharedWorkbench.name=Shared Crafting Table
+tile.AFMTestModel.name=Test Model Block
+tile.AFMDayDetector.name=Day Detector
+tile.AFMOre.name=AFM Ore
+tile.AFMFabricator.name=Fabricator
+
+tile.AFMTintedGlass.white.name=White tinted glass
+tile.AFMTintedGlass.orange.name=Orange tinted glass
+tile.AFMTintedGlass.magenta.name=Magenta tinted glass
+tile.AFMTintedGlass.lightblue.name=Light blue tinted glass
+tile.AFMTintedGlass.yellow.name=Yellow tinted glass
+tile.AFMTintedGlass.lightgreen.name=Light green tinted glass
+tile.AFMTintedGlass.pink.name=Pink tinted glass
+tile.AFMTintedGlass.darkgrey.name=Dark grey tinted glass
+tile.AFMTintedGlass.lightgrey.name=Light grey tinted glass
+tile.AFMTintedGlass.cyan.name=Cyan tinted glass
+tile.AFMTintedGlass.purple.name=Purple tinted glass
+tile.AFMTintedGlass.blue.name=Blue tinted glass
+tile.AFMTintedGlass.brown.name=Brown tinted glass
+tile.AFMTintedGlass.green.name=Green tinted glass
+tile.AFMTintedGlass.red.name=Red tinted glass
+tile.AFMTintedGlass.black.name=Black tinted glass
+
+tile.AFMColouredGlass.white.name=White coloured glass
+tile.AFMColouredGlass.orange.name=Orange coloured glass
+tile.AFMColouredGlass.magenta.name=Magenta coloured glass
+tile.AFMColouredGlass.lightblue.name=Light blue coloured glass
+tile.AFMColouredGlass.yellow.name=Yellow coloured glass
+tile.AFMColouredGlass.lightgreen.name=Light green coloured glass
+tile.AFMColouredGlass.pink.name=Pink coloured glass
+tile.AFMColouredGlass.darkgrey.name=Dark grey coloured glass
+tile.AFMColouredGlass.lightgrey.name=Light grey coloured glass
+tile.AFMColouredGlass.cyan.name=Cyan coloured glass
+tile.AFMColouredGlass.purple.name=Purple coloured glass
+tile.AFMColouredGlass.blue.name=Blue coloured glass
+tile.AFMColouredGlass.brown.name=Brown coloured glass
+tile.AFMColouredGlass.green.name=Green coloured glass
+tile.AFMColouredGlass.red.name=Red coloured glass
+tile.AFMColouredGlass.black.name=Black coloured glass
+
+#tile..name=
+
+###################################################
+###################### Items ######################
+###################################################
+
+item.quartz.name=Quartz
+#item..name=

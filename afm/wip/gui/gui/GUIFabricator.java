@@ -3,7 +3,8 @@ package afm.wip.gui.gui;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import afm.core.Properties;
+import afm.data.GUIData;
+import afm.data.Properties;
 import afm.gui.gui.AFMGUI;
 import afm.wip.gui.container.ContainerFabricator;
 import afm.wip.tileEntity.TEFabricator;
@@ -13,7 +14,7 @@ public class GUIFabricator extends AFMGUI {
 	public GUIFabricator(TEFabricator tileEntity, InventoryPlayer inventory,
 							World world) {
 		super(new ContainerFabricator(tileEntity, inventory, world),
-				Properties.GUI.BG_FABRICATOR);
+				GUIData.BG_FABRICATOR);
 	}
 
 	@Override

@@ -1,0 +1,20 @@
+package afm.data;
+
+import net.minecraftforge.common.Configuration;
+
+public class GUIData {
+	private static final String DIR = Properties.RES_DIR + "gui/";
+
+	public static final String BG_TESTCHEST = GUIData.DIR + "testchest.png";
+	public static final String BG_SHAREDCRAFTING = GUIData.DIR + "crafting.png";
+	public static final String BG_FABRICATOR = GUIData.DIR + "fabricator.png";
+
+	// GUI IDs
+	public static final int ID_TESTCHEST = 0;
+	public static final int ID_SHAREDWORKBENCH = 1;
+	public static final int ID_FABRICATOR = 2;
+
+	public static void loadConfig(Configuration config) {
+
+	}
+}

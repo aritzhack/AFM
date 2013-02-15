@@ -1,6 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties version="1.0">
-	<comment>English (US) Localization File</comment>
-	<entry key="item.quartz.name">Extra</entry>
-</properties>
+####################################################
+###################### Blocks ######################
+####################################################
+
+tile.AFMLaser.name=Laser
+tile.AFMSharedWorkbench.name=Shared Crafting Table
+tile.AFMTestModel.name=Bloque con Test de Modelo
+tile.AFMDayDetector.name=Detector de día
+tile.AFMOre.name=Mena AFM
+tile.AFMFabricator.name=Fabricador
+
+tile.AFMTintedGlass.white.name=Cristal tintado de blanco
+tile.AFMTintedGlass.orange.name=Cristal tintado de naranja
+tile.AFMTintedGlass.magenta.name=Cristal tintado de magenta
+tile.AFMTintedGlass.lightblue.name=Cristal tintado de azul claro
+tile.AFMTintedGlass.yellow.name=Cristal tintado de amarillo
+tile.AFMTintedGlass.lightgreen.name=Cristal tintado de verde claro
+tile.AFMTintedGlass.pink.name=Cristal tintado de rosa
+tile.AFMTintedGlass.darkgrey.name=Cristal tintado de gris oscuro
+tile.AFMTintedGlass.lightgrey.name=Cristal tintado de gris claro
+tile.AFMTintedGlass.cyan.name=Cristal tintado de cián
+tile.AFMTintedGlass.purple.name=Cristal tintado de morado
+tile.AFMTintedGlass.blue.name=Cristal tintado de azul
+tile.AFMTintedGlass.brown.name=Cristal tintado de marrón
+tile.AFMTintedGlass.green.name=Cristal tintado de verde
+tile.AFMTintedGlass.red.name=Cristal tintado de rojo
+tile.AFMTintedGlass.black.name=Cristal tintado de negro
+
+tile.AFMColouredGlass.white.name=Cristal coloreado de blanco 
+tile.AFMColouredGlass.orange.name=Cristal coloreado de naranja
+tile.AFMColouredGlass.magenta.name=Cristal coloreado de magenta
+tile.AFMColouredGlass.lightblue.name=Cristal coloreado de azul claro
+tile.AFMColouredGlass.yellow.name=Cristal coloreado de amarillo
+tile.AFMColouredGlass.lightgreen.name=Cristal coloreado de verde claro
+tile.AFMColouredGlass.pink.name=Cristal coloreado de rosa
+tile.AFMColouredGlass.darkgrey.name=Cristal coloreado de gris oscuro
+tile.AFMColouredGlass.lightgrey.name=Cristal coloreado de gris claro
+tile.AFMColouredGlass.cyan.name=Cristal coloreado de cián
+tile.AFMColouredGlass.purple.name=Cristal coloreado de morado
+tile.AFMColouredGlass.blue.name=Cristal coloreado de azul
+tile.AFMColouredGlass.brown.name=Cristal coloreado de marrón
+tile.AFMColouredGlass.green.name=Cristal coloreado de verde
+tile.AFMColouredGlass.red.name=Cristal coloreado de rojo
+tile.AFMColouredGlass.black.name=Cristal coloreado de negro
+
+#tile..name=
+
+###################################################
+###################### Items ######################
+###################################################
+
+item.quartz.name=Cuarzo
+#item..name=

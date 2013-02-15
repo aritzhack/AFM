@@ -2,7 +2,7 @@ package afm.gui.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import afm.core.Properties;
+import afm.data.Properties;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
 
