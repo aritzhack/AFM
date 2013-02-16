@@ -9,7 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
-import afm.core.UtilAFM;
+import afm.core.util.UtilAFM;
 
 public class CommandKillAll {
 

@@ -1,5 +1,6 @@
 package afm.wip.blocks;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -8,7 +9,6 @@ import afm.blocks.BlockContainerAFM;
 import afm.core.AFM;
 import afm.data.BlockData;
 import afm.data.GUIData;
-import afm.data.Properties;
 import afm.wip.tileEntity.TEFabricator;
 
 public class BlockFabricator extends BlockContainerAFM {
@@ -18,8 +18,7 @@ public class BlockFabricator extends BlockContainerAFM {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z,
-			EntityPlayer player, int i, float f, float g, float t) {
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float f, float g, float t) {
 
 		TileEntity te = world.getBlockTileEntity(x, y, z);
 
@@ -37,12 +36,12 @@ public class BlockFabricator extends BlockContainerAFM {
 
 	@Override
 	public int getBlockTextureFromSide(int side) {
-		return workbench.getBlockTextureFromSide(side);
+		return Block.workbench.getBlockTextureFromSide(side);
 	}
 
 	@Override
 	public String getTextureFile() {
-		return workbench.getTextureFile();
+		return Block.workbench.getTextureFile();
 	}
 
 }

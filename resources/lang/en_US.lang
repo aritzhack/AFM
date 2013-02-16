@@ -51,3 +51,10 @@ tile.AFMColouredGlass.black.name=Black coloured glass
 
 item.quartz.name=Quartz
 #item..name=
+
+###################################################
+################### Inventories ###################
+###################################################
+
+inventory.afm.portableChest=Portable chest
+inventory.afm.testChest=Test chest

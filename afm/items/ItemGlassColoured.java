@@ -2,7 +2,7 @@ package afm.items;
 
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import afm.core.UtilAFM;
+import afm.core.util.UtilAFM;
 import afm.data.BlockData;
 
 public class ItemGlassColoured extends ItemBlock {

@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.world.World;
 import afm.core.AFM;
-import afm.core.UtilAFM;
+import afm.core.util.UtilAFM;
 import afm.gui.container.AFMContainer;
 import afm.wip.tileEntity.TEFabricator;
 

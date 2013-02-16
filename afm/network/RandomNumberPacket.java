@@ -4,8 +4,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import net.minecraft.network.INetworkManager;
-
 import afm.core.AFMLogger;
 import afm.data.Properties;
 import cpw.mods.fml.common.network.Player;

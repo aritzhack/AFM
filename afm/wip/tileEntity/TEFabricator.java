@@ -1,13 +1,11 @@
 package afm.wip.tileEntity;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import afm.tileEntity.TEAFM;
-import afm.wip.blocks.BlockFabricator;
 import afm.wip.gui.container.ContainerFabricator;
 
 public class TEFabricator extends TEAFM {
@@ -26,13 +24,15 @@ public class TEFabricator extends TEAFM {
 
 	@Override
 	public ItemStack getStackInSlot(int slotIndex) {
-		if (slotIndex >= this.inventory.length) return null;
+		if (slotIndex >= this.inventory.length)
+			return null;
 		return this.inventory[slotIndex];
 	}
 
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
-		if (slot >= this.inventory.length) return;
+		if (slot >= this.inventory.length)
+			return;
 		this.inventory[slot] = stack;
 
 		if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {
@@ -42,7 +42,8 @@ public class TEFabricator extends TEAFM {
 
 	@Override
 	public ItemStack decrStackSize(int slotIndex, int amount) {
-		if (slotIndex >= this.inventory.length) return null;
+		if (slotIndex >= this.inventory.length)
+			return null;
 		ItemStack stack = this.getStackInSlot(slotIndex);
 
 		if (stack != null) {
@@ -62,7 +63,8 @@ public class TEFabricator extends TEAFM {
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int slotIndex) {
-		if (slotIndex >= this.inventory.length) return null;
+		if (slotIndex >= this.inventory.length)
+			return null;
 		ItemStack stack = this.getStackInSlot(slotIndex);
 
 		if (stack != null) {
@@ -79,10 +81,8 @@ public class TEFabricator extends TEAFM {
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
-		return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord,
-				this.zCoord) == this
-				&& player.getDistanceSq(this.xCoord + 0.5, this.yCoord + 0.5,
-						this.zCoord + 0.5) < 64;
+		return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) == this
+				&& player.getDistanceSq(this.xCoord + 0.5, this.yCoord + 0.5, this.zCoord + 0.5) < 64;
 	}
 
 	@Override
@@ -100,7 +100,9 @@ public class TEFabricator extends TEAFM {
 				this.inventory[slot] = ItemStack.loadItemStackFromNBT(tag);
 			}
 		}
-		if(this.container != null) container.setDataFromTE(this.inventory);
+		if (this.container != null) {
+			this.container.setDataFromTE(this.inventory);
+		}
 	}
 
 	@Override
@@ -126,13 +128,14 @@ public class TEFabricator extends TEAFM {
 
 	@Override
 	public void updateEntity() {
-		if (this.container != null) this.container.update();
+		if (this.container != null) {
+			this.container.update();
+		}
 	}
 
 	public void saveStacks(InventoryCrafting craftMatrix) {
 		for (int x = 0; x < 9; x++) {
-			this.inventory[x] = craftMatrix
-					.getStackInRowAndColumn(x % 3, x / 3);
+			this.inventory[x] = craftMatrix.getStackInRowAndColumn(x % 3, x / 3);
 		}
 	}
 

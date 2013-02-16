@@ -5,6 +5,8 @@ import afm.data.BlockData;
 import afm.items.ItemGlassColoured;
 import afm.items.ItemGlassTinted;
 import afm.wip.blocks.BlockFabricator;
+import afm.wip.blocks.BlockPortableChest;
+import afm.wip.items.ItemPortableChest;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Blocks {
@@ -17,6 +19,7 @@ public class Blocks {
 	public static BlockTestModel testModel;
 	public static BlockFabricator fabricator;
 	public static BlockLaser laser;
+	public static BlockPortableChest portableChest;
 
 	public static void init() {
 
@@ -30,6 +33,7 @@ public class Blocks {
 		Blocks.testModel = new BlockTestModel();
 		Blocks.fabricator = new BlockFabricator();
 		Blocks.laser = new BlockLaser();
+		Blocks.portableChest = new BlockPortableChest();
 
 		GameRegistry.registerBlock(Blocks.colouredGlass, ItemGlassColoured.class, BlockData.NAME_COLOUREDGLASS);
 		GameRegistry.registerBlock(Blocks.tintedGlass, ItemGlassTinted.class, BlockData.NAME_TINTEDGLASS);
@@ -39,10 +43,10 @@ public class Blocks {
 		GameRegistry.registerBlock(Blocks.testModel, BlockData.NAME_TESTMODEL);
 		GameRegistry.registerBlock(Blocks.fabricator, BlockData.NAME_FABRICATOR);
 		GameRegistry.registerBlock(Blocks.laser, BlockData.NAME_LASER);
+		GameRegistry.registerBlock(Blocks.portableChest, ItemPortableChest.class, BlockData.NAME_PORTABLE_CHEST);
 
 		Blocks.colouredGlass.init();
 		Blocks.oreAFM.init();
-
 	}
 
 }
