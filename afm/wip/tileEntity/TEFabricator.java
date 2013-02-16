@@ -99,8 +99,8 @@ public class TEFabricator extends TEAFM {
 			if (slot >= 0 && slot < this.inventory.length) {
 				this.inventory[slot] = ItemStack.loadItemStackFromNBT(tag);
 			}
-
 		}
+		if(this.container != null) container.setDataFromTE(this.inventory);
 	}
 
 	@Override
@@ -127,8 +127,6 @@ public class TEFabricator extends TEAFM {
 	@Override
 	public void updateEntity() {
 		if (this.container != null) this.container.update();
-		
-		LanguageRegistry.addName(new ItemStack(new BlockFabricator(), 1, 0), "Fabricator");
 	}
 
 	public void saveStacks(InventoryCrafting craftMatrix) {

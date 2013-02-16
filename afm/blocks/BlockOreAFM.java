@@ -30,7 +30,7 @@ public class BlockOreAFM extends BlockAFM {
 		Random r = new Random();
 
 		RandomNumberPacket rnPacket = new RandomNumberPacket(r.nextInt(), r.nextInt());
-		AFMPacket.sendPacketToServer(rnPacket);
+		rnPacket.sendPacketToServer(rnPacket);
 
 		return true;
 	}

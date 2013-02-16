@@ -4,6 +4,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import net.minecraft.network.INetworkManager;
+
 import afm.core.AFMLogger;
 import afm.data.Properties;
 import cpw.mods.fml.common.network.Player;
@@ -35,7 +37,6 @@ public class RandomNumberPacket extends AFMPacket {
 		this.ran1 = packetData.readInt();
 		this.ran2 = packetData.readInt();
 		AFMLogger.log(String.format("Random numbers: %d, %d", this.ran1, this.ran2));
-
 	}
 
 }
