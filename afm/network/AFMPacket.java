@@ -5,6 +5,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import afm.data.Properties;
@@ -37,11 +38,18 @@ public abstract class AFMPacket {
 	protected abstract void writePacket(DataOutputStream packetData) throws IOException;
 
 	public static void sendPacketToServer(AFMPacket packet) {
-		PacketDispatcher.sendPacketToServer(packet.newPacket());
+		packet.sendPacketToServer();
+	}
+	
+	public void sendPacketToServer(){
+		PacketDispatcher.sendPacketToServer(this.newPacket());
+	}
+	public void sendPacketToPlayer(Player player){
+		PacketDispatcher.sendPacketToPlayer(this.newPacket(), player);
 	}
 
 	public static void sendPacketToPlayer(AFMPacket packet, Player player) {
-		PacketDispatcher.sendPacketToPlayer(packet.newPacket(), player);
+		packet.sendPacketToPlayer(player);
 	}
 
 	public abstract void handle(DataInputStream packetData, Player player) throws IOException;

@@ -71,7 +71,7 @@ public class ContainerFabricator extends AFMContainer {
 		}
 
 		this.readFromTileEntityNBT();
-		// this.onCraftMatrixChanged(null);
+		 this.onCraftMatrixChanged(null);
 	}
 
 	@Override
@@ -164,6 +164,7 @@ public class ContainerFabricator extends AFMContainer {
 	}
 
 	private ItemStack checkInventoryforNeeded(ItemStack neededStack) {
+		if(neededStack == null) return null;
 		for (int j = 0; j < 9; j++) {
 			ItemStack curr = this.getSlot(9 + j).getStack();
 			if (ItemStack.areItemStacksEqual(curr, neededStack) && neededStack.stackSize > 0) {
@@ -175,5 +176,11 @@ public class ContainerFabricator extends AFMContainer {
 
 	private ItemStack checkNeighboughrsForNeeded(ItemStack neededStack) {
 		return neededStack;
+	}
+
+	public void setDataFromTE(ItemStack[] stacks) {
+		for(int x = 0; x<9; x++){
+			this.craftMatrix.setInventorySlotContents(x, stacks[x]);
+		}
 	}
 }
