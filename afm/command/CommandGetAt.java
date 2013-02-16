@@ -7,7 +7,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
-import afm.core.UtilAFM;
+import afm.core.util.UtilAFM;
 
 public class CommandGetAt {
 

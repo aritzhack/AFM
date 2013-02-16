@@ -122,6 +122,6 @@ public class TETestChest extends TEAFM implements IInventory {
 
 	@Override
 	public String getInvName() {
-		return "TileEntityTutorial";
+		return "inventory.afm.testChest";
 	}
 }

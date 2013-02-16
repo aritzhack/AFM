@@ -31,9 +31,9 @@ public class TabAFM extends CreativeTabs {
 		super.displayAllReleventItems(list);
 		// Here are added the items that have some special properties
 
-		//ItemStack i1 = new ItemStack(Blocks.tintedGlass, 1, 0);
-		//UtilAFM.addDescriptionToStack(i1, i1.getItemName());
-		//list.add(i1);
+		// ItemStack i1 = new ItemStack(Blocks.tintedGlass, 1, 0);
+		// UtilAFM.addDescriptionToStack(i1, i1.getItemName());
+		// list.add(i1);
 	}
 
 }

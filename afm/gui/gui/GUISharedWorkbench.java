@@ -9,17 +9,20 @@ import afm.gui.container.ContainerSharedWorkbench;
 import afm.tileEntity.TESharedWorkbench;
 
 public class GUISharedWorkbench extends AFMGUI {
+	
+	TESharedWorkbench tileEntity;
 
 	public GUISharedWorkbench(TESharedWorkbench tileEntity,
 			InventoryPlayer invPlayer, World world) {
 		super(new ContainerSharedWorkbench(tileEntity, invPlayer, world),
 				GUIData.BG_SHAREDCRAFTING);
+		this.tileEntity = tileEntity;
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int i, int j) {
 
-		fontRenderer.drawString("Crafting", 6, 6, 0x404040);
+		fontRenderer.drawString(StatCollector.translateToLocal("container.crafting"), 6, 6, 0x404040);
 		fontRenderer.drawString(
 				StatCollector.translateToLocal("container.inventory"), 6, 75,
 				0x404040);

@@ -5,7 +5,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import afm.core.AFM;
-import afm.core.UtilAFM;
+import afm.core.util.UtilNBT;
 import afm.data.ItemData;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -25,7 +25,7 @@ public class ItemQuartz extends ItemAFM {
 	private void addRecipe() {
 		ItemStack out = new ItemStack(this);
 
-		UtilAFM.addDescriptionToStack(out, "Funciona!!");
+		UtilNBT.addDescriptionToStack(out, "Funciona!!");
 
 		GameRegistry
 		.addShapelessRecipe(out, new ItemStack(Item.diamond), new ItemStack(Item.diamond), new ItemStack(Item.diamond), new ItemStack(Item.diamond));
