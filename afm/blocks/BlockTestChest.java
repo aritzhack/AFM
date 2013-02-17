@@ -13,10 +13,10 @@ import afm.data.BlockData;
 import afm.data.GUIData;
 import afm.tileEntity.TETestChest;
 
-public class BlockDayDetector extends BlockContainerAFM {
+public class BlockTestChest extends BlockContainerAFM {
 
-	public BlockDayDetector() {
-		super(BlockData.ID_DAYDETECTOR, BlockData.NAME_DAY_DETECTOR, BlockData.TEXTUREINDEX_DAYDETECTOR);
+	public BlockTestChest() {
+		super(BlockData.ID_TESTCHEST, BlockData.NAME_TESTCHEST, BlockData.TEXTUREINDEX_TESTCHEST);
 		this.setCreativeTab(AFM.tabAFM);
 	}
 

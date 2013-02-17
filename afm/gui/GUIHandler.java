@@ -11,12 +11,12 @@ import afm.gui.container.ContainerChestTest;
 import afm.gui.container.ContainerSharedWorkbench;
 import afm.gui.gui.GUIChestTest;
 import afm.gui.gui.GUISharedWorkbench;
+import afm.tileEntity.TEPortableChest;
 import afm.tileEntity.TESharedWorkbench;
 import afm.tileEntity.TETestChest;
 import afm.wip.gui.container.ContainerFabricator;
 import afm.wip.gui.gui.GUIFabricator;
 import afm.wip.tileEntity.TEFabricator;
-import afm.wip.tileEntity.TEPortableChest;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 

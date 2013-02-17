@@ -1,4 +1,4 @@
-package afm.wip.tileEntity;
+package afm.tileEntity;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
