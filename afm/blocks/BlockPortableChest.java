@@ -1,4 +1,4 @@
-package afm.wip.blocks;
+package afm.blocks;
 
 import java.util.Random;
 
@@ -10,9 +10,9 @@ import net.minecraft.world.World;
 import afm.core.AFM;
 import afm.core.AFMLogger;
 import afm.data.BlockData;
+import afm.items.ItemPortableChest;
 import afm.items.Items;
-import afm.wip.items.ItemPortableChest;
-import afm.wip.tileEntity.TEPortableChest;
+import afm.tileEntity.TEPortableChest;
 
 public class BlockPortableChest extends BlockChest {
 	Random random = new Random();

@@ -5,7 +5,7 @@
 tile.AFMLaser.name=Laser
 tile.AFMSharedWorkbench.name=Shared Crafting Table
 tile.AFMTestModel.name=Test Model Block
-tile.AFMDayDetector.name=Day Detector
+tile.AFMTestChest.name=Test Chest
 tile.AFMOre.name=AFM Ore
 tile.AFMFabricator.name=Fabricator
 
@@ -58,3 +58,4 @@ item.quartz.name=Quartz
 
 inventory.afm.portableChest=Portable chest
 inventory.afm.testChest=Test chest
+inventory.afm.fabricator=Fabricator
