@@ -1,6 +1,7 @@
 package afm.wip.gui.container;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.world.World;
 import afm.core.AFM;
-import afm.core.util.UtilAFM;
 import afm.gui.container.AFMContainer;
 import afm.wip.tileEntity.TEFabricator;
 
@@ -27,7 +27,8 @@ public class ContainerFabricator extends AFMContainer {
 	private final World world;
 
 	boolean fulfilled = false;
-	private final List<ItemStack> neededStacks = new ArrayList<ItemStack>();
+	private List<Integer> neededStacks = new ArrayList<Integer>();
+	private List<ItemStack> tempInv;
 
 	public ContainerFabricator(TEFabricator tileEntity,
 								InventoryPlayer inventoryPlayer, World world) {
@@ -88,8 +89,10 @@ public class ContainerFabricator extends AFMContainer {
 		if (this.fulfilled) {
 			AFM.proxy.writeChatMessageToPlayer("Fulfilled");
 		} else {
-			for (ItemStack s : this.neededStacks)
-				AFM.proxy.writeChatMessageToPlayer(s.toString());
+			for (int i : this.neededStacks){
+				ItemStack needed = this.getSlot(i).getStack();
+				AFM.proxy.writeChatMessageToPlayer(needed.getItemName() + "x" + needed.stackSize);
+			}
 		}
 		AFM.proxy.writeChatMessageToPlayer("------------------");
 
@@ -111,8 +114,7 @@ public class ContainerFabricator extends AFMContainer {
 			slot.putStack(stack);
 		}
 		// TODO Make saving the recipe work
-		this.onCraftMatrixChanged(null); // Called to "save" to tile entity, not
-										 // working
+		this.onCraftMatrixChanged(null); // Called to "save" to tile entity
 
 		return slot.getStack();
 	}
@@ -140,42 +142,60 @@ public class ContainerFabricator extends AFMContainer {
 		return this.tileEntity.isUseableByPlayer(player);
 	}
 
+	/**
+	 * Updated the container, checking for the recipe, and it's ingredients. <br />
+	 * Called when the TileEntity is updated
+	 */
 	public void update() {
-
 		this.neededStacks.clear();
 
-		this.fulfilled = false;
+		this.fulfilled = true;
 
 		if (this.getSlot(9).getStack() == null || this.getSlot(9).getStack().stackSize <= 0) {
-			this.fulfilled = true;
 			return;
 		}
+		
+		this.tempInv = this.inventoryItemStacks.subList(0, 9);
 
-		for (int x = 0; x < 9; x++) {
+		for (int x = 0; x < this.craftMatrix.getSizeInventory(); x++) {
 			ItemStack craftStack = this.craftMatrix.getStackInSlot(x);
-			this.checkInventoryforNeeded(craftStack);
-			this.checkNeighboughrsForNeeded(craftStack);
-			if (craftStack != null && craftStack.stackSize > 0)
-				this.neededStacks.add(craftStack);
+			if(craftStack == null) continue;
+			ItemStack needed = craftStack.copy();
+			if(needed == null) continue;
+			
+			if (!this.checkInventoryforNeeded(needed) &&
+				!this.checkNeighboughrsForNeeded(needed))
+				this.neededStacks.add(x); // If not found, add the slot index to the needed
+				this.fulfilled = false; // And state that we're not fulfilled, not to check the list
 		}
-
-		this.fulfilled = this.neededStacks.size() <= 0
-				|| this.neededStacks.isEmpty();
 	}
 
-	private ItemStack checkInventoryforNeeded(ItemStack neededStack) {
-		if(neededStack == null) return null;
-		for (int j = 0; j < 9; j++) {
-			ItemStack curr = this.getSlot(9 + j).getStack();
-			if (ItemStack.areItemStacksEqual(curr, neededStack) && neededStack.stackSize > 0) {
-				neededStack.splitStack(curr.stackSize);
+	private boolean checkInventoryforNeeded(ItemStack neededStack) {
+		Iterator<ItemStack> iter = this.tempInv.iterator();
+		return checkForISinIterator(iter, neededStack);
+	}
+	
+	private boolean checkNeighboughrsForNeeded(ItemStack neededStack) {
+		return checkForISinIterator(null, neededStack);
+	}
+	
+	/**
+	 * Iterates over the iterator, looking for the needed ItemStack
+	 * @param iter The iterator to iterate on
+	 * @param needed The IS to look for in the iterator
+	 * @return if the IS is found
+	 */
+	private boolean checkForISinIterator(Iterator<ItemStack> iter, ItemStack needed){ 
+		if(iter==null) return false;
+		while(iter.hasNext()){
+			ItemStack curr = iter.next();
+			if(curr == null) continue;
+			if (curr.isItemEqual(needed) && ItemStack.areItemStackTagsEqual(curr, needed) && needed.stackSize > 0) {
+				curr.stackSize--;
+				return true;
 			}
 		}
-		return neededStack;
-	}
-
-	private ItemStack checkNeighboughrsForNeeded(ItemStack neededStack) {
-		return neededStack;
+		return false;
 	}
 
 	public void setDataFromTE(ItemStack[] stacks) {
