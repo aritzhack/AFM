@@ -34,7 +34,7 @@ public class AFM {
     final WorldGenerator worldGen = new WorldGenerator();
 
     @Instance(Properties.MOD_ID)
-    public static final AFM afm = new AFM();
+    public static AFM afm = new AFM();
 
     @SidedProxy(clientSide = "afm.proxy.ClientProxy", serverSide = "afm.proxy.CommonProxy")
     public static CommonProxy proxy;
