@@ -77,8 +77,7 @@ public class ContainerFabricator extends AFMContainer {
     }
 
     @Override
-    public ItemStack slotClick(int slotIndex, int button, int par3,
-                               EntityPlayer player) {
+    public ItemStack slotClick(int slotIndex, int button, int par3, EntityPlayer player) {
 
         this.update();
 
@@ -93,8 +92,7 @@ public class ContainerFabricator extends AFMContainer {
         AFM.proxy.writeChatMessageToPlayer("------------------");
 
         if (slotIndex == 9) return null; // Can't modify result slot
-        if (slotIndex > 9 || slotIndex < 0) // If storage or none, handle them
-            // as usual
+        if (slotIndex > 9 || slotIndex < 0) // If storage or none, handle them as usual
             return super.slotClick(slotIndex, button, par3, player);
 
         // If craft-matrix:
