@@ -13,45 +13,45 @@ import java.io.IOException;
 
 public abstract class AFMPacket {
 
-    protected abstract byte getPacketID();
+	protected abstract byte getPacketID();
 
-    Packet newPacket() {
+	Packet newPacket() {
 
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        DataOutputStream packetData = new DataOutputStream(bos);
-        try {
-            packetData.writeByte(this.getPacketID());
-            this.writePacket(packetData);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		DataOutputStream packetData = new DataOutputStream(bos);
+		try {
+			packetData.writeByte(this.getPacketID());
+			this.writePacket(packetData);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 
-        Packet250CustomPayload packet = new Packet250CustomPayload();
-        packet.channel = Properties.Network.CHANNEL;
-        packet.data = bos.toByteArray();
-        packet.length = bos.size();
+		Packet250CustomPayload packet = new Packet250CustomPayload();
+		packet.channel = Properties.Network.CHANNEL;
+		packet.data = bos.toByteArray();
+		packet.length = bos.size();
 
-        return packet;
-    }
+		return packet;
+	}
 
-    protected abstract void writePacket(DataOutputStream packetData) throws IOException;
+	protected abstract void writePacket(DataOutputStream packetData) throws IOException;
 
-    public static void sendPacketToServer(AFMPacket packet) {
-        packet.sendPacketToServer();
-    }
+	public static void sendPacketToServer(AFMPacket packet) {
+		packet.sendPacketToServer();
+	}
 
-    void sendPacketToServer() {
-        PacketDispatcher.sendPacketToServer(this.newPacket());
-    }
+	void sendPacketToServer() {
+		PacketDispatcher.sendPacketToServer(this.newPacket());
+	}
 
-    void sendPacketToPlayer(Player player) {
-        PacketDispatcher.sendPacketToPlayer(this.newPacket(), player);
-    }
+	void sendPacketToPlayer(Player player) {
+		PacketDispatcher.sendPacketToPlayer(this.newPacket(), player);
+	}
 
-    public static void sendPacketToPlayer(AFMPacket packet, Player player) {
-        packet.sendPacketToPlayer(player);
-    }
+	public static void sendPacketToPlayer(AFMPacket packet, Player player) {
+		packet.sendPacketToPlayer(player);
+	}
 
-    public abstract void handle(DataInputStream packetData, Player player) throws IOException;
+	public abstract void handle(DataInputStream packetData, Player player) throws IOException;
 
 }

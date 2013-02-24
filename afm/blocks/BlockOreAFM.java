@@ -13,25 +13,25 @@ import java.util.Random;
 
 public class BlockOreAFM extends BlockAFM {
 
-    public BlockOreAFM() {
-        super(BlockData.ID_ORE, BlockData.NAME_ORE_AFM, BlockData.TEXTUREINDEX_ORE);
+	public BlockOreAFM() {
+		super(BlockData.ID_ORE, BlockData.NAME_ORE_AFM, BlockData.TEXTUREINDEX_ORE);
 
-        this.setLightValue(1.0F);
-    }
+		this.setLightValue(1.0F);
+	}
 
-    public void init() {
-        GameRegistry.addSmelting(Blocks.oreAFM.blockID, new ItemStack(Items.quartz), 0.1F);
-    }
+	public void init() {
+		GameRegistry.addSmelting(Blocks.oreAFM.blockID, new ItemStack(Items.quartz), 0.1F);
+	}
 
-    @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float f, float g, float t) {
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float f, float g, float t) {
 
-        Random r = new Random();
+		Random r = new Random();
 
-        RandomNumberPacket rnPacket = new RandomNumberPacket(r.nextInt(), r.nextInt());
-        AFMPacket.sendPacketToServer(rnPacket);
+		RandomNumberPacket rnPacket = new RandomNumberPacket(r.nextInt(), r.nextInt());
+		AFMPacket.sendPacketToServer(rnPacket);
 
-        return true;
-    }
+		return true;
+	}
 
 }

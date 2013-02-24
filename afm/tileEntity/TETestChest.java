@@ -77,10 +77,12 @@ public class TETestChest extends TEAFM implements IInventory {
 	}
 
 	@Override
-	public void openChest() {}
+	public void openChest() {
+	}
 
 	@Override
-	public void closeChest() {}
+	public void closeChest() {
+	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound tagCompound) {
