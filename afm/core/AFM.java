@@ -29,68 +29,68 @@ import net.minecraftforge.common.MinecraftForge;
 @NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = {Properties.Network.CHANNEL}, packetHandler = PacketHandler.class)
 public class AFM {
 
-    Configuration config;
+	Configuration config;
 
-    final WorldGenerator worldGen = new WorldGenerator();
+	final WorldGenerator worldGen = new WorldGenerator();
 
-    @Instance(Properties.MOD_ID)
-    public static AFM afm = new AFM();
+	@Instance(Properties.MOD_ID)
+	public static AFM afm = new AFM();
 
-    @SidedProxy(clientSide = "afm.proxy.ClientProxy", serverSide = "afm.proxy.CommonProxy")
-    public static CommonProxy proxy;
+	@SidedProxy(clientSide = "afm.proxy.ClientProxy", serverSide = "afm.proxy.CommonProxy")
+	public static CommonProxy proxy;
 
-    public static final CreativeTabs tabAFM = new TabAFM(CreativeTabs.getNextID());
+	public static final CreativeTabs tabAFM = new TabAFM(CreativeTabs.getNextID());
 
-    public static final GUIHandler guiHandler = new GUIHandler();
+	public static final GUIHandler guiHandler = new GUIHandler();
 
-    @ServerStarting
-    public void serverStarting(FMLServerStartingEvent e) {
-        e.registerServerCommand(new CommandAFM());
-    }
+	@ServerStarting
+	public void serverStarting(FMLServerStartingEvent e) {
+		e.registerServerCommand(new CommandAFM());
+	}
 
-    @PreInit
-    public void preInit(FMLPreInitializationEvent event) {
+	@PreInit
+	public void preInit(FMLPreInitializationEvent event) {
 
-        AFMLogger.init();
+		AFMLogger.init();
 
-        Properties.init(event.getSuggestedConfigurationFile());
+		Properties.init(event.getSuggestedConfigurationFile());
 
-        Localization.loadLocales();
+		Localization.loadLocales();
 
-        MinecraftForge.EVENT_BUS.register(new EventHandler());
+		MinecraftForge.EVENT_BUS.register(new EventHandler());
 
-        NetworkRegistry.instance().registerGuiHandler(AFM.afm, AFM.guiHandler);
-    }
+		NetworkRegistry.instance().registerGuiHandler(AFM.afm, AFM.guiHandler);
+	}
 
-    @Init
-    public void init(FMLInitializationEvent event) {
+	@Init
+	public void init(FMLInitializationEvent event) {
 
-        this.showDebugGroup(true, event.getSide().toString());
+		this.showDebugGroup(true, event.getSide().toString());
 
-        AFM.proxy.registerTexuresAndRenderers();
+		AFM.proxy.registerTexuresAndRenderers();
 
-        Items.init();
-        Blocks.init();
+		Items.init();
+		Blocks.init();
 
-        GameRegistry.registerWorldGenerator(this.worldGen);
+		GameRegistry.registerWorldGenerator(this.worldGen);
 
-        this.showDebugGroup(false, event.getSide().toString());
-    }
+		this.showDebugGroup(false, event.getSide().toString());
+	}
 
-    private void showDebugGroup(boolean opening, String side) {
+	private void showDebugGroup(boolean opening, String side) {
 
-        String s = String.format("%s Initialization for Minecraft %s and Forge %s %s in %s", Properties.MOD_NAME, Properties.MC_VERSION,
-                Properties.FORGE_VERSION, opening ? "started" : "finished", side);
+		String s = String.format("%s Initialization for Minecraft %s and Forge %s %s in %s", Properties.MOD_NAME, Properties.MC_VERSION,
+				Properties.FORGE_VERSION, opening ? "started" : "finished", side);
 
-        // Just aesthetics...
-        String b1 = "", b2 = "";
-        for (int i = 0; i < s.length(); i++) {
-            b1 = b1 + (opening ? "=" : "-");
-            b2 = b2 + (opening ? "-" : "=");
-        }
+		// Just aesthetics...
+		String b1 = "", b2 = "";
+		for (int i = 0; i < s.length(); i++) {
+			b1 = b1 + (opening ? "=" : "-");
+			b2 = b2 + (opening ? "-" : "=");
+		}
 
-        AFMLogger.log(b1);
-        AFMLogger.log(s);
-        AFMLogger.log(b2);
-    }
+		AFMLogger.log(b1);
+		AFMLogger.log(s);
+		AFMLogger.log(b2);
+	}
 }

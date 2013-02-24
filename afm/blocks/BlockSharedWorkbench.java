@@ -12,35 +12,35 @@ import net.minecraft.world.World;
 
 public class BlockSharedWorkbench extends BlockContainerAFM {
 
-    public BlockSharedWorkbench() {
-        super(BlockData.ID_SHAREDWORKBENCH, BlockData.NAME_SHARED_WORKBENCH, Block.workbench.blockIndexInTexture, Material.wood);
-    }
+	public BlockSharedWorkbench() {
+		super(BlockData.ID_SHAREDWORKBENCH, BlockData.NAME_SHARED_WORKBENCH, Block.workbench.blockIndexInTexture, Material.wood);
+	}
 
-    @Override
-    public TileEntity createNewTileEntity(World var1) {
-        return new TESharedWorkbench();
-    }
+	@Override
+	public TileEntity createNewTileEntity(World var1) {
+		return new TESharedWorkbench();
+	}
 
-    @Override
-    public String getTextureFile() {
-        return Block.workbench.getTextureFile();
-    }
+	@Override
+	public String getTextureFile() {
+		return Block.workbench.getTextureFile();
+	}
 
-    @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float f, float g, float t) {
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float f, float g, float t) {
 
-        TileEntity te = world.getBlockTileEntity(x, y, z);
+		TileEntity te = world.getBlockTileEntity(x, y, z);
 
-        if (te == null || player.isSneaking())
-            return false;
+		if (te == null || player.isSneaking())
+			return false;
 
-        player.openGui(AFM.afm, GUIData.ID_SHAREDWORKBENCH, world, x, y, z);
-        return true;
-    }
+		player.openGui(AFM.afm, GUIData.ID_SHAREDWORKBENCH, world, x, y, z);
+		return true;
+	}
 
-    @Override
-    public int getBlockTextureFromSide(int side) {
-        return Block.workbench.getBlockTextureFromSide(side);
-    }
+	@Override
+	public int getBlockTextureFromSide(int side) {
+		return Block.workbench.getBlockTextureFromSide(side);
+	}
 
 }

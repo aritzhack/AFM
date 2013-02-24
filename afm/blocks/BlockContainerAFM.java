@@ -7,29 +7,29 @@ import net.minecraft.block.material.Material;
 
 public abstract class BlockContainerAFM extends BlockContainer {
 
-    protected BlockContainerAFM(int id, String blockName, Material material) {
-        super(id, material);
-        this.setBlockName(blockName);
-        this.setCreativeTab(AFM.tabAFM);
-    }
+	protected BlockContainerAFM(int id, String blockName, Material material) {
+		super(id, material);
+		this.setBlockName(blockName);
+		this.setCreativeTab(AFM.tabAFM);
+	}
 
-    BlockContainerAFM(int id, String blockName) {
-        this(id, blockName, Material.rock);
-    }
+	BlockContainerAFM(int id, String blockName) {
+		this(id, blockName, Material.rock);
+	}
 
-    BlockContainerAFM(int id, String blockName, int indexInTexture, Material material) {
-        super(id, indexInTexture, material);
-        this.setBlockName(blockName);
-        this.setCreativeTab(AFM.tabAFM);
-    }
+	BlockContainerAFM(int id, String blockName, int indexInTexture, Material material) {
+		super(id, indexInTexture, material);
+		this.setBlockName(blockName);
+		this.setCreativeTab(AFM.tabAFM);
+	}
 
-    BlockContainerAFM(int id, String blockName, int indexInTexture) {
-        this(id, blockName, indexInTexture, Material.rock);
-    }
+	BlockContainerAFM(int id, String blockName, int indexInTexture) {
+		this(id, blockName, indexInTexture, Material.rock);
+	}
 
-    @Override
-    public String getTextureFile() {
-        return BlockData.TEXTURE;
-    }
+	@Override
+	public String getTextureFile() {
+		return BlockData.TEXTURE;
+	}
 
 }

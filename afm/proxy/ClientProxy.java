@@ -11,22 +11,22 @@ import net.minecraftforge.client.MinecraftForgeClient;
 
 public class ClientProxy extends CommonProxy {
 
-    @Override
-    public void writeChatMessageToPlayer(String s) {
-        Minecraft.getMinecraft().thePlayer.addChatMessage(s);
-    }
+	@Override
+	public void writeChatMessageToPlayer(String s) {
+		Minecraft.getMinecraft().thePlayer.addChatMessage(s);
+	}
 
-    /**
-     * Registers the textures for blocks and items
-     */
-    @Override
-    public void registerTexuresAndRenderers() {
-        AFMLogger.log("Registering textures");
-        MinecraftForgeClient.preloadTexture(BlockData.TEXTURE);
-        MinecraftForgeClient.preloadTexture(ItemData.TEXTURE);
+	/**
+	 * Registers the textures for blocks and items
+	 */
+	@Override
+	public void registerTexuresAndRenderers() {
+		AFMLogger.log("Registering textures");
+		MinecraftForgeClient.preloadTexture(BlockData.TEXTURE);
+		MinecraftForgeClient.preloadTexture(ItemData.TEXTURE);
 
-        AFMLogger.log("Registering renderers");
-        ClientRegistry.bindTileEntitySpecialRenderer(TETestModel.class, new TESRTestModel());
-    }
+		AFMLogger.log("Registering renderers");
+		ClientRegistry.bindTileEntitySpecialRenderer(TETestModel.class, new TESRTestModel());
+	}
 
 }

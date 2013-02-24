@@ -10,32 +10,32 @@ import java.io.IOException;
 
 public class RandomNumberPacket extends AFMPacket {
 
-    int ran1, ran2;
+	int ran1, ran2;
 
-    public RandomNumberPacket(int ran1, int ran2) {
-        this.ran1 = ran1;
-        this.ran2 = ran2;
-    }
+	public RandomNumberPacket(int ran1, int ran2) {
+		this.ran1 = ran1;
+		this.ran2 = ran2;
+	}
 
-    public RandomNumberPacket() {
-    }
+	public RandomNumberPacket() {
+	}
 
-    @Override
-    protected byte getPacketID() {
-        return Properties.Network.PCKT_ID_RANDOM_NUMBERS;
-    }
+	@Override
+	protected byte getPacketID() {
+		return Properties.Network.PCKT_ID_RANDOM_NUMBERS;
+	}
 
-    @Override
-    protected void writePacket(DataOutputStream packetData) throws IOException {
-        packetData.writeInt(this.ran1);
-        packetData.writeInt(this.ran2);
-    }
+	@Override
+	protected void writePacket(DataOutputStream packetData) throws IOException {
+		packetData.writeInt(this.ran1);
+		packetData.writeInt(this.ran2);
+	}
 
-    @Override
-    public void handle(DataInputStream packetData, Player player) throws IOException {
-        this.ran1 = packetData.readInt();
-        this.ran2 = packetData.readInt();
-        AFMLogger.log(String.format("Random numbers: %d, %d", this.ran1, this.ran2));
-    }
+	@Override
+	public void handle(DataInputStream packetData, Player player) throws IOException {
+		this.ran1 = packetData.readInt();
+		this.ran2 = packetData.readInt();
+		AFMLogger.log(String.format("Random numbers: %d, %d", this.ran1, this.ran2));
+	}
 
 }
