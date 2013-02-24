@@ -1,150 +1,161 @@
 package afm.wip.tileEntity;
 
+import afm.core.AFMLogger;
+import afm.core.util.UtilAFM;
+import afm.tileEntity.TEAFM;
+import afm.wip.gui.container.ContainerFabricator;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import afm.tileEntity.TEAFM;
-import afm.wip.gui.container.ContainerFabricator;
+import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.ISidedInventory;
 
-public class TEFabricator extends TEAFM {
+public class TEFabricator extends TEAFM implements ISidedInventory {
 
-	private final ItemStack[] inventory;
-	private ContainerFabricator container;
+    public ContainerFabricator containerFabricator;
+    private ItemStack[] inventory;
 
-	public TEFabricator() {
-		this.inventory = new ItemStack[19];
-	}
+    public TEFabricator() {
+        this.inventory = new ItemStack[19];
+    }
 
-	@Override
-	public int getSizeInventory() {
-		return this.inventory.length;
-	}
+    @Override
+    public int getSizeInventory() {
+        return this.inventory.length;
+    }
 
-	@Override
-	public ItemStack getStackInSlot(int slotIndex) {
-		if (slotIndex >= this.inventory.length)
-			return null;
-		return this.inventory[slotIndex];
-	}
+    @Override
+    public ItemStack getStackInSlot(int slotIndex) {
+        if (slotIndex >= this.inventory.length)
+            return null;
+        return this.inventory[slotIndex];
+    }
 
-	@Override
-	public void setInventorySlotContents(int slot, ItemStack stack) {
-		if (slot >= this.inventory.length)
-			return;
-		this.inventory[slot] = stack;
+    @Override
+    public void setInventorySlotContents(int slot, ItemStack stack) {
+        if (slot >= this.inventory.length)
+            return;
+        this.inventory[slot] = stack;
 
-		if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {
-			stack.stackSize = this.getInventoryStackLimit();
-		}
-	}
+        if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {
+            stack.stackSize = this.getInventoryStackLimit();
+        }
+    }
 
-	@Override
-	public ItemStack decrStackSize(int slotIndex, int amount) {
-		if (slotIndex >= this.inventory.length)
-			return null;
-		ItemStack stack = this.getStackInSlot(slotIndex);
+    @Override
+    public ItemStack decrStackSize(int slotIndex, int amount) {
+        ItemStack stack = this.getStackInSlot(slotIndex);
+        if (stack == null) return null;
+        if (stack.stackSize <= amount) {
+            this.setInventorySlotContents(slotIndex, null);
+        } else {
+            stack = stack.splitStack(amount);
+            if (stack.stackSize == 0) {
+                this.setInventorySlotContents(slotIndex, null);
+            }
+        }
+        onInventoryChanged();
+        return stack;
+    }
 
-		if (stack != null) {
+    @Override
+    public ItemStack getStackInSlotOnClosing(int slotIndex) {
+        ItemStack ret = this.getStackInSlot(slotIndex);
+        if (ret == null) return null;
+        this.setInventorySlotContents(slotIndex, null);
+        return ret;
+    }
 
-			if (stack.stackSize <= amount) {
-				this.setInventorySlotContents(slotIndex, null);
-			} else {
-				stack = stack.splitStack(amount);
-				if (stack.stackSize == 0) {
-					this.setInventorySlotContents(slotIndex, null);
-				}
-			}
-		}
+    @Override
+    public int getInventoryStackLimit() {
+        return 64;
+    }
 
-		return stack;
-	}
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer player) {
+        return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) == this
+                && player.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) < 64D;
+    }
 
-	@Override
-	public ItemStack getStackInSlotOnClosing(int slotIndex) {
-		if (slotIndex >= this.inventory.length)
-			return null;
-		ItemStack stack = this.getStackInSlot(slotIndex);
+    @Override
+    public void updateEntity() {
+        if (this.containerFabricator == null) return;
+        if (this.containerFabricator.fulfilled) {
+            AFMLogger.log(this.worldObj.getWorldTime() + " - Fulfilled");
+            return;
+        }
+        AFMLogger.log(this.worldObj.getWorldTime() + this.containerFabricator.needed.toString());
+    }
 
-		if (stack != null) {
-			this.setInventorySlotContents(slotIndex, null);
-		}
+    @Override
+    public void readFromNBT(NBTTagCompound tagCompound) {
+        super.readFromNBT(tagCompound);
 
-		return stack;
-	}
+        NBTTagList tagList = tagCompound.getTagList("Fabricator");
+        this.inventory = new ItemStack[this.getSizeInventory()];
+        for (int i = 0; i < tagList.tagCount(); i++) {
+            NBTTagCompound tag = (NBTTagCompound) tagList.tagAt(i);
 
-	@Override
-	public int getInventoryStackLimit() {
-		return 64;
-	}
+            byte slot = tag.getByte("Slot");
 
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) {
-		return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) == this
-				&& player.getDistanceSq(this.xCoord + 0.5, this.yCoord + 0.5, this.zCoord + 0.5) < 64;
-	}
+            if (slot >= 0 && slot < this.inventory.length) {
+                this.inventory[slot] = ItemStack.loadItemStackFromNBT(tag);
+            }
+        }
+    }
 
-	@Override
-	public void readFromNBT(NBTTagCompound tagCompound) {
-		super.readFromNBT(tagCompound);
+    @Override
+    public void writeToNBT(NBTTagCompound tagCompound) {
+        super.writeToNBT(tagCompound);
 
-		NBTTagList tagList = tagCompound.getTagList("Fabricator");
+        NBTTagList itemList = new NBTTagList();
 
-		for (int i = 0; i < tagList.tagCount(); i++) {
-			NBTTagCompound tag = (NBTTagCompound) tagList.tagAt(i);
+        for (int i = 0; i < this.inventory.length; i++) {
+            ItemStack stack = this.inventory[i];
 
-			byte slot = tag.getByte("Slot");
+            if (stack != null) {
+                NBTTagCompound tag = new NBTTagCompound();
 
-			if (slot >= 0 && slot < this.inventory.length) {
-				this.inventory[slot] = ItemStack.loadItemStackFromNBT(tag);
-			}
-		}
-		if (this.container != null) {
-			this.container.setDataFromTE(this.inventory);
-		}
-	}
+                tag.setByte("Slot", (byte) i);
+                stack.writeToNBT(tag);
+                itemList.appendTag(tag);
+            }
+        }
 
-	@Override
-	public void writeToNBT(NBTTagCompound tagCompound) {
-		super.writeToNBT(tagCompound);
+        tagCompound.setTag("Fabricator", itemList);
+    }
 
-		NBTTagList itemList = new NBTTagList();
+    @Override
+    public String getInvName() {
+        return "inventory.afm.fabricator";
+    }
 
-		for (int i = 0; i < this.inventory.length; i++) {
-			ItemStack stack = this.inventory[i];
+    /**
+     * Get the start of the side inventory.
+     *
+     * @param side The global side to get the start of range.
+     */
+    @Override
+    public int getStartInventorySide(ForgeDirection side) {
+        return 0;
+    }
 
-			if (stack != null) {
-				NBTTagCompound tag = new NBTTagCompound();
+    /**
+     * Get the size of the side inventory.
+     *
+     * @param side The global side.
+     */
+    @Override
+    public int getSizeInventorySide(ForgeDirection side) {
+        return 0;
+    }
 
-				tag.setByte("Slot", (byte) i);
-				stack.writeToNBT(tag);
-				itemList.appendTag(tag);
-			}
-		}
-
-		tagCompound.setTag("Fabricator", itemList);
-	}
-
-	@Override
-	public void updateEntity() {
-		if (this.container != null) {
-			this.container.update();
-		}
-	}
-
-	public void saveStacks(InventoryCrafting craftMatrix) {
-		for (int x = 0; x < 9; x++) {
-			this.inventory[x] = craftMatrix.getStackInRowAndColumn(x % 3, x / 3);
-		}
-	}
-
-	public void setContainer(ContainerFabricator container) {
-		this.container = container;
-	}
-
-	@Override
-	public String getInvName() {
-		return "inventory.afm.fabricator";
-	}
+    public void dropItems() {
+        for (int i = 0; i < this.inventory.length; i++) {
+            ItemStack stack = this.getStackInSlot(i);
+            if ((stack != null) && (stack.stackSize > 0))
+                UtilAFM.dropEntityItem(stack, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+        }
+    }
 }
