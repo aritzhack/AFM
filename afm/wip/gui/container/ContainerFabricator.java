@@ -158,11 +158,7 @@ public class ContainerFabricator extends Container {
 	}
 
 	/**
-<<<<<<< HEAD
 	 * Returns the first slot number the itemStack can fit in,
-=======
-	 * Returns the first slot number the itemstack can fit in,
->>>>>>> origin/master
 	 * returning a positive int if the slot is empty, and
 	 * a negative int if it's same item.
 	 * @param itemStack ItemStack to be fit in the tempStorage
