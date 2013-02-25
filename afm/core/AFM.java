@@ -2,6 +2,7 @@ package afm.core;
 
 import afm.blocks.Blocks;
 import afm.command.CommandAFM;
+import afm.core.util.UtilAFM;
 import afm.data.Properties;
 import afm.gui.GUIHandler;
 import afm.i18n.Localization;
@@ -71,6 +72,8 @@ public class AFM {
 
 		Items.init();
 		Blocks.init();
+
+		UtilAFM.initOreDict();
 
 		GameRegistry.registerWorldGenerator(this.worldGen);
 

@@ -14,8 +14,26 @@ import java.util.TreeMap;
 
 public final class UtilAFM {
 
-	private static TreeMap<ItemStack, String> oreDictMap = new TreeMap<ItemStack, String>();
+	private static Comparator<ItemStack> itemStackComparator = new Comparator<ItemStack>() {
+		@Override
+		public int compare(ItemStack o1, ItemStack o2) {
+			return UtilAFM.sortItemStack(o1, o2);
+		}
+	};
+	private static TreeMap<ItemStack, String> oreDictMap = new TreeMap<ItemStack, String>(itemStackComparator);
 
+	private static int sortItemStack(ItemStack o1, ItemStack o2) {
+		switch (UtilAFM.compareItemStacks(o1, o2, false, false)) {
+			case 1: // If different ID
+				return o1.itemID-o2.itemID;
+			case 2: // If different metadata
+				return o1.getItemDamage()-o2.getItemDamage();
+			case -2: // If different amount (Should happen?)
+				return o1.stackSize-o2.stackSize;
+			default: // Else, equal
+				return 0;
+		}
+	}
 
 	public static void initOreDict() {
 		for (String s : OreDictionary.getOreNames()) {
@@ -24,22 +42,6 @@ public final class UtilAFM {
 			}
 		}
 	}
-
-	private static Comparator<ItemStack> itemStackComparator = new Comparator<ItemStack>() {
-		@Override
-		public int compare(ItemStack o1, ItemStack o2) {
-			return UtilAFM.sortItemStack(o1, o2);
-		}
-	};
-
-	// TODO return a difference
-	private static int sortItemStack(ItemStack o1, ItemStack o2) {
-		switch (UtilAFM.compareItemStacks(o1, o2, false, false)) {
-			default:
-		}
-		return 0;
-	}
-
 
 	public static EntityPlayerMP getPlayer(String username) {
 		MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
