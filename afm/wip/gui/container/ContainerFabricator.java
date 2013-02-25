@@ -14,6 +14,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -25,7 +26,8 @@ public class ContainerFabricator extends Container {
 	InvUpdater storage;
 	InventoryCraftResult result;
 
-	public List<ItemStack> needed = new ArrayList<ItemStack>();
+	List<ItemStack> tempStorage = new ArrayList<ItemStack>();
+
 	public boolean fulfilled;
 
 	public ContainerFabricator(TEFabricator teFabricator, InventoryPlayer inventoryPlayer, World world) {
@@ -47,7 +49,6 @@ public class ContainerFabricator extends Container {
 		addSlotToContainer(new Slot(this.result, 9, 80, 35));
 
 		// Storage IDs: 10-18
-		// TODO Change where the +10 happens to here (10 + x + y * 3) instead of in InvUpdater
 		for (int y = 0; y < 3; y++) {
 			for (int x = 0; x < 3; x++) {
 				addSlotToContainer(new Slot(this.storage, 10 + x + y * 3, 116 + x * 18, 17 + y * 18));
@@ -79,9 +80,7 @@ public class ContainerFabricator extends Container {
 		if (this.fulfilled) {
 			System.out.println(this.tileEntity.worldObj.getWorldTime() + " - Fulfilled");
 		} else {
-			for (ItemStack is : this.needed) {
-				System.out.println(this.tileEntity.worldObj.getWorldTime() + " - " + is.getItemName() + "x" + is.stackSize);
-			}
+			System.out.println(this.tileEntity.worldObj.getWorldTime() + " - Not Fulfilled");
 		}
 		System.out.println("---------------------------");
 
@@ -108,33 +107,76 @@ public class ContainerFabricator extends Container {
 	@Override
 	public void onCraftMatrixChanged(IInventory par1IInventory) {
 		this.result.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(matrix, this.tileEntity.worldObj));
-		this.needed.clear();
-		this.fulfilled = true;
 
 		if (this.result.getStackInSlot(0) == null) return;
 
-		for (int x = 0; x < 9; x++) {
-			ItemStack is = (ItemStack) this.inventoryItemStacks.get(x);
-			if (is == null) continue;
-
-			// TODO clone storage to an array/list, and check from there, removing the amount used
-			if (findItemStackInStorage(is) == -1) {
-				needed.add(is); // If not found, add it to needed;
-				this.fulfilled = false;
-			}
-		}
+		checkIfFulfilled();
 
 		super.onCraftMatrixChanged(par1IInventory);
 	}
 
-	/**
-	 * Called when putStackInSlot player shift-clicks on putStackInSlot slot. You must override this or you will crash when someone does that.
-	 */
-	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
-		return super.transferStackInSlot(par1EntityPlayer, par2);    //To change body of overridden methods use File | Settings | File Templates.
+	private void checkIfFulfilled(){
+
+		this.tempStorage.clear();
+		this.fulfilled = true;
+
+		if(this.result.getStackInSlot(0) == null) return; // Not result in recipe -> Not check everything
+
+		// Clone the storage to a list, so that it can be modified
+		for(int i = 0; i < 9; i++){
+			ItemStack itemStack = this.storage.getStackInSlot(i);
+			if(itemStack == null) return;
+			this.tempStorage.add(itemStack);
+		}
+
+		// Iterate over every itemStack needed
+		for (int i = 0; i < 9; i++) {
+			ItemStack is = this.matrix.getStackInSlot(i); // Get from the matrix
+			if (is == null) continue;
+			ItemStack neededStack = is.copy();
+
+			// Iterate over every itemStack in the storage
+			for (ItemStack curr : this.tempStorage) {
+				if (UtilAFM.isSameItemOreDict(curr, neededStack) && curr.stackSize >= 1) {
+					curr.splitStack(1); // 1, so that if in the recipe the stackSize is bigger, it doesn't affect
+					break;
+				} else {
+					this.fulfilled = false;
+				}
+			}
+		}
+		if(this.fulfilled){
+			int canFit = canFitInTempStorage(this.result.getStackInSlot(0));
+			if (canFit < 0){
+				this.tempStorage.set(canFit, this.result.getStackInSlot(0));
+			} else if (canFit > 0){
+				ItemStack is = this.result.getStackInSlot(0);
+				is.stackSize += this.tempStorage.get(-canFit).stackSize;
+				this.tempStorage.set(-canFit, is);
+			}
+		}
 	}
 
+	/**
+	 * Returns the first slot number the itemStack can fit in,
+	 * returning a positive int if the slot is empty, and
+	 * a negative int if it's same item.
+	 * @param itemStack ItemStack to be fit in the tempStorage
+	 * @return 	0 if cannot fit
+	 * 			>0 if slot num is null
+	 * 			<0 if same item
+	 */
+	private int canFitInTempStorage(ItemStack itemStack){
+		for(int i = 0; i < 9; i++){
+			ItemStack stack = this.storage.getStackInSlot(i);
+			if(stack == null){
+				return i;
+			} else if(stack.isItemEqual(itemStack) && itemStack.stackSize + stack.stackSize >= this.storage.getInventoryStackLimit()){
+				return -i;
+			}
+		}
+		return 0;
+	}
 
 	// TODO check from the (to be done) cloned storage, so that we can then remove from it
 	private int findItemStackInStorage(ItemStack stack) {
@@ -145,6 +187,14 @@ public class ContainerFabricator extends Container {
 			}
 		}
 		return -1;
+	}
+
+	/**
+	 * Called when putStackInSlot player shift-clicks on putStackInSlot slot. You must override this or you will crash when someone does that.
+	 */
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
+		return super.transferStackInSlot(par1EntityPlayer, par2);    //To change body of overridden methods use File | Settings | File Templates.
 	}
 
 	public class InvUpdater implements IInventory {
@@ -179,7 +229,6 @@ public class ContainerFabricator extends Container {
 
 		@Override
 		public void setInventorySlotContents(int slot, ItemStack stack) {
-			System.out.println("Working in slot: " + slot);
 			this.inv.setInventorySlotContents(slot, stack);
 			ContainerFabricator.this.onCraftMatrixChanged(this);
 		}
