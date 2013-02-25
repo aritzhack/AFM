@@ -50,7 +50,7 @@ public class ContainerFabricator extends Container {
 		// TODO Change where the +10 happens to here (10 + x + y * 3) instead of in InvUpdater
 		for (int y = 0; y < 3; y++) {
 			for (int x = 0; x < 3; x++) {
-				addSlotToContainer(new Slot(this.storage, x + y * 3, 116 + x * 18, 17 + y * 18));
+				addSlotToContainer(new Slot(this.storage, 10 + x + y * 3, 116 + x * 18, 17 + y * 18));
 			}
 		}
 
@@ -162,24 +162,25 @@ public class ContainerFabricator extends Container {
 
 		@Override
 		public ItemStack getStackInSlot(int slot) {
-			return inv.getStackInSlot(slot + 10);
+			return inv.getStackInSlot(slot);
 		}
 
 		@Override
 		public ItemStack decrStackSize(int slot, int amount) {
-			ItemStack ret = inv.decrStackSize(slot + 10, amount);
+			ItemStack ret = inv.decrStackSize(slot, amount);
 			if (ret != null) ContainerFabricator.this.onCraftMatrixChanged(this);
 			return ret;
 		}
 
 		@Override
 		public ItemStack getStackInSlotOnClosing(int slot) {
-			return this.inv.getStackInSlotOnClosing(slot + 10);
+			return this.inv.getStackInSlotOnClosing(slot);
 		}
 
 		@Override
 		public void setInventorySlotContents(int slot, ItemStack stack) {
-			this.inv.setInventorySlotContents(slot + 10, stack);
+			System.out.println("Working in slot: " + slot);
+			this.inv.setInventorySlotContents(slot, stack);
 			ContainerFabricator.this.onCraftMatrixChanged(this);
 		}
 
