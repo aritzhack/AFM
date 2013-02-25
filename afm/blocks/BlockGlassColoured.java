@@ -52,7 +52,7 @@ public class BlockGlassColoured extends BlockAFM {
 	 * <ul>
 	 * </ul>
 	 */
-	public void init() {
+	public void initRecipes() {
 		for (int meta = 0; meta < 16; meta++) {
 			ItemStack glass = new ItemStack(Block.glass, 1);
 			ItemStack output = new ItemStack(this, 1, meta);

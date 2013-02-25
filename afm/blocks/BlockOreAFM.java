@@ -19,7 +19,7 @@ public class BlockOreAFM extends BlockAFM {
 		this.setLightValue(1.0F);
 	}
 
-	public void init() {
+	public void initRecipes() {
 		GameRegistry.addSmelting(Blocks.oreAFM.blockID, new ItemStack(Items.quartz), 0.1F);
 	}
 

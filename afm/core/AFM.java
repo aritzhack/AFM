@@ -73,6 +73,9 @@ public class AFM {
 		Items.init();
 		Blocks.init();
 
+		Blocks.registerBlocks();
+		Blocks.addRecipes();
+
 		UtilAFM.initOreDict();
 
 		GameRegistry.registerWorldGenerator(this.worldGen);
