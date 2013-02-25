@@ -120,14 +120,13 @@ public final class UtilAFM {
 	}
 
 	public static boolean isSameItemOreDict(ItemStack i1, ItemStack i2) {
-		return UtilAFM.compareItemStacksWithOreDict(i1, i2, false, true) < 0 ? true : false;
+		return UtilAFM.compareItemStacksWithOreDict(i1, i2, false, true) < 0;
 	}
 
 	private static boolean compareOreDict(ItemStack s1, ItemStack s2) {
 		String n1 = getOreDictOreName(s1);
 		String n2 = getOreDictOreName(s2);
-		if (n1 == null || n2 == null) return false;
-		return n1.equals(n2);
+		return !(n1 == null || n2 == null) && n1.equals(n2);
 	}
 
 	public static String getOreDictOreName(ItemStack is) {
