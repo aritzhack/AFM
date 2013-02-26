@@ -14,7 +14,6 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -108,6 +107,8 @@ public class ContainerFabricator extends Container {
 	public void onCraftMatrixChanged(IInventory par1IInventory) {
 		this.result.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(matrix, this.tileEntity.worldObj));
 
+		this.fulfilled = true;
+
 		if (this.result.getStackInSlot(0) == null) return;
 
 		checkIfFulfilled();
@@ -115,17 +116,16 @@ public class ContainerFabricator extends Container {
 		super.onCraftMatrixChanged(par1IInventory);
 	}
 
-	private void checkIfFulfilled(){
+	private void checkIfFulfilled() {
 
 		this.tempStorage.clear();
-		this.fulfilled = true;
 
-		if(this.result.getStackInSlot(0) == null) return; // Not result in recipe -> Not check everything
+		if (this.result.getStackInSlot(0) == null) return; // Not result in recipe -> Not check everything
 
 		// Clone the storage to a list, so that it can be modified
-		for(int i = 0; i < 9; i++){
+		for (int i = 0; i < 9; i++) {
 			ItemStack itemStack = this.storage.getStackInSlot(i);
-			if(itemStack == null) continue;
+			if (itemStack == null) continue;
 			this.tempStorage.add(itemStack);
 		}
 
@@ -145,11 +145,11 @@ public class ContainerFabricator extends Container {
 				}
 			}
 		}
-		if(this.fulfilled){
+		if (this.fulfilled) {
 			int canFit = canFitInTempStorage(this.result.getStackInSlot(0));
-			if (canFit < 0){
+			if (canFit < 0) {
 				this.tempStorage.set(canFit, this.result.getStackInSlot(0));
-			} else if (canFit > 0){
+			} else if (canFit > 0) {
 				ItemStack is = this.result.getStackInSlot(0);
 				is.stackSize += this.tempStorage.get(-canFit).stackSize;
 				this.tempStorage.set(-canFit, is);
@@ -161,18 +161,24 @@ public class ContainerFabricator extends Container {
 	 * Returns the first slot number the itemStack can fit in,
 	 * returning a positive int if the slot is empty, and
 	 * a negative int if it's same item.
+	 *
 	 * @param itemStack ItemStack to be fit in the tempStorage
-	 * @return 	0 if cannot fit
-	 * 			>0 if slot num is null
-	 * 			<0 if same item
+	 * @return 0 if cannot fit
+	 *         >0 if slot num is null
+	 *         <0 if same item
 	 */
-	private int canFitInTempStorage(ItemStack itemStack){
-		for(int i = 0; i < 9; i++){
-			ItemStack stack = this.storage.getStackInSlot(i);
-			if(stack == null){
-				return i;
-			} else if(stack.isItemEqual(itemStack) && itemStack.stackSize + stack.stackSize >= this.storage.getInventoryStackLimit()){
-				return -i;
+	private int canFitInTempStorage(ItemStack itemStack) {
+		for (int i = 0; i < 9; i++) {
+			try {
+				ItemStack stack = this.tempStorage.get(i);
+
+				if (stack == null) {
+					return i;
+				} else if (stack.isItemEqual(itemStack) && itemStack.stackSize + stack.stackSize >= this.storage.getInventoryStackLimit()) {
+					return -i;
+				}
+			} catch (IndexOutOfBoundsException e) {
+				continue;
 			}
 		}
 		return 0;
