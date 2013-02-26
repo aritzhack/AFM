@@ -125,7 +125,7 @@ public class ContainerFabricator extends Container {
 		// Clone the storage to a list, so that it can be modified
 		for(int i = 0; i < 9; i++){
 			ItemStack itemStack = this.storage.getStackInSlot(i);
-			if(itemStack == null) return;
+			if(itemStack == null) continue;
 			this.tempStorage.add(itemStack);
 		}
 
