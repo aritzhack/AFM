@@ -27,6 +27,8 @@ public class ContainerFabricator extends Container {
 	InvUpdater storage;
 	InventoryCraftResult result;
 
+	int updateCount = 0;
+
 	List<ItemStack> tempStorage = new ArrayList<ItemStack>();
 
 	public boolean fulfilled;
@@ -77,9 +79,10 @@ public class ContainerFabricator extends Container {
 
 	@Override
 	public ItemStack slotClick(int slotIndex, int button, int par3, EntityPlayer player) {
+		this.updateCount = 0;
 		this.onCraftMatrixChanged(this.tileEntity);
-		AFMLogger.log(this.tileEntity.worldObj.getWorldTime() + (this.fulfilled ? " - Fulfilled" : " - Not Fulfilled"));
-		AFMLogger.log("---------------------------" + par3);
+//		AFMLogger.log(this.tileEntity.worldObj.getWorldTime() + (this.fulfilled ? " - Fulfilled" : " - Not Fulfilled"));
+//		AFMLogger.log("---------------------------");
 
 		if (slotIndex == 9) return null; // Can't modify result slot
 		if (slotIndex > 9 || slotIndex < 0) // If storage or none, handle them as usual
@@ -103,6 +106,9 @@ public class ContainerFabricator extends Container {
 	 */
 	@Override
 	public void onCraftMatrixChanged(IInventory par1IInventory) {
+		updateCount++;
+		System.out.println(this.tileEntity.worldObj.getWorldTime() + " - Update number " + this.updateCount);
+		if(updateCount > 100) return;
 		this.result.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(matrix, this.tileEntity.worldObj));
 
 		this.fulfilled = true;
@@ -158,35 +164,37 @@ public class ContainerFabricator extends Container {
 			if(!addToTempStorage(resultStack)) return;
 			for(int i = 0; i < 9; i++){
 				try{
-					this.tileEntity.setInventorySlotContents(10+i, this.tempStorage.get(i));
+//					this.tileEntity.setInventorySlotContents(10+i, this.tempStorage.get(i));
+					this.storage.setInventorySlotContents(i, this.tempStorage.get(i));
 				} catch (IndexOutOfBoundsException e){
-					this.tileEntity.setInventorySlotContents(10+i, null);
+//					this.tileEntity.setInventorySlotContents(10+i, null);
+					this.storage.setInventorySlotContents(i, null);
 				}
 			}
 		}
+		this.onCraftMatrixChanged(this.tileEntity);
 	}
 
 	private boolean addToTempStorage(ItemStack itemStack) {
-		int canBeAdded = 0;
 		for (int i = 1; i < 10; i++) {
 			try {
-				ItemStack stack = this.tempStorage.get(i);
-				if (stack == null) {
-					canBeAdded = i;
-					break;
-				} else if (stack.isItemEqual(itemStack) && itemStack.stackSize + stack.stackSize <= this.storage.getInventoryStackLimit()) {
-					canBeAdded = -i;
-					break;
+				ItemStack storageStack = this.tempStorage.get(i);
+				if (storageStack == null) {
+					this.tempStorage.set(i, itemStack);
+					return true;
+				} else if (storageStack.isItemEqual(itemStack) && itemStack.stackSize + 1 <= this.storage.getInventoryStackLimit()) {
+					ItemStack stack = storageStack.copy();
+					stack.stackSize++;
+					this.tempStorage.set(i, stack);
+					return true;
 				}
-			} catch (IndexOutOfBoundsException ignored) {canBeAdded = 0;}
+			} catch (IndexOutOfBoundsException e) {
+				if(this.tempStorage.size() > 9) return false;
+				this.tempStorage.add(itemStack);
+				return true;
+			}
 		}
-		if(canBeAdded == 0) return false;
-		if (canBeAdded > 0) {
-			this.tempStorage.set(canBeAdded-1, itemStack.copy());
-		} else if (canBeAdded < 0) {
-			itemStack.stackSize += this.tempStorage.get(-canBeAdded-1).stackSize;
-		}
-		return true;
+		return false;
 	}
 
 	/**
@@ -230,7 +238,7 @@ public class ContainerFabricator extends Container {
 		@Override
 		public void setInventorySlotContents(int slot, ItemStack stack) {
 			this.inv.setInventorySlotContents(slot+10, stack);
-			ContainerFabricator.this.onCraftMatrixChanged(this);
+			//ContainerFabricator.this.onCraftMatrixChanged(this);
 		}
 
 		@Override
@@ -245,7 +253,7 @@ public class ContainerFabricator extends Container {
 
 		@Override
 		public void onInventoryChanged() {
-			ContainerFabricator.this.onCraftMatrixChanged(this);
+			//ContainerFabricator.this.onCraftMatrixChanged(this);
 			this.inv.onInventoryChanged();
 		}
 
