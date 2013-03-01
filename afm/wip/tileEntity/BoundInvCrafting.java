@@ -35,7 +35,7 @@ public class BoundInvCrafting extends InventoryCrafting {
 	public ItemStack decrStackSize(int slot, int amount) {
 		ItemStack ret = this.boundTo.decrStackSize(slot, amount);
 		if (ret != null) {
-			this.container.onCraftMatrixChanged(this);
+//			this.container.onCraftMatrixChanged(this);
 		}
 		return ret;
 	}
@@ -47,7 +47,7 @@ public class BoundInvCrafting extends InventoryCrafting {
 	public void setInventorySlotContents(int index, ItemStack stack) {
 		if (index >= 9) return;
 		this.boundTo.setInventorySlotContents(index, stack);
-		this.container.onCraftMatrixChanged(this);
+//		this.container.onCraftMatrixChanged(this);
 
 	}
 }
