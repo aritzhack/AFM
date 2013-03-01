@@ -1,5 +1,6 @@
 package afm.wip.tileEntity;
 
+import afm.core.AFMLogger;
 import afm.core.util.UtilAFM;
 import afm.tileEntity.TEAFM;
 import afm.wip.gui.container.ContainerFabricator;
@@ -14,6 +15,7 @@ public class TEFabricator extends TEAFM implements ISidedInventory {
 
 	public ContainerFabricator containerFabricator;
 	private ItemStack[] inventory;
+	private int updateCount = 0;
 
 	public TEFabricator() {
 		this.inventory = new ItemStack[19];
@@ -75,6 +77,18 @@ public class TEFabricator extends TEAFM implements ISidedInventory {
 	public boolean isUseableByPlayer(EntityPlayer player) {
 		return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) == this
 				&& player.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) < 64D;
+	}
+
+	@Override
+	public void updateEntity() {
+		this.updateCount++;
+		if(updateCount == 100) updateCount = 0;
+		if (updateCount % 5 == 0){
+			AFMLogger.log("Update count: " + updateCount);
+			if(this.containerFabricator != null){
+				this.containerFabricator.onCraftMatrixChanged(this);
+			}
+		}
 	}
 
 	@Override
@@ -146,5 +160,9 @@ public class TEFabricator extends TEAFM implements ISidedInventory {
 			if ((stack != null) && (stack.stackSize > 0))
 				UtilAFM.dropEntityItem(stack, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
 		}
+	}
+
+	public void setContainer(ContainerFabricator container){
+		this.containerFabricator = container;
 	}
 }
