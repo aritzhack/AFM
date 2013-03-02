@@ -13,7 +13,7 @@ import java.io.File;
  */
 public final class Properties {
 
-	public static final String RES_DIR = "/resources/";
+	public static final String RES_DIR = "/afm/res/";
 	public static final String LANG_DIR = Properties.RES_DIR + "lang/";
 	private static Configuration config;
 
