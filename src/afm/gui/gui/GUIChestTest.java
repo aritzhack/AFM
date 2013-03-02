@@ -6,6 +6,13 @@ import afm.tileEntity.TETestChest;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;
 
+/**
+ * GUIChestTest
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class GUIChestTest extends AFMGUI {
 
 	TETestChest tileEntity;

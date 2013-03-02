@@ -13,6 +13,13 @@ import net.minecraft.world.IBlockAccess;
 
 import java.util.List;
 
+/**
+ * BlockGlassColoured
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class BlockGlassColoured extends BlockAFM {
 
 	public BlockGlassColoured() {

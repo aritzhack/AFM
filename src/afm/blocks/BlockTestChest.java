@@ -13,6 +13,13 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
+/**
+ * BlockTestChest
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class BlockTestChest extends BlockContainerAFM {
 
 	public BlockTestChest() {

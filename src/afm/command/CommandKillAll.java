@@ -10,6 +10,13 @@ import net.minecraft.world.World;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * CommandKillAll
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class CommandKillAll {
 
 	public static void handle(ICommandSender sender, String[] args) {
@@ -46,7 +53,7 @@ public class CommandKillAll {
 		return "/afm killAll (entityType)";
 	}
 
-	public static List getTabCompletion(ICommandSender sender, String[] args) {
+	public static List<String> getTabCompletion(ICommandSender sender, String[] args) {
 		return Arrays.asList("pig", "cow");
 	}
 

@@ -4,7 +4,13 @@ import afm.core.AFM;
 import afm.data.BlockData;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-
+/**
+ * BlockAFM
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 abstract class BlockAFM extends Block {
 
 	public BlockAFM(int id, String blockName) {

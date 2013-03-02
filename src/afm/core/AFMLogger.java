@@ -5,6 +5,13 @@ import cpw.mods.fml.common.FMLLog;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * AFMLogger
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class AFMLogger {
 
 	private static final Logger logger = Logger.getLogger("AFM");

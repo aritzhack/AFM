@@ -20,6 +20,13 @@ import net.minecraft.world.World;
 
 import java.util.logging.Level;
 
+/**
+ * GUIHandler
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class GUIHandler implements IGuiHandler {
 
 	public GUIHandler() {

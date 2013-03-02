@@ -7,6 +7,13 @@ import net.minecraft.inventory.*;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.world.World;
 
+/**
+ * ContainerSharedWorkbench
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class ContainerSharedWorkbench extends AFMContainer {
 
 	public InventoryCrafting craftMatrix = new InventoryCrafting(this, 3, 3);

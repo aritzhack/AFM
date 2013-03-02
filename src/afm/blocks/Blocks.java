@@ -8,6 +8,13 @@ import afm.items.ItemPortableChest;
 import afm.wip.blocks.BlockFabricator;
 import cpw.mods.fml.common.registry.GameRegistry;
 
+/**
+ * Blocks
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class Blocks {
 
 	public static BlockGlassColoured colouredGlass;

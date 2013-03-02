@@ -5,6 +5,13 @@ import afm.data.BlockData;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
+/**
+ * ItemGlassColoured
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class ItemGlassColoured extends ItemBlock {
 
 	public ItemGlassColoured(int par1) {

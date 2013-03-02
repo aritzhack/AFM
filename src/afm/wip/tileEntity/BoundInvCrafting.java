@@ -6,7 +6,11 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 
 /**
- * @author Aritz Lopez
+ * BoundInvCrafting
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
  */
 public class BoundInvCrafting extends InventoryCrafting {
 

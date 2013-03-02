@@ -11,6 +11,13 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
+/**
+ * BlockOreAFM
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class BlockOreAFM extends BlockAFM {
 
 	public BlockOreAFM() {

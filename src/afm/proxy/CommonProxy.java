@@ -1,12 +1,14 @@
 package afm.proxy;
 
+/**
+ * CommonProxy
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class CommonProxy {
 
-	/**
-	 * Not implemented in server-side
-	 *
-	 * @see ClientProxy#registerTexuresAndRenderers()
-	 */
 	public void registerTexuresAndRenderers() {
 	}
 

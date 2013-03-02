@@ -11,6 +11,13 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.ISidedInventory;
 
+/**
+ * TEFabricator
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class TEFabricator extends TEAFM implements ISidedInventory {
 
 	public ContainerFabricator containerFabricator;

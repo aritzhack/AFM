@@ -8,6 +8,13 @@ import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
+/**
+ * TabAFM
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class TabAFM extends CreativeTabs {
 
 	public TabAFM(int par1) {
@@ -25,6 +32,7 @@ public class TabAFM extends CreativeTabs {
 		return new ItemStack(Blocks.oreAFM);
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void displayAllReleventItems(List list) {

@@ -26,6 +26,13 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 
+/**
+ * AFM
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 @Mod(name = Properties.MOD_NAME, modid = Properties.MOD_ID, version = Properties.VERSION)
 @NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = {Properties.Network.CHANNEL}, packetHandler = PacketHandler.class)
 public class AFM {

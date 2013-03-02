@@ -12,6 +12,13 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
+/**
+ * BlockPortableChest
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class BlockPortableChest extends BlockChest {
 	final Random random = new Random();
 

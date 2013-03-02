@@ -5,6 +5,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 
+/**
+ * UtilNBT
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class UtilNBT {
 
 	public static void addDescriptionToStack(ItemStack is, String description) {

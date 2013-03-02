@@ -18,7 +18,11 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * @author Aritz Lopez
+ * ContainerFabricator
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
  */
 public class ContainerFabricator extends Container {
 	TEFabricator tileEntity;
