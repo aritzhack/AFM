@@ -4,6 +4,13 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
 import org.lwjgl.opengl.GL11;
 
+/**
+ * AFMGUI
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public abstract class AFMGUI extends GuiContainer {
 
 	String backgroundTexture = null;

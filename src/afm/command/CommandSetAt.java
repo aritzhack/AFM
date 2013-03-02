@@ -8,6 +8,13 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
+/**
+ * CommandSetAt
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class CommandSetAt {
 
 	public static void handle(ICommandSender sender, String[] args) {
@@ -42,7 +49,7 @@ public class CommandSetAt {
 		return "/afm setAt x y z id (metadata)";
 	}
 
-	public static List getTabCompletion(ICommandSender sender, String[] args) {
+	public static List<String> getTabCompletion(ICommandSender sender, String[] args) {
 		return null;
 	}
 

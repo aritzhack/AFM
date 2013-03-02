@@ -2,6 +2,13 @@ package afm.data;
 
 import net.minecraftforge.common.Configuration;
 
+/**
+ * GUIData
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class GUIData {
 	private static final String DIR = Properties.RES_DIR + "gui/";
 

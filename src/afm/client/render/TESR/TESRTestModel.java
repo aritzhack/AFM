@@ -4,6 +4,13 @@ import afm.client.render.model.ModelTestModel;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
+/**
+ * TESRTestModel
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class TESRTestModel extends TileEntitySpecialRenderer {
 
 	ModelTestModel model;

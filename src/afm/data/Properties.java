@@ -4,6 +4,13 @@ import net.minecraftforge.common.Configuration;
 
 import java.io.File;
 
+/**
+ * Properties
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public final class Properties {
 
 	public static final String RES_DIR = "/resources/";

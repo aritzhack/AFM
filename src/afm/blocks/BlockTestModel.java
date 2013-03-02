@@ -5,6 +5,13 @@ import afm.tileEntity.TETestModel;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+/**
+ * BlockTestModel
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class BlockTestModel extends BlockContainerAFM {
 
 	public BlockTestModel() {

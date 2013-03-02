@@ -12,6 +12,13 @@ import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Map;
 
+/**
+ * PacketHandler
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class PacketHandler implements IPacketHandler {
 
 	Map<Byte, AFMPacket> packets = new Hashtable<Byte, AFMPacket>();

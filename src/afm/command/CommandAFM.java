@@ -5,6 +5,13 @@ import net.minecraft.command.ICommandSender;
 
 import java.util.List;
 
+/**
+ * CommandAFM
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class CommandAFM extends CommandBase {
 
 	@Override
@@ -26,8 +33,9 @@ public class CommandAFM extends CommandBase {
 		return commandSender.canCommandSenderUseCommand(3, "ban");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List addTabCompletionOptions(ICommandSender par1iCommandSender, String[] args) {
+	public List<String> addTabCompletionOptions(ICommandSender par1iCommandSender, String[] args) {
 
 		if (args.length > 0) {
 			if (args[0].equalsIgnoreCase("setAt"))

@@ -8,6 +8,13 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.StatCollector;
 
+/**
+ * TEPortableChest
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class TEPortableChest extends TileEntityChest {
 
 	public void setContentFromIS(ItemStack is) {

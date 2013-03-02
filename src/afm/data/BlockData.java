@@ -2,6 +2,13 @@ package afm.data;
 
 import net.minecraftforge.common.Configuration;
 
+/**
+ * BlockData
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class BlockData {
 	public static final String TEXTURE = Properties.RES_DIR + "blocks.png";
 

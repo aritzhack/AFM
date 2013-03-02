@@ -5,6 +5,13 @@ import afm.data.BlockData;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 
+/**
+ * BlockContainerAFM
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public abstract class BlockContainerAFM extends BlockContainer {
 
 	protected BlockContainerAFM(int id, String blockName, Material material) {

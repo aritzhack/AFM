@@ -9,6 +9,13 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
+/**
+ * CommandGetAt
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class CommandGetAt {
 
 	public static void handle(ICommandSender sender, String[] args) {
@@ -39,7 +46,7 @@ public class CommandGetAt {
 		return "/afm getAt x y z";
 	}
 
-	public static List getTabCompletion(ICommandSender sender, String[] args) {
+	public static List<String> getTabCompletion(ICommandSender sender, String[] args) {
 		return null;
 	}
 

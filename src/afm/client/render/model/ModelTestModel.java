@@ -6,6 +6,13 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraftforge.client.ForgeHooksClient;
 import org.lwjgl.opengl.GL11;
 
+/**
+ * ModelTestModel
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class ModelTestModel extends ModelBase {
 	final ModelRenderer TopCube;
 	final ModelRenderer MidTube;

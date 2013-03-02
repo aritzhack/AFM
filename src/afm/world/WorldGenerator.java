@@ -8,6 +8,13 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 
 import java.util.Random;
 
+/**
+ * WorldGenerator
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class WorldGenerator implements IWorldGenerator {
 
 	@Override

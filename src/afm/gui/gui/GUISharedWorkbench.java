@@ -7,6 +7,13 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+/**
+ * GUISharedWorkbench
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class GUISharedWorkbench extends AFMGUI {
 
 	TESharedWorkbench tileEntity;

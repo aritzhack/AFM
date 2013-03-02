@@ -8,6 +8,13 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+/**
+ * GUIFabricator
+ *
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class GUIFabricator extends AFMGUI {
 
 	TEFabricator tileEntity;
