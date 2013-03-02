@@ -2,10 +2,10 @@
   "modinfoversion": 2,
   "modlist": [{
     "modid": "AFM",
-    "name": "AFM v0.2",
+    "name": "AFM v%VERSION%",
     "description": "The first mod I do, in which I try to implement as many things as possible.",
-    "version": "0.2",
-    "mcversion": "1.4.5",
+    "version": "%VERSION%",
+    "mcversion": "%MC_VERSION%",
     "authors": [ "aritzh"],
     "credits": "Authored by Aritzh",
     "logoFile": "/logo.png",
