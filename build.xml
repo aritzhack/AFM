@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="AFM" default="Compile and Build">
+    <description>
+        AFM (Aritzh's first mod) is, as it's name says, the first mod
+        aritzh develops, using the Forge/FML APIs, and implementing as
+        many things as possible, helping me (aritzh) making
+        better mods in the future.
+    </description>
+
+	<property name="mod.id" value="AFM"/>
+	<property name="mod.version" value="0.2"/>
+
+    <property name="mcp.version" value="7.26"/>
+    <property name="forge.version" value="6.6.2.534"/>
+    <property name="mc.version" value="1.4.7"/>
+
+    <property name="mcp.dir" value="../mcp/mcp"/>
+    <property name="src.dir" value="src/afm"/>
+    <property name="res.dir" value="resources/afm"/>
+
+    <!-- Output folders -->
+    <property name="distr.dir" value="../distr"/>
+	<property name="oldSource.dir" value="${distr.dir}/archive"/>
+	
+	<target name="clean">
+		<echo>Cleaning output dir...</echo>
+		<delete dir="${mcp.dir}/src/minecraft/afm" />
+	</target>
+
+    <target name="Compile and Build" description="Recompile, reobfuscates and package the code into a jar" depends="clean">
+        <echo>Compiling ${mod.id} v${mod.version} for Forge ${forge.version} and MC ${mc.version}, using MCP ${mcp.version}</echo>
+
+    	<copy todir="${mcp.dir}/src/minecraft/afm" >
+    		<fileset dir="${src.dir}" />
+    		<fileset dir="${res.dir}" />
+    	</copy>
+    	
+    	<replace dir="${mcp.dir}/src/minecraft/afm" token="%VERSION%" value="${mod.version}" />
+    	<replace dir="${mcp.dir}/src/minecraft/afm" token="%MC_VERSION%" value="${mc.version}" />
+    	<replace dir="${mcp.dir}/src/minecraft/afm" token="%FORGE_VERSION%" value="${forge.version}" />
+
+        <echo>Recompiling...</echo>
+        <exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failifexecutionfails="true" failonerror="true">
+            <arg line="/c recompile.bat"/>
+        </exec>
+
+        <echo>Reobfuscating...</echo>
+        <exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failifexecutionfails="true" failonerror="true">
+            <arg line="/c reobfuscate.bat"/>
+        </exec>
+
+        <echo>Copying source and resources...</echo>
+        <mkdir dir="${oldSource.dir}/${mod.version}"/>
+
+        <copy todir="${oldSource.dir}/${mod.version}">
+    		<fileset dir="${src.dir}" />
+    		<fileset dir="${res.dir}" />
+        </copy>
+    	<replace dir="${mcp.dir}/src/minecraft/afm" token="%VERSION%" value="${mod.version}" />
+    	<replace dir="${mcp.dir}/src/minecraft/afm" token="%MC_VERSION%" value="${mc.version}" />
+    	<replace dir="${mcp.dir}/src/minecraft/afm" token="%FORGE_VERSION%" value="${forge.version}" />
+
+        <echo>Building jar...</echo>
+    	<copy todir="${mcp.dir}/reobf/minecraft/afm">
+    		<fileset dir="${res.dir}" />
+    	</copy>
+        <jar destfile="${distr.dir}/${mod.id} v${mod.version}.jar" basedir="${mcp.dir}/reobf/minecraft">
+        </jar>
+
+        <echo>Done building. Thanks to the MCP team for such a great tool, and to the Forge/FML team for the awesome API</echo>
+    </target>
+
+</project>

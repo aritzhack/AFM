@@ -23,10 +23,10 @@ public final class Properties {
 	}
 
 	public static final String MOD_ID = "AFM";
-	public static final String VERSION = "0.2";
-	public static final String MOD_NAME = "AFM v" + Properties.VERSION;
-	public static final String MC_VERSION = "1.4.7";
-	public static final String FORGE_VERSION = "6.6.1.524";
+	public static final String VERSION = "%VERSION%";
+	public static final String MOD_NAME = MOD_ID + " v" + Properties.VERSION;
+	public static final String MC_VERSION = "%MC_VERSION%";
+	public static final String FORGE_VERSION = "%FORGE_VERSION%";
 
 	public static void init(File configFile) {
 		Properties.config = new Configuration(configFile);
