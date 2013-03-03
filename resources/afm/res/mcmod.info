@@ -8,9 +8,8 @@
     "mcversion": "%MC_VERSION%",
     "authors": [ "aritzh"],
     "credits": "Authored by Aritzh",
-    "logoFile": "/logo.png",
-    "screenshots": [ "screenie1.png", "screenie2.png" ],
-    "requiredMods": [ "Forge"],
+    "logoFile": "/afm/res/logo.png",,
+    "requiredMods": [ "MinecraftForge"],
     "useDependencyInformation": "false"
   }]
 }
