@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="AFM" default="Compile and Build">
+<project name="AFM" default="Build and copy to dropbox">
     <description>
         AFM (Aritzh's first mod) is, as it's name says, the first mod
         aritzh develops, using the Forge/FML APIs, and implementing as
         many things as possible, helping me (aritzh) making
         better mods in the future.
     </description>
-
+	
 	<property name="mod.id" value="AFM"/>
-	<property name="mod.version" value="0.2"/>
+	<property name="mod.version.base" value="0.2"/>
 
     <property name="mcp.version" value="7.26"/>
     <property name="forge.version" value="6.6.2.534"/>
@@ -22,14 +22,23 @@
     <!-- Output folders -->
     <property name="distr.dir" value="../distr"/>
 	<property name="oldSource.dir" value="${distr.dir}/archive"/>
+	<property name="dropbox.dir" value="C:/Dropbox" />
 	
-	<target name="clean">
+	<condition property="shouldClean">
+		<available file="${mcp.dir}/src/minecraft/afm" type="dir" />
+	</condition>
+	
+	<target name="clean" if="shouldClean">
 		<echo>Cleaning output dir...</echo>
 		<delete dir="${mcp.dir}/src/minecraft/afm" />
 	</target>
 
     <target name="Compile and Build" description="Recompile, reobfuscates and package the code into a jar" depends="clean">
-        <echo>Compiling ${mod.id} v${mod.version} for Forge ${forge.version} and MC ${mc.version}, using MCP ${mcp.version}</echo>
+    	
+    	<buildnumber />
+    	<property name="mod.version" value="${mod.version.base}.${build.number}" />
+    	
+        <echo>Compiling ${mod.id} v${mod.version} for Forge ${forge.version} and MC ${mc.version}, using MCP ${mcp.version}...</echo>
 
     	<copy todir="${mcp.dir}/src/minecraft/afm" >
     		<fileset dir="${src.dir}" />
@@ -70,5 +79,16 @@
 
         <echo>Done building. Thanks to the MCP team for such a great tool, and to the Forge/FML team for the awesome API</echo>
     </target>
+	
+	<target name="Copy distr to dropbox" description="Copy all distribuition files (jars and source) to the dropbox folder inside drive C:">
+		<echo>Copying distribuition files to dropbox...</echo>
+		<copy todir="${dropbox.dir}/AFM">
+			<fileset dir="${distr.dir}" />
+		</copy>
+	</target>
+	
+	<target name="Build and copy to dropbox" description="Builds the mod and copies jars and sources to the dropbox folder inside drive c:" depends="Compile and Build, Copy distr to dropbox">
+		
+	</target>
 
 </project>
