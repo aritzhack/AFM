@@ -1,15 +1,14 @@
 package afm.wip.tileEntity;
 
-import afm.core.AFMLogger;
-import afm.core.util.UtilAFM;
-import afm.tileEntity.TEAFM;
-import afm.wip.gui.container.ContainerFabricator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.ISidedInventory;
+import afm.core.util.UtilAFM;
+import afm.tileEntity.TEAFM;
+import afm.wip.gui.container.ContainerFabricator;
 
 /**
  * TEFabricator
@@ -88,13 +87,11 @@ public class TEFabricator extends TEAFM implements ISidedInventory {
 
 	@Override
 	public void updateEntity() {
+		if(this.worldObj.isRemote) return;
 		this.updateCount++;
 		if(updateCount == 100) updateCount = 0;
-		if (updateCount % 5 == 0){
-			AFMLogger.log("Update count: " + updateCount);
-			if(this.containerFabricator != null){
-				this.containerFabricator.onCraftMatrixChanged(this);
-			}
+		if (updateCount % 5 == 0 && this.containerFabricator != null){
+			this.containerFabricator.onCraftMatrixChanged(this);
 		}
 	}
 
@@ -172,4 +169,6 @@ public class TEFabricator extends TEAFM implements ISidedInventory {
 	public void setContainer(ContainerFabricator container){
 		this.containerFabricator = container;
 	}
+	
+	
 }
