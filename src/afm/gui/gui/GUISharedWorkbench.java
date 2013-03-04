@@ -1,5 +1,7 @@
 package afm.gui.gui;
 
+import org.lwjgl.opengl.GL11;
+
 import afm.data.GUIData;
 import afm.gui.container.ContainerSharedWorkbench;
 import afm.tileEntity.TESharedWorkbench;
@@ -33,5 +35,17 @@ public class GUISharedWorkbench extends AFMGUI {
 				StatCollector.translateToLocal("container.inventory"), 6, 75,
 				0x404040);
 	}
+
+	@Override
+	protected void drawGuiContainerBackgroundLayer(float var1, int var2,
+			int var3) {
+        int var4 = this.mc.renderEngine.getTexture("/gui/crafting.png");
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        this.mc.renderEngine.bindTexture(var4);
+        int var5 = (this.width - this.xSize) / 2;
+        int var6 = (this.height - this.ySize) / 2;
+        this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);
+	}
+	
 
 }
