@@ -50,7 +50,7 @@ public class TEPortableChest extends TileEntityChest {
 			}
 			NBTTagCompound stTag = new NBTTagCompound(String.valueOf(i));
 			stacksTag.appendTag(currStack.writeToNBT(stTag));
-			UtilNBT.addDescriptionToStack(ret, "Stack: " + StatCollector.translateToLocal(currStack.getItemName()) + "x" + currStack.stackSize);
+			UtilNBT.addDescriptionToStack(ret, "Stack: " + currStack.getItemName() + "x" + currStack.stackSize);
 		}
 		return ret;
 	}
