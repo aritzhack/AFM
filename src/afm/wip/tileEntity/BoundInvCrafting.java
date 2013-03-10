@@ -14,13 +14,11 @@ import net.minecraft.item.ItemStack;
  */
 public class BoundInvCrafting extends InventoryCrafting {
 
-	private ContainerFabricator container;
 	private IInventory boundTo;
 
-	public BoundInvCrafting(ContainerFabricator container, IInventory boundTo) {
+	public BoundInvCrafting(ContainerFabricator container) {
 		super(container, 3, 3);
-		this.container = container;
-		this.boundTo = boundTo;
+		this.boundTo = container.tileEntity;
 	}
 
 	/**
@@ -37,11 +35,7 @@ public class BoundInvCrafting extends InventoryCrafting {
 	 */
 	@Override
 	public ItemStack decrStackSize(int slot, int amount) {
-		ItemStack ret = this.boundTo.decrStackSize(slot, amount);
-		if (ret != null) {
-//			this.container.onCraftMatrixChanged(this);
-		}
-		return ret;
+		return this.boundTo.decrStackSize(slot, amount);
 	}
 
 	/**
@@ -51,7 +45,5 @@ public class BoundInvCrafting extends InventoryCrafting {
 	public void setInventorySlotContents(int index, ItemStack stack) {
 		if (index >= 9) return;
 		this.boundTo.setInventorySlotContents(index, stack);
-//		this.container.onCraftMatrixChanged(this);
-
 	}
 }
