@@ -24,7 +24,7 @@ public class BlockLaser extends BlockAFM {
 	}
 
 	public BlockLaser() {
-		super(BlockData.ID_LASER, BlockData.NAME_LASER, BlockData.TEXTUREINDEX_LASER);
+		super(BlockData.ID_LASER, BlockData.NAME_LASER, TextureType.ONE_TEX);
 	}
 
 }

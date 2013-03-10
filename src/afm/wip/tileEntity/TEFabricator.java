@@ -1,11 +1,11 @@
 package afm.wip.tileEntity;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.common.ISidedInventory;
 import afm.core.util.UtilAFM;
 import afm.tileEntity.TEAFM;
 import afm.wip.gui.container.ContainerFabricator;
@@ -144,18 +144,20 @@ public class TEFabricator extends TEAFM implements ISidedInventory {
 	 * @param side The global side to get the start of range.
 	 */
 	@Override
-	public int getStartInventorySide(ForgeDirection side) {
-		return 0;
+	public int func_94127_c(int side) {
+		ForgeDirection dir = ForgeDirection.getOrientation(side);
+		return 10; // Storage
 	}
 
 	/**
 	 * Get the size of the side inventory.
 	 *
-	 * @param side The global side.
+	 * @param side The global side to get the size of.
 	 */
 	@Override
-	public int getSizeInventorySide(ForgeDirection side) {
-		return 0;
+	public int func_94128_d(int side) {
+		ForgeDirection dir = ForgeDirection.getOrientation(side);
+		return 9; // Storage size 
 	}
 
 	public void dropItems() {
@@ -168,6 +170,19 @@ public class TEFabricator extends TEAFM implements ISidedInventory {
 
 	public void setContainer(ContainerFabricator container){
 		this.containerFabricator = container;
+	}
+	
+	/**
+	 * Something like: if true -> localize invName, else, use invName
+	 */
+	@Override
+	public boolean func_94042_c() {
+		return true;
+	}
+
+	@Override
+	public boolean func_94041_b(int i, ItemStack itemstack) {
+		return false; // FIXME Still guessing...
 	}
 	
 	

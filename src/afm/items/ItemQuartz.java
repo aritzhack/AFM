@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 public class ItemQuartz extends ItemAFM {
 
 	public ItemQuartz() {
-		super(ItemData.ID_QUARTZ, ItemData.NAME_QUARTZ, ItemData.TEXTUREINDEX_QUARTZ, AFM.tabAFM);
+		super(ItemData.ID_QUARTZ, ItemData.NAME_QUARTZ, AFM.tabAFM);
 		this.addRecipe();
 	}
 

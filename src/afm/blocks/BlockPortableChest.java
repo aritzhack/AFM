@@ -42,7 +42,7 @@ public class BlockPortableChest extends BlockChest {
 	}
 
 	public BlockPortableChest() {
-		super(BlockData.ID_PORTABLE_CHEST);
+		super(BlockData.ID_PORTABLE_CHEST, 0); // 0 means not redstone when open AFAIK
 		this.setCreativeTab(AFM.tabAFM);
 	}
 

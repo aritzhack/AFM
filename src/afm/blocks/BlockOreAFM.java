@@ -21,8 +21,7 @@ import java.util.Random;
 public class BlockOreAFM extends BlockAFM {
 
 	public BlockOreAFM() {
-		super(BlockData.ID_ORE, BlockData.NAME_ORE_AFM, BlockData.TEXTUREINDEX_ORE);
-
+		super(BlockData.ID_ORE, BlockData.NAME_ORE_AFM, TextureType.ONE_TEX);
 		this.setLightValue(1.0F);
 	}
 

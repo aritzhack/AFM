@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 /**
@@ -20,7 +21,7 @@ import net.minecraft.world.World;
 public class BlockSharedWorkbench extends BlockContainerAFM {
 
 	public BlockSharedWorkbench() {
-		super(BlockData.ID_SHAREDWORKBENCH, BlockData.NAME_SHARED_WORKBENCH, Block.workbench.blockIndexInTexture, Material.wood);
+		super(BlockData.ID_SHAREDWORKBENCH, BlockData.NAME_SHARED_WORKBENCH, Material.wood, TextureType.NONE);
 	}
 
 	@Override
@@ -46,8 +47,8 @@ public class BlockSharedWorkbench extends BlockContainerAFM {
 	}
 
 	@Override
-	public int getBlockTextureFromSide(int side) {
-		return Block.workbench.getBlockTextureFromSide(side);
+	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
+		return Block.workbench.getBlockTextureFromSideAndMetadata(side, meta);
 	}
 
 }
