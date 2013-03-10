@@ -1,12 +1,11 @@
 package afm.tileEntity;
 
-import afm.core.util.UtilNBT;
-import afm.data.BlockData;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.StatCollector;
+import afm.core.util.UtilNBT;
+import afm.data.BlockData;
 
 /**
  * TEPortableChest

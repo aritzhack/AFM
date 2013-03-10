@@ -1,8 +1,5 @@
 package afm.wip.gui.container;
 
-import afm.core.util.UtilAFM;
-import afm.wip.tileEntity.BoundInvCrafting;
-import afm.wip.tileEntity.TEFabricator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -12,10 +9,9 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.world.World;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
+import afm.core.util.UtilAFM;
+import afm.wip.tileEntity.BoundInvCrafting;
+import afm.wip.tileEntity.TEFabricator;
 
 /**
  * ContainerFabricator
@@ -25,19 +21,17 @@ import java.util.ListIterator;
  *
  */
 public class ContainerFabricator extends Container {
-	TEFabricator tileEntity;
+	public TEFabricator tileEntity;
 	BoundInvCrafting matrix;
-	InvUpdater storage;
 	InventoryCraftResult result;
 
-	List<ItemStack> tempStorage = new ArrayList<ItemStack>();
+	ItemStack[] tempStorage;
 
 	public boolean fulfilled;
 
 	public ContainerFabricator(TEFabricator teFabricator, InventoryPlayer inventoryPlayer, World world) {
 		this.tileEntity = teFabricator;
-		this.matrix = new BoundInvCrafting(this, teFabricator);
-		this.storage = new InvUpdater(teFabricator);
+		this.matrix = new BoundInvCrafting(this);
 		this.result = new InventoryCraftResult();
 
 		teFabricator.setContainer(this);
@@ -54,10 +48,10 @@ public class ContainerFabricator extends Container {
 		// Result ID: 9
 		addSlotToContainer(new Slot(this.result, 9, 80, 35));
 
-		// Storage IDs: 10-18 (10 get added in InvUpdater)
+		// Storage IDs: 10-18
 		for (int y = 0; y < 3; y++) {
 			for (int x = 0; x < 3; x++) {
-				addSlotToContainer(new Slot(this.storage, x + y * 3, 116 + x * 18, 17 + y * 18));
+				addSlotToContainer(new Slot(this.tileEntity, 10 + x + y * 3, 116 + x * 18, 17 + y * 18));
 			}
 		}
 
@@ -106,88 +100,104 @@ public class ContainerFabricator extends Container {
 	@Override
 	public void onCraftMatrixChanged(IInventory par1IInventory) {
 		this.result.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(matrix, this.tileEntity.worldObj));
-
+		
 		this.fulfilled = true;
 
 		if (this.result.getStackInSlot(0) == null) return;
 
-		checkIfFulfilled();
+		this.tryCraft();
 	}
 
-	private void checkIfFulfilled() {
+	public void tryCraft() {
 
-		this.tempStorage.clear();
-		ItemStack resultStack = this.result.getStackInSlot(0);
-		if (resultStack == null) return; // Not result in recipe -> Not check everything
+		ItemStack resultStack = this.result.getStackInSlot(0); // Get result stack
+		if (resultStack == null) return; // Not result in recipe -> Cannot craft
 
-		// Clone the storage to a list, so that it can be modified
-		for (int i = 0; i < 9; i++) {
-			ItemStack itemStack = this.storage.getStackInSlot(i);
-			if (itemStack == null) continue;
-			this.tempStorage.add(itemStack);
-		}
+		// Clone the storage, so that it can be modified without affecting the original one
+		this.tempStorage = this.cloneStorage();
 
 		// Iterate over every itemStack needed
-		for (int i = 0; i < 9; i++) {
-			ItemStack is = this.matrix.getStackInSlot(i); // Get from the matrix
-			if (is == null) continue;
-			ItemStack neededStack = is.copy();
-
-			// Iterate over every itemStack in the storage
-			ListIterator<ItemStack> iter = this.tempStorage.listIterator();
-			if(!iter.hasNext()){
-				this.fulfilled = false;
-				return;
-			}
-			while (iter.hasNext()){
-				ItemStack curr = iter.next();
-				if (UtilAFM.isSameItemOreDict(curr, neededStack) && curr.stackSize >= 1) {
-					ItemStack newIS = curr.copy();
-					newIS.splitStack(1); // 1, so that if in the recipe the stackSize is bigger, it doesn't affect
-					iter.remove();
-					if(newIS.stackSize >= 1){
-						iter.add(newIS);
-					}
-					break;
-				} else {
-					this.fulfilled = false;
-				}
-			}
-		}
-		if (this.fulfilled) {
-			if(!addToTempStorage(resultStack)) return;
-			for(int i = 0; i < 9; i++){
-				try{
-					this.storage.setInventorySlotContents(i, this.tempStorage.get(i));
-				} catch (IndexOutOfBoundsException e){
-					this.storage.setInventorySlotContents(i, null);
-				}
-			}
+		checkEveryNeeded();
+		
+		// I have everything I need & can add stack to the storage
+		if (this.fulfilled && addToTempStorage(resultStack.copy())) {
+			this.updateStorageFromTemp(); // Craft & remove needed items!
 		}
 	}
+	
+	private ItemStack[] cloneStorage(){
+		ItemStack[] retArray = new ItemStack[9];
+		for (int i = 0; i < 9; i++) {
+			ItemStack itemStack = this.getSlot(i+10).getStack();
+			if (itemStack == null){
+				retArray[i] = null;
+			} else {
+				retArray[i] = itemStack.copy();
+			}
+		}
+		return retArray;
+	}
+	
+	private boolean checkEveryNeeded(){
+		for (int i = 0; i < 9; i++) {
+			
+			ItemStack neededStack = this.matrix.getStackInSlot(i); // Get from the matrix
+			if (neededStack == null) continue;
+			boolean done = false; // we need something, so not done
 
-	private boolean addToTempStorage(ItemStack itemStack) {
+			// Iterate over every itemStack in the storage
+			done = this.seekAndRemoveItemFromTempStorage(neededStack);
+			
+			if(!done) return false; // If I didn't fulfill the needed, don't continue
+		}
+		return true;
+	}
+	
+	private boolean seekAndRemoveItemFromTempStorage(ItemStack needed){
+		
+		for(int i = 0; i<this.tempStorage.length; i++){
+			ItemStack curr = this.tempStorage[i];
+			if(curr == null) continue;
+			// Check if both itemStacks are equal, and if the stack in the storage is valid
+			if (UtilAFM.isSameItemOreDict(curr, needed) && curr.stackSize >= 1) {
+				curr.stackSize-=1; // -1, so that if the stackSize of the recipe is bigger, it doesn't affect
+				if(curr.stackSize < 1) this.tempStorage[i] = null;
+				return true; // Found, stop looking for it!
+			}
+		}
+		return false;
+	}
+
+	public boolean addToTempStorage(ItemStack itemStack) {
 		int firstEmpty = -1;
 		try {
-			for (int i = 1; i < 10; i++) {
-					ItemStack storageStack = this.tempStorage.get(i);
+			for (int i = 1; i < 9; i++) {
+					ItemStack storageStack = this.tempStorage[i];
 					if (storageStack == null && firstEmpty == -1) {
 						firstEmpty = i;
-					} else if ((storageStack != null && storageStack.isItemEqual(itemStack) && itemStack.stackSize + storageStack.stackSize <= this.storage.getInventoryStackLimit())) {
+					} else if ((storageStack != null && storageStack.isItemEqual(itemStack) && itemStack.stackSize + storageStack.stackSize <= this.tileEntity.getInventoryStackLimit())) {
 						ItemStack stack = storageStack.copy();
 						stack.stackSize+=itemStack.stackSize;
-						this.tempStorage.set(i, stack);
+						this.tempStorage[i] = stack;
 						return true;
 					}
 			}
-		} catch (IndexOutOfBoundsException e) {
-			if(this.tempStorage.size() >= 9) return false;
-			this.tempStorage.add(itemStack);
+		} catch (IndexOutOfBoundsException e) {}
+		if(firstEmpty != -1 && firstEmpty < 9){
+			this.tempStorage[firstEmpty] = itemStack;
 			return true;
 		}
-		if(firstEmpty == -1)return false;
-		this.tempStorage.set(firstEmpty, itemStack);
-		return true;
+		return false;
+	}
+	
+	private void updateStorageFromTemp(){
+		for(int i = 0; i < 9; i++){
+			try{
+				this.putStackInSlot(i+10, this.tempStorage[i]);
+			} catch (IndexOutOfBoundsException e){
+				this.putStackInSlot(i+10, null);
+			}
+		}
 	}
 
 	/**
@@ -197,67 +207,5 @@ public class ContainerFabricator extends Container {
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
 		return super.transferStackInSlot(par1EntityPlayer, par2);
 	}
-
-	// TODO Don't use a different class, since it doesn't longer update
-	public class InvUpdater implements IInventory {
-
-		private IInventory inv;
-
-		public InvUpdater(IInventory inventory) {
-			inv = inventory;
-		}
-
-		@Override
-		public int getSizeInventory() {
-			return 9;
-		}
-
-		@Override
-		public ItemStack getStackInSlot(int slot) {
-			return inv.getStackInSlot(slot+10);
-		}
-
-		@Override
-		public ItemStack decrStackSize(int slot, int amount) {
-			return inv.decrStackSize(slot+10, amount);
-		}
-
-		@Override
-		public ItemStack getStackInSlotOnClosing(int slot) {
-			return this.inv.getStackInSlotOnClosing(slot+10);
-		}
-
-		@Override
-		public void setInventorySlotContents(int slot, ItemStack stack) {
-			this.inv.setInventorySlotContents(slot+10, stack);
-		}
-
-		@Override
-		public String getInvName() {
-			return this.inv.getInvName();
-		}
-
-		@Override
-		public int getInventoryStackLimit() {
-			return this.inv.getInventoryStackLimit();
-		}
-
-		@Override
-		public void onInventoryChanged() {
-			this.inv.onInventoryChanged();
-		}
-
-		@Override
-		public boolean isUseableByPlayer(EntityPlayer var1) {
-			return false;
-		}
-
-		@Override
-		public void openChest() {
-		}
-
-		@Override
-		public void closeChest() {
-		}
-	}
+	
 }
