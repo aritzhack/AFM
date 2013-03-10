@@ -39,7 +39,7 @@ public class CommandGetAt {
 		int id = w.getBlockId(x, y, z);
 		int meta = w.getBlockMetadata(x, y, z);
 		Block b = Block.blocksList[id];
-		sender.sendChatToPlayer("Block: ID=" + id + ", meta=" + meta + ", name=" + b.getBlockName());
+		sender.sendChatToPlayer("Block: ID=" + id + ", meta=" + meta + ", name=" + b.getUnlocalizedName());
 	}
 
 	public static String getUsage() {

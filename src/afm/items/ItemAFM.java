@@ -1,8 +1,11 @@
 package afm.items;
 
-import afm.data.ItemData;
+import afm.core.AFM;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * ItemAFM
@@ -13,22 +16,21 @@ import net.minecraft.item.Item;
  */
 class ItemAFM extends Item {
 
-	ItemAFM(int id, String itemName, int indexInTexture, CreativeTabs tab) {
+	ItemAFM(int id, String itemName, CreativeTabs tab) {
 		super(id);
 		this.setCreativeTab(tab);
-		this.setIconIndex(indexInTexture);
-		this.setItemName(itemName);
+		this.setUnlocalizedName(itemName);
 	}
-
-	public ItemAFM(int id, int indexInTexture, CreativeTabs tab) {
-		super(id);
-		this.setCreativeTab(tab);
-		this.setIconIndex(indexInTexture);
+	
+	ItemAFM(int id, String itemName) {
+		this(id, itemName, AFM.tabAFM);
 	}
-
-	@Override
-	public String getTextureFile() {
-		return ItemData.TEXTURE;
-	}
+	
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void func_94581_a(IconRegister iconRegister)
+    {
+        this.iconIndex = iconRegister.func_94245_a("afm:" + this.getUnlocalizedName());
+    }
 
 }

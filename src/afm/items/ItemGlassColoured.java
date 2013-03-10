@@ -17,12 +17,12 @@ public class ItemGlassColoured extends ItemBlock {
 	public ItemGlassColoured(int par1) {
 		super(par1);
 		this.setHasSubtypes(true);
-		this.setItemName(BlockData.NAME_COLOUREDGLASS);
+		this.setUnlocalizedName(BlockData.NAME_COLOUREDGLASS);
 	}
 
 	@Override
-	public String getItemNameIS(ItemStack itemStack) {
-		return this.getItemName() + "." + UtilAFM.colorNames[itemStack.getItemDamage()].toLowerCase().replace(" ", "");
+	public String getUnlocalizedName(ItemStack itemStack) {
+		return this.getUnlocalizedName() + "." + UtilAFM.colorNames[itemStack.getItemDamage()].toLowerCase().replace(" ", "");
 	}
 
 	@Override

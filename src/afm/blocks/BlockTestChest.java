@@ -23,7 +23,7 @@ import java.util.Random;
 public class BlockTestChest extends BlockContainerAFM {
 
 	public BlockTestChest() {
-		super(BlockData.ID_TESTCHEST, BlockData.NAME_TESTCHEST, BlockData.TEXTUREINDEX_TESTCHEST);
+		super(BlockData.ID_TESTCHEST, BlockData.NAME_TESTCHEST, TextureType.ONE_TEX);
 		this.setCreativeTab(AFM.tabAFM);
 	}
 
