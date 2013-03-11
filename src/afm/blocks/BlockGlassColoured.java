@@ -26,26 +26,23 @@ import java.util.List;
  */
 public class BlockGlassColoured extends BlockAFM {
 
-	Icon[][] icons = new Icon[16][6];
+	Icon[] icons = new Icon[16];
 
 	public BlockGlassColoured() {
-		super(BlockData.ID_COLOURED_GLASS, BlockData.NAME_COLOUREDGLASS, Material.glass, TextureType.ONE_TEX);
+		super(BlockData.ID_COLOURED_GLASS, BlockData.NAME_COLOUREDGLASS, Material.glass, TextureType.CUSTOM);
 	}
 	
 	@Override
 	protected void registerCustomIcons(IconRegister iconRegister) {
 		for(int meta = 0; meta < 16; meta++){
-			for(ForgeDirection dir : ForgeDirection.values()){ // For each side
-				if(dir == ForgeDirection.UNKNOWN) break;
-				icons[meta][dir.ordinal()] = iconRegister.func_94245_a(String.format("afm:%s-%s_%s",this.getUnlocalizedName(), UtilAFM.colorNames[meta].toLowerCase().replace(" ", ""), dir.toString().toLowerCase()));
-			}
+				icons[meta] = iconRegister.func_94245_a(String.format("afm:%s-%s", UtilAFM.getBlockUnlocName(this), UtilAFM.colorNames[meta].toLowerCase().replace(" ", "")));
 		}
 	}
 
 	@Override
 	protected Icon getCustomIcon(ForgeDirection dir, int metadata) {
-		if(dir != ForgeDirection.UNKNOWN && dir.ordinal() >= 0 && dir.ordinal() < 6 && metadata >= 0 && metadata <16){
-			return icons[metadata][dir.ordinal()];
+		if(metadata >= 0 && metadata <16){
+			return icons[metadata];
 		}
 		return null;
 	}
