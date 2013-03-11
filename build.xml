@@ -10,17 +10,27 @@
 	
 	<property name="mod.id" value="AFM"/>
 	<property name="mod.version.base" value="0.2"/>
+	
+	<!-- Folder properties -->
+	<property name="base.dir" value="${basedir}/.." />
 
-    <property name="mcp.version" value="7.26"/>
-    <property name="forge.version" value="6.6.2.534"/>
-    <property name="mc.version" value="1.4.7"/>
-
-    <property name="mcp.dir" value="../mcp/mcp"/>
-    <property name="src.dir" value="src/afm"/>
-    <property name="res.dir" value="resources/afm"/>
+	<property name="mod.dir" value="${base.dir}/afm" />
+	<property name="forge.dir" value="${base.dir}/mcp" />
+	
+    <property name="mcp.dir" value="${mcp.dir}/mcp"/>
+    <property name="src.dir" value="${mod.dir}/src/afm"/>
+    <property name="res.dir" value="${mod.dir}/resources/afm"/>
+	
+	<!-- Forge/MCP/MC version properties -->
+	<loadproperties srcfile="${forge.dir}/forgeversion.properties"/>
+	<loadproperties srcfile="${forge.dir}/fml/common/fmlversion.properties"/>
+	
+    <property name="mcp.version" value="${fmlbuild.mcpversion}"/>
+    <property name="forge.version" value="${forge.major.number}.${forge.minor.number}.${forge.revision.number}.${forge.build.number}"/>
+    <property name="mc.version" value="${fmlbuild.mcversion}"/>
 
     <!-- Output folders -->
-    <property name="distr.dir" value="../distr"/>
+    <property name="distr.dir" value="${base.dir}/distr"/>
 	<property name="oldSource.dir" value="${distr.dir}/archive"/>
 	<property name="dropbox.dir" value="C:/Dropbox" />
 	
