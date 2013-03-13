@@ -2,6 +2,7 @@ package afm.gui.gui;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
+
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -25,13 +26,9 @@ public abstract class AFMGUI extends GuiContainer {
 												   int var3) {
 
 		GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-
 		this.mc.renderEngine.func_98187_b(backgroundTexture);
-
 		int x = (width - xSize) / 2;
-
 		int y = (height - ySize) / 2;
-
 		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 	}
 
