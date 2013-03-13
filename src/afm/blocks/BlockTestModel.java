@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 public class BlockTestModel extends BlockContainerAFM {
 
 	public BlockTestModel() {
-		super(BlockData.ID_TESTMODEL, BlockData.NAME_TESTMODEL, TextureType.DEFAULT);
+		super(BlockData.ID_TESTMODEL, BlockData.NAME_TESTMODEL);
 	}
 
 	@Override

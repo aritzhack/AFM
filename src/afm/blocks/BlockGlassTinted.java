@@ -1,10 +1,7 @@
 package afm.blocks;
 
-import afm.core.util.UtilAFM;
-import afm.data.BlockData;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -13,9 +10,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.common.ForgeDirection;
-
-import java.util.List;
+import afm.core.util.UtilAFM;
+import afm.data.BlockData;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * BlockGlassTinted
@@ -29,24 +28,23 @@ public class BlockGlassTinted extends BlockAFM {
 	Icon[] icons = new Icon[16];
 
 	public BlockGlassTinted() {
-		super(BlockData.ID_TINTED_GLASS, BlockData.NAME_TINTEDGLASS, Material.glass, TextureType.CUSTOM);
+		super(BlockData.ID_TINTED_GLASS, BlockData.NAME_TINTEDGLASS, Material.glass);
 		this.hasMetadata = true;
 		this.init();
 	}
-	
-	@Override
-	protected void registerCustomIcons(IconRegister iconRegister) {
-		for(int meta = 0; meta < 16; meta++){
-			icons[meta] = iconRegister.func_94245_a(String.format("afm:%s-%s", UtilAFM.getBlockUnlocName(this), UtilAFM.colorNames[meta].toLowerCase().replace(" ", "")));
-		}
-	}
 
 	@Override
-	protected Icon getCustomIcon(ForgeDirection dir, int metadata) {
-		if(metadata >= 0 && metadata <16){
-			return icons[metadata];
+	@SideOnly(Side.CLIENT)
+	public void func_94332_a(IconRegister iconRegister) {
+		for(int meta = 0; meta < 16; meta++){
+			icons[meta] = iconRegister.func_94245_a(String.format("afm:%s-%s", BlockData.NAME_TINTEDGLASS, UtilAFM.colorNames[meta].toLowerCase().replace(" ", "")));
 		}
-		return null;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
+		return icons[meta];
 	}
 
 	@Override

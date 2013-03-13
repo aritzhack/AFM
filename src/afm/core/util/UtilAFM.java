@@ -3,7 +3,6 @@ package afm.core.util;
 import java.util.Comparator;
 import java.util.TreeMap;
 
-import net.minecraft.block.Block;
 import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -143,10 +142,6 @@ public final class UtilAFM {
 		String ret = oreDictMap.get(is);
 		if (ret != null) return ret;
 		return oreDictMap.get(new ItemStack(is.itemID, 1, -1));
-	}
-	
-	public static String getBlockUnlocName(Block b){
-		return b.getUnlocalizedName().substring(5);
 	}
 
 	public static final String[] colorNames = {"White", "Orange", "Magenta", "Light Blue", "Yellow", "Light Green", "Pink", "Dark Grey", "Light Grey", "Cyan",

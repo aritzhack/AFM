@@ -1,10 +1,7 @@
 package afm.blocks;
 
-import afm.core.util.UtilAFM;
-import afm.data.BlockData;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -13,9 +10,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.common.ForgeDirection;
-
-import java.util.List;
+import afm.core.util.UtilAFM;
+import afm.data.BlockData;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * BlockGlassColoured
@@ -29,22 +28,23 @@ public class BlockGlassColoured extends BlockAFM {
 	Icon[] icons = new Icon[16];
 
 	public BlockGlassColoured() {
-		super(BlockData.ID_COLOURED_GLASS, BlockData.NAME_COLOUREDGLASS, Material.glass, TextureType.CUSTOM);
+		super(BlockData.ID_COLOURED_GLASS, BlockData.NAME_COLOUREDGLASS, Material.glass);
 	}
 	
 	@Override
-	protected void registerCustomIcons(IconRegister iconRegister) {
+	@SideOnly(Side.CLIENT)
+	public void func_94332_a(IconRegister iconRegister) {
 		for(int meta = 0; meta < 16; meta++){
-				icons[meta] = iconRegister.func_94245_a(String.format("afm:%s-%s", UtilAFM.getBlockUnlocName(this), UtilAFM.colorNames[meta].toLowerCase().replace(" ", "")));
+			icons[meta] = iconRegister.func_94245_a(String.format("afm:%s-%s", BlockData.NAME_COLOUREDGLASS, UtilAFM.colorNames[meta].toLowerCase().replace(" ", "")));
 		}
 	}
+	
+	
 
 	@Override
-	protected Icon getCustomIcon(ForgeDirection dir, int metadata) {
-		if(metadata >= 0 && metadata <16){
-			return icons[metadata];
-		}
-		return null;
+	@SideOnly(Side.CLIENT)
+	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
+		return icons[meta];
 	}
 
 	@Override

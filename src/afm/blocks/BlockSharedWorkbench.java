@@ -21,17 +21,12 @@ import net.minecraft.world.World;
 public class BlockSharedWorkbench extends BlockContainerAFM {
 
 	public BlockSharedWorkbench() {
-		super(BlockData.ID_SHAREDWORKBENCH, BlockData.NAME_SHARED_WORKBENCH, Material.wood, TextureType.NONE);
+		super(BlockData.ID_SHAREDWORKBENCH, BlockData.NAME_SHARED_WORKBENCH, Material.wood);
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		return new TESharedWorkbench();
-	}
-
-	@Override
-	public String getTextureFile() {
-		return Block.workbench.getTextureFile();
 	}
 
 	@Override
