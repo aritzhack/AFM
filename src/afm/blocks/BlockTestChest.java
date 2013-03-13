@@ -1,17 +1,21 @@
 package afm.blocks;
 
-import afm.core.AFM;
-import afm.data.BlockData;
-import afm.data.GUIData;
-import afm.tileEntity.TETestChest;
+import java.util.Random;
+
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-
-import java.util.Random;
+import afm.core.AFM;
+import afm.data.BlockData;
+import afm.data.GUIData;
+import afm.tileEntity.TETestChest;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * BlockTestChest
@@ -21,15 +25,24 @@ import java.util.Random;
  *
  */
 public class BlockTestChest extends BlockContainerAFM {
+	
+	Icon icon;
 
 	public BlockTestChest() {
-		super(BlockData.ID_TESTCHEST, BlockData.NAME_TESTCHEST, BlockData.TEXTUREINDEX_TESTCHEST);
+		super(BlockData.ID_TESTCHEST, BlockData.NAME_TESTCHEST);
 		this.setCreativeTab(AFM.tabAFM);
 	}
-
+	
 	@Override
-	public String getTextureFile() {
-		return BlockData.TEXTURE;
+	@SideOnly(Side.CLIENT)
+	public void func_94332_a(IconRegister iconRegister) {
+			icon = iconRegister.func_94245_a(String.format("afm:%s", BlockData.NAME_TESTCHEST));
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
+		return icon;
 	}
 
 	@Override

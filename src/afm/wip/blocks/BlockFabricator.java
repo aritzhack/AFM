@@ -1,15 +1,19 @@
 package afm.wip.blocks;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
+import net.minecraft.world.World;
 import afm.blocks.BlockContainerAFM;
 import afm.core.AFM;
 import afm.data.BlockData;
 import afm.data.GUIData;
 import afm.wip.tileEntity.TEFabricator;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 
 /**
  * BlockFabricator
@@ -54,13 +58,19 @@ public class BlockFabricator extends BlockContainerAFM {
 	}
 
 	@Override
-	public int getBlockTextureFromSide(int side) {
-		return Block.workbench.getBlockTextureFromSide(side);
+	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
+		return Block.workbench.getBlockTextureFromSideAndMetadata(side, meta);
 	}
 
 	@Override
 	public String getTextureFile() {
 		return Block.workbench.getTextureFile();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void func_94332_a(IconRegister par1IconRegister) {
+		// Do nothing, no need to register any icon
 	}
 
 }

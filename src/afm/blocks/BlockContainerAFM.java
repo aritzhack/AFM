@@ -1,9 +1,11 @@
 package afm.blocks;
 
-import afm.core.AFM;
-import afm.data.BlockData;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import afm.core.AFM;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * BlockContainerAFM
@@ -16,27 +18,16 @@ public abstract class BlockContainerAFM extends BlockContainer {
 
 	protected BlockContainerAFM(int id, String blockName, Material material) {
 		super(id, material);
-		this.setBlockName(blockName);
+		this.setUnlocalizedName(blockName);
 		this.setCreativeTab(AFM.tabAFM);
 	}
 
 	BlockContainerAFM(int id, String blockName) {
 		this(id, blockName, Material.rock);
 	}
-
-	BlockContainerAFM(int id, String blockName, int indexInTexture, Material material) {
-		super(id, indexInTexture, material);
-		this.setBlockName(blockName);
-		this.setCreativeTab(AFM.tabAFM);
-	}
-
-	BlockContainerAFM(int id, String blockName, int indexInTexture) {
-		this(id, blockName, indexInTexture, Material.rock);
-	}
-
+	
 	@Override
-	public String getTextureFile() {
-		return BlockData.TEXTURE;
-	}
+	@SideOnly(Side.CLIENT)
+	public abstract void func_94332_a(IconRegister par1IconRegister);
 
 }

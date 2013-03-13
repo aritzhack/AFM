@@ -1,10 +1,10 @@
 package afm.gui.gui;
 
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.StatCollector;
 import afm.data.GUIData;
 import afm.gui.container.ContainerChestTest;
 import afm.tileEntity.TETestChest;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.StatCollector;
 
 /**
  * GUIChestTest

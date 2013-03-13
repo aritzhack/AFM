@@ -1,17 +1,20 @@
 package afm.blocks;
 
+import java.util.List;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
+import afm.core.util.UtilAFM;
 import afm.data.BlockData;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.IBlockAccess;
-
-import java.util.List;
 
 /**
  * BlockGlassColoured
@@ -22,13 +25,26 @@ import java.util.List;
  */
 public class BlockGlassColoured extends BlockAFM {
 
+	Icon[] icons = new Icon[16];
+
 	public BlockGlassColoured() {
 		super(BlockData.ID_COLOURED_GLASS, BlockData.NAME_COLOUREDGLASS, Material.glass);
 	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void func_94332_a(IconRegister iconRegister) {
+		for(int meta = 0; meta < 16; meta++){
+			icons[meta] = iconRegister.func_94245_a(String.format("afm:%s-%s", BlockData.NAME_COLOUREDGLASS, UtilAFM.colorNames[meta].toLowerCase().replace(" ", "")));
+		}
+	}
+	
+	
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int side, int metadata) {
-		return metadata + 16 * BlockData.TEXTUREROW_COLOURED_GLASS;
+	@SideOnly(Side.CLIENT)
+	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
+		return icons[meta];
 	}
 
 	@Override

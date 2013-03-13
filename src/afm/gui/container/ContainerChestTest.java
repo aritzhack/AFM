@@ -1,11 +1,11 @@
 package afm.gui.container;
 
-import afm.data.ItemData;
-import afm.tileEntity.TETestChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import afm.tileEntity.TETestChest;
 
 /**
  * ContainerChestTest
@@ -27,9 +27,7 @@ public class ContainerChestTest extends AFMContainer {
 
 				Slot s = new Slot(tileEntity, x + y * 9, 8 + x * 18,
 						18 + y * 18);
-				s.setBackgroundIconTexture(ItemData.TEXTURE);
-				s.setBackgroundIconIndex(15);
-
+				s.setBackgroundIconIndex(Item.diamond.getIconFromDamage(0)); // Diamond with meta=0
 				addSlotToContainer(s);
 			}
 		}
