@@ -1,11 +1,14 @@
 package afm.blocks;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import afm.core.AFM;
 import afm.data.BlockData;
 import afm.data.GUIData;
 import afm.tileEntity.TESharedWorkbench;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
@@ -19,6 +22,11 @@ import net.minecraft.world.World;
  *
  */
 public class BlockSharedWorkbench extends BlockContainerAFM {
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	// Do nothing because we don't need to register any icon
+	public void func_94332_a(IconRegister par1IconRegister) {}
 
 	public BlockSharedWorkbench() {
 		super(BlockData.ID_SHAREDWORKBENCH, BlockData.NAME_SHARED_WORKBENCH, Material.wood);

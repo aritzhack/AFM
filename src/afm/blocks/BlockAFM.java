@@ -2,8 +2,11 @@ package afm.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
 import afm.core.AFM;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * BlockAFM
@@ -27,4 +30,8 @@ abstract class BlockAFM extends Block {
 		this.setUnlocalizedName(blockName);
 		this.setCreativeTab(AFM.tabAFM);
 	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public abstract void func_94332_a(IconRegister par1IconRegister);
 }
