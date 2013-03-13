@@ -14,6 +14,7 @@ public class EventHandler {
 
 	@ForgeSubscribe
 	public void onPlayerInteractEvent(PlayerInteractEvent event) {
-		AFM.proxy.writeChatMessageToPlayer(event.action.name());
+		if(!event.entityPlayer.worldObj.isRemote)
+			AFM.proxy.writeChatMessageToPlayer(event.action.name());
 	}
 }

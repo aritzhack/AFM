@@ -40,7 +40,7 @@ public class CommandKillAll {
 			if (entityType == null) {
 				if (!(entity instanceof EntityPlayer)) {
 					player.onKillEntity(null);
-					// TODO Doesn't
+					// TODO Doesn't kill
 				}
 			} else if (entity.getEntityName().equals(entityType)) {
 				entity.onKillEntity(null);
