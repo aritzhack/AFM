@@ -1,6 +1,8 @@
 package afm.core.util;
 
-import cpw.mods.fml.common.FMLCommonHandler;
+import java.util.Comparator;
+import java.util.TreeMap;
+
 import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -8,9 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
-
-import java.util.Comparator;
-import java.util.TreeMap;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 /**
  * UtilAFM

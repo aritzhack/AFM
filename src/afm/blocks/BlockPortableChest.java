@@ -1,16 +1,19 @@
 package afm.blocks;
 
-import afm.core.AFM;
-import afm.core.AFMLogger;
-import afm.data.BlockData;
-import afm.tileEntity.TEPortableChest;
+import java.util.Random;
+
 import net.minecraft.block.BlockChest;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-
-import java.util.Random;
+import afm.core.AFM;
+import afm.core.AFMLogger;
+import afm.data.BlockData;
+import afm.tileEntity.TEPortableChest;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * BlockPortableChest
@@ -21,7 +24,18 @@ import java.util.Random;
  */
 public class BlockPortableChest extends BlockChest {
 	final Random random = new Random();
-
+	Icon icon;
+	
+	public BlockPortableChest() {
+		super(BlockData.ID_PORTABLE_CHEST, 0); // 0 means not redstone when open AFAIK
+		this.setCreativeTab(AFM.tabAFM);
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
+		return icon;
+	}
 
 	@Override
 	public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
@@ -41,10 +55,6 @@ public class BlockPortableChest extends BlockChest {
 		world.spawnEntityInWorld(eItem);
 	}
 
-	public BlockPortableChest() {
-		super(BlockData.ID_PORTABLE_CHEST);
-		this.setCreativeTab(AFM.tabAFM);
-	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1) {

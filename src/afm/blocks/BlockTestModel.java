@@ -1,7 +1,10 @@
 package afm.blocks;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import afm.data.BlockData;
 import afm.tileEntity.TETestModel;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -36,6 +39,12 @@ public class BlockTestModel extends BlockContainerAFM {
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		return new TETestModel();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void func_94332_a(IconRegister par1IconRegister) {
+		// No need to register any icon
 	}
 
 }

@@ -19,7 +19,7 @@ public class ItemPortableChest extends ItemBlock {
 
 	public ItemPortableChest(int id) {
 		super(id);
-		this.setItemName(BlockData.NAME_PORTABLE_CHEST);
+		this.setUnlocalizedName(BlockData.NAME_PORTABLE_CHEST);
 	}
 
 	@Override

@@ -1,9 +1,13 @@
 package afm.blocks;
 
-import afm.core.AFM;
-import afm.data.BlockData;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.util.Icon;
+import afm.core.AFM;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 /**
  * BlockAFM
  *
@@ -12,30 +16,22 @@ import net.minecraft.block.material.Material;
  *
  */
 abstract class BlockAFM extends Block {
+	
+	Icon[] icons = new Icon[6];
+	boolean hasMetadata = false;
+	
 
 	public BlockAFM(int id, String blockName) {
 		this(id, blockName, Material.rock);
 	}
 
-	BlockAFM(int id, String blockName, int indexInTexture) {
-		this(id, blockName, indexInTexture, Material.rock);
-	}
-
 	BlockAFM(int id, String blockName, Material material) {
 		super(id, material);
-		this.setBlockName(blockName);
-		this.setCreativeTab(AFM.tabAFM);
-	}
-
-	public BlockAFM(int id, String blockName, int indexInTexture, Material material) {
-		super(id, indexInTexture, material);
-		this.setBlockName(blockName);
+		this.setUnlocalizedName(blockName);
 		this.setCreativeTab(AFM.tabAFM);
 	}
 
 	@Override
-	public String getTextureFile() {
-		return BlockData.TEXTURE;
-	}
-
+	@SideOnly(Side.CLIENT)
+	public abstract void func_94332_a(IconRegister par1IconRegister);
 }
