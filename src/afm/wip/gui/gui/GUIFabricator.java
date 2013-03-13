@@ -1,12 +1,12 @@
 package afm.wip.gui.gui;
 
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 import afm.data.GUIData;
 import afm.gui.gui.AFMGUI;
 import afm.wip.gui.container.ContainerFabricator;
 import afm.wip.tileEntity.TEFabricator;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
 
 /**
  * GUIFabricator
@@ -28,7 +28,6 @@ public class GUIFabricator extends AFMGUI {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int i, int j) {
-
 		this.fontRenderer.drawString(StatCollector.translateToLocal(this.tileEntity.getInvName()), 6, 6, 0x404040);
 		this.fontRenderer.drawString(
 				StatCollector.translateToLocal("container.inventory"), 7, 73,

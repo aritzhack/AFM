@@ -10,7 +10,7 @@ import net.minecraftforge.common.Configuration;
  *
  */
 public class GUIData {
-	private static final String DIR = Properties.RES_DIR + "/mods/afm/textures/gui/";
+	private static final String DIR = "/mods/afm/textures/gui/";
 
 	public static final String BG_TESTCHEST = GUIData.DIR + "testchest.png";
 	public static final String BG_SHAREDCRAFTING = GUIData.DIR + "crafting.png";
