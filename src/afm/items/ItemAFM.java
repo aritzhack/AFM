@@ -1,11 +1,8 @@
 package afm.items;
 
-import afm.core.AFM;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import afm.core.AFM;
 
 /**
  * ItemAFM
@@ -25,12 +22,5 @@ class ItemAFM extends Item {
 	ItemAFM(int id, String itemName) {
 		this(id, itemName, AFM.tabAFM);
 	}
-	
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void func_94581_a(IconRegister iconRegister)
-    {
-        this.iconIndex = iconRegister.func_94245_a("afm:" + this.getUnlocalizedName());
-    }
 
 }

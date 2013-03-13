@@ -7,7 +7,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import afm.blocks.BlockContainerAFM;
-import afm.blocks.TextureType;
 import afm.core.AFM;
 import afm.data.BlockData;
 import afm.data.GUIData;
@@ -23,7 +22,7 @@ import afm.wip.tileEntity.TEFabricator;
 public class BlockFabricator extends BlockContainerAFM {
 
 	public BlockFabricator() {
-		super(BlockData.ID_FABRICATOR, BlockData.NAME_FABRICATOR, Material.wood, TextureType.NONE);
+		super(BlockData.ID_FABRICATOR, BlockData.NAME_FABRICATOR, Material.wood);
 	}
 
 	/**
