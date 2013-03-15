@@ -1,11 +1,11 @@
 package afm.client.render.model;
 
-import afm.data.BlockData;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraftforge.client.ForgeHooksClient;
+
 import org.lwjgl.opengl.GL11;
 
+import afm.data.BlockData;
 import cpw.mods.fml.client.FMLClientHandler;
 
 /**
@@ -52,7 +52,7 @@ public class ModelTestModel extends ModelBase {
 		GL11.glDisable(GL11.GL_LIGHTING);
 
 		GL11.glTranslated(x + .5, y - .5, z + .5);
-		ForgeHooksClient.bindTexture(BlockData.TEXTURE_TESTMODEL, 0);
+		FMLClientHandler.instance().getClient().renderEngine.func_98187_b(BlockData.TEXTURE_TESTMODEL);
 
 		TopCube.render(scale);
 		MidTube.render(scale);
@@ -60,7 +60,6 @@ public class ModelTestModel extends ModelBase {
 
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
-
 	}
 
 	private void setRotation(ModelRenderer model) {

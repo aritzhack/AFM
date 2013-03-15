@@ -63,11 +63,6 @@ public class BlockFabricator extends BlockContainerAFM {
 	}
 
 	@Override
-	public String getTextureFile() {
-		return Block.workbench.getTextureFile();
-	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
 	public void func_94332_a(IconRegister par1IconRegister) {
 		// Do nothing, no need to register any icon

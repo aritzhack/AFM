@@ -1,8 +1,10 @@
 package afm.proxy;
 
-//import afm.client.render.TESR.TESRTestModel;
 import net.minecraft.client.Minecraft;
+import afm.client.render.TESR.TESRTestModel;
 import afm.core.AFMLogger;
+import afm.tileEntity.TETestModel;
+import cpw.mods.fml.client.registry.ClientRegistry;
 
 /**
  * ClientProxy
@@ -25,7 +27,7 @@ public class ClientProxy extends CommonProxy {
 	public void registerTexuresAndRenderers() {
 
 		AFMLogger.log("Registering renderers");
-		//ClientRegistry.bindTileEntitySpecialRenderer(TETestModel.class, new TESRTestModel());
+		ClientRegistry.bindTileEntitySpecialRenderer(TETestModel.class, new TESRTestModel());
 	}
 
 }

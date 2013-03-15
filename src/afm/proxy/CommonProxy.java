@@ -1,5 +1,8 @@
 package afm.proxy;
 
+import afm.tileEntity.TETestModel;
+import cpw.mods.fml.common.registry.GameRegistry;
+
 /**
  * CommonProxy
  *
@@ -13,6 +16,10 @@ public class CommonProxy {
 	}
 
 	public void writeChatMessageToPlayer(String s) {
+	}
+	
+	public void registerTileEntities(){
+		GameRegistry.registerTileEntity(TETestModel.class, "AFMTETestModel");
 	}
 
 }
