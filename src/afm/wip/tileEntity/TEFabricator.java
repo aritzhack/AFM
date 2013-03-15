@@ -5,7 +5,6 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.common.ForgeDirection;
 import afm.core.util.UtilAFM;
 import afm.tileEntity.TEAFM;
 import afm.wip.gui.container.ContainerFabricator;
@@ -145,8 +144,7 @@ public class TEFabricator extends TEAFM implements ISidedInventory {
 	 */
 	@Override
 	public int func_94127_c(int side) {
-		ForgeDirection dir = ForgeDirection.getOrientation(side);
-		return 10; // Storage
+		return 10; // Storage index start
 	}
 
 	/**
@@ -156,7 +154,6 @@ public class TEFabricator extends TEAFM implements ISidedInventory {
 	 */
 	@Override
 	public int func_94128_d(int side) {
-		ForgeDirection dir = ForgeDirection.getOrientation(side);
 		return 9; // Storage size 
 	}
 
