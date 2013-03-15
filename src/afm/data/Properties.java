@@ -13,7 +13,8 @@ import java.io.File;
  */
 public final class Properties {
 
-	public static final String RES_DIR = "/afm/res/";
+	public static final String RES_DIR = "/mods/afm/";
+	public static final String TEX_DIR = Properties.RES_DIR + "textures/";
 	public static final String LANG_DIR = Properties.RES_DIR + "lang/";
 	private static Configuration config;
 

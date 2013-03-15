@@ -10,11 +10,11 @@ import net.minecraftforge.common.Configuration;
  *
  */
 public class GUIData {
-	private static final String DIR = "/mods/afm/textures/gui/";
+	private static final String GUI_DIR = Properties.TEX_DIR + "gui/";
 
-	public static final String BG_TESTCHEST = GUIData.DIR + "testchest.png";
-	public static final String BG_SHAREDCRAFTING = GUIData.DIR + "crafting.png";
-	public static final String BG_FABRICATOR = GUIData.DIR + "fabricator.png";
+	public static final String BG_TESTCHEST = GUIData.GUI_DIR + "testchest.png";
+	public static final String BG_SHAREDCRAFTING = GUIData.GUI_DIR + "crafting.png";
+	public static final String BG_FABRICATOR = GUIData.GUI_DIR + "fabricator.png";
 
 	// GUI IDs
 	public static final int ID_TESTCHEST = 0;
