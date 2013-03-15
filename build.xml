@@ -9,7 +9,7 @@
     </description>
 	
 	<property name="mod.id" value="AFM"/>
-	<property name="mod.version.base" value="0.2"/>
+	<property name="mod.version.base" value="0.3"/>
 	
 	<!-- Folder properties -->
 	<property name="base.dir" value="${basedir}/.." />
