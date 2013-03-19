@@ -9,6 +9,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.world.World;
+import afm.core.AFMLogger;
 import afm.core.util.UtilAFM;
 import afm.wip.tileEntity.BoundInvCrafting;
 import afm.wip.tileEntity.TEFabricator;
@@ -77,6 +78,9 @@ public class ContainerFabricator extends Container {
 	@Override
 	public ItemStack slotClick(int slotIndex, int button, int par3, EntityPlayer player) {
 
+		if(slotIndex < 19 && slotIndex >= 0 && this.getSlot(slotIndex).getHasStack()){
+			AFMLogger.log("Slot stack id: " + this.getSlot(slotIndex).getStack().itemID + ", meta: " + this.getSlot(slotIndex).getStack().getItemDamage());
+		}
 		if (slotIndex == 9) return null; // Can't modify result slot
 		if (slotIndex > 9 || slotIndex < 0) // If storage or none, handle them as usual
 			return super.slotClick(slotIndex, button, par3, player);
@@ -99,13 +103,14 @@ public class ContainerFabricator extends Container {
 	 */
 	@Override
 	public void onCraftMatrixChanged(IInventory par1IInventory) {
+		
 		this.result.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(matrix, this.tileEntity.worldObj));
 		
 		this.fulfilled = true;
 
 		if (this.result.getStackInSlot(0) == null) return;
-
 		this.tryCraft();
+
 	}
 
 	public void tryCraft() {
@@ -117,7 +122,17 @@ public class ContainerFabricator extends Container {
 		this.tempStorage = this.cloneStorage();
 
 		// Iterate over every itemStack needed
-		checkEveryNeeded();
+		for (int i = 0; i < 9; i++) {
+			
+			ItemStack neededStack = this.matrix.getStackInSlot(i); // Get from the matrix
+			if (neededStack == null) continue; // If null, check next
+
+			// Iterate over every itemStack in the storage
+			if(!this.seekAndRemoveItemFromTempStorage(neededStack)){
+				this.fulfilled = false; // If I didn't fulfill the needed,
+				return; // don't continue
+			}
+		}
 		
 		// I have everything I need & can add stack to the storage
 		if (this.fulfilled && addToTempStorage(resultStack.copy())) {
@@ -138,24 +153,9 @@ public class ContainerFabricator extends Container {
 		return retArray;
 	}
 	
-	private boolean checkEveryNeeded(){
-		for (int i = 0; i < 9; i++) {
-			
-			ItemStack neededStack = this.matrix.getStackInSlot(i); // Get from the matrix
-			if (neededStack == null) continue;
-			boolean done = false; // we need something, so not done
-
-			// Iterate over every itemStack in the storage
-			done = this.seekAndRemoveItemFromTempStorage(neededStack);
-			
-			if(!done) return false; // If I didn't fulfill the needed, don't continue
-		}
-		return true;
-	}
-	
 	private boolean seekAndRemoveItemFromTempStorage(ItemStack needed){
 		
-		for(int i = 0; i<this.tempStorage.length; i++){
+		for(int i = 0; i < this.tempStorage.length; i++){
 			ItemStack curr = this.tempStorage[i];
 			if(curr == null) continue;
 			// Check if both itemStacks are equal, and if the stack in the storage is valid
