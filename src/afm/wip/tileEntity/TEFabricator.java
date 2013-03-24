@@ -89,7 +89,7 @@ public class TEFabricator extends TEAFM implements ISidedInventory {
 		if(this.worldObj.isRemote) return;
 		this.updateCount++;
 		if(updateCount == 100) updateCount = 0;
-		if (updateCount % 5 == 0 && this.containerFabricator != null){
+		if (updateCount % 2 == 0 && this.containerFabricator != null){ // Every 1/10 sec, if tps if 100%
 			this.containerFabricator.onCraftMatrixChanged(this);
 		}
 	}
