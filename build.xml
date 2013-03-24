@@ -14,7 +14,7 @@
 	<property name="base.dir" value="${basedir}/.." />
 
 	<property name="mod.dir" value="${base.dir}/afm" />
-	<property name="forge.dir" value="${base.dir}/mcp" />
+	<property name="forge.dir" value="${base.dir}/forge" />
 	
     <property name="mcp.dir" value="${forge.dir}/mcp"/>
     <property name="src.dir" value="${mod.dir}/src"/>
@@ -40,9 +40,10 @@
 	<target name="clean" if="shouldClean">
 		<echo>Cleaning output dir...</echo>
 		<delete dir="${mcp.dir}/src/minecraft/afm" />
+		<delete dir="${mcp.dir}/src/minecraft/mods" />
 	</target>
 
-    <target name="Compile and Build" depends="clean, Increment build number">
+    <target name="Compile and Build" depends="Increment build number">
     	<loadproperties srcfile="build.number"/>
     	<property name="mod.version" value="${major}.${minor}.${build}" />
     	
@@ -84,8 +85,14 @@
     	</copy>
         <jar destfile="${distr.dir}/${mod.id} v${mod.version}.jar" basedir="${mcp.dir}/reobf/minecraft">
         </jar>
+    	
+    	<echo>Built</echo>
 
+    	<echo>Cleaning temp files...</echo>
+    	<antcall target="clean" />
+    	
         <echo>Done building. Thanks to the MCP team for such a great tool, and to the Forge/FML team for the awesome API</echo>
+
     </target>
 	
 	<target name="Copy distr to dropbox">
