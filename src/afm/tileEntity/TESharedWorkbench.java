@@ -140,17 +140,14 @@ public class TESharedWorkbench extends TEAFM {
 		return "inventory.afm.sharedCrafting";
 	}
 
-	/**
-	 * Something like: if true -> localize invName, else, use invName
-	 */
 	@Override
-	public boolean func_94042_c() {
+	public boolean isInvNameLocalized() {
 		return true;
 	}
 
 	@Override
-	public boolean func_94041_b(int i, ItemStack itemstack) {
-		return false; // FIXME Still guessing...
+	public boolean isStackValidForSlot(int i, ItemStack itemstack) {
+		return false;
 	}
 
 }

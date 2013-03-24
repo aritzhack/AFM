@@ -43,8 +43,6 @@ public class BlockTestModel extends BlockContainerAFM {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94332_a(IconRegister par1IconRegister) {
-		// No need to register any icon
-	}
-
+	// No need to register any icon
+	public void registerIcons(IconRegister par1IconRegister) {}
 }

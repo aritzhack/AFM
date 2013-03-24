@@ -34,12 +34,14 @@ public class CommandSetAt {
 		int z = Integer.valueOf(args[3]);
 		int id = Integer.valueOf(args[4]);
 		int meta = 0;
+		
+		w.setBlock(x, y, z, id);
 
 		if (args.length == 6) {
 			meta = Integer.valueOf(args[5]);
+			w.setBlockMetadataWithNotify(x, y, z, meta, 3); // 3 updates client+server, but just with same ID
 		} else if (args.length > 6) throw new WrongUsageException(CommandSetAt.getUsage());
-		
-		w.setBlockAndMetadataWithNotify(x, y, z, id, meta, 2); // FIXME make sure this should be 2 (2 updates server + client AFAIK)
+
 
 	}
 
