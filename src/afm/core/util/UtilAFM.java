@@ -121,13 +121,20 @@ public final class UtilAFM {
 			case 1:
 			case 2:
 			case 3:
-				// If same in OreDict, return -2, else, tell the difference
+				// If same in OreDict, return -3, else, tell the difference
 				return UtilAFM.compareOreDict(s1, s2) ? -3 : compare;
 			default:
 				return compare; // If one null, already equal, or different amounts, return it
 		}
 	}
 
+	/**
+	 * Checks if both ISs are the same item, regardless the stack size. (Both null returns false)
+	 * @param i1 First IS to compare
+	 * @param i2 Second IS to compare
+	 * @return Whether both IS are same item or not <br />
+	 * {@link UtilAFM#compareItemStacksWithOreDict(ItemStack, ItemStack, boolean, boolean) UtilAFM.compareItemStacksWithOreDict(i1, i2, false, true)<0}
+	 */
 	public static boolean isSameItemOreDict(ItemStack i1, ItemStack i2) {
 		return UtilAFM.compareItemStacksWithOreDict(i1, i2, false, true) < 0;
 	}
