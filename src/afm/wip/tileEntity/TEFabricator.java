@@ -1,7 +1,6 @@
 package afm.wip.tileEntity;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -16,7 +15,7 @@ import afm.wip.gui.container.ContainerFabricator;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  *
  */
-public class TEFabricator extends TEAFM implements ISidedInventory {
+public class TEFabricator extends TEAFM {
 
 	public ContainerFabricator containerFabricator;
 	private ItemStack[] inventory;
@@ -137,26 +136,6 @@ public class TEFabricator extends TEAFM implements ISidedInventory {
 		return "inventory.afm.fabricator";
 	}
 
-	/**
-	 * Get the start of the side inventory.
-	 *
-	 * @param side The global side to get the start of range.
-	 */
-	@Override
-	public int func_94127_c(int side) {
-		return 10; // Storage index start
-	}
-
-	/**
-	 * Get the size of the side inventory.
-	 *
-	 * @param side The global side to get the size of.
-	 */
-	@Override
-	public int func_94128_d(int side) {
-		return 9; // Storage size 
-	}
-
 	public void dropItems() {
 		for (int i = 0; i < this.inventory.length; i++) {
 			ItemStack stack = this.getStackInSlot(i);
@@ -169,18 +148,14 @@ public class TEFabricator extends TEAFM implements ISidedInventory {
 		this.containerFabricator = container;
 	}
 	
-	/**
-	 * Something like: if true -> localize invName, else, use invName
-	 */
 	@Override
-	public boolean func_94042_c() {
+	public boolean isInvNameLocalized() {
 		return true;
 	}
 
 	@Override
-	public boolean func_94041_b(int i, ItemStack itemstack) {
-		return false; // FIXME Still guessing...
+	public boolean isStackValidForSlot(int i, ItemStack itemstack) {
+		return false;
 	}
-	
 	
 }

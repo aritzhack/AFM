@@ -33,8 +33,8 @@ public class BlockOreAFM extends BlockAFM {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94332_a(IconRegister iconRegister) {
-			icon = iconRegister.func_94245_a(String.format("afm:%s", BlockData.NAME_ORE_AFM));
+	public void registerIcons(IconRegister iconRegister) {
+			icon = iconRegister.registerIcon(String.format("afm:%s", BlockData.NAME_ORE_AFM));
 	}
 	
 	@Override

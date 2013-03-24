@@ -28,6 +28,6 @@ public abstract class BlockContainerAFM extends BlockContainer {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public abstract void func_94332_a(IconRegister par1IconRegister);
+	public abstract void registerIcons(IconRegister par1IconRegister);
 
 }

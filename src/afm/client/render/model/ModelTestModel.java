@@ -52,7 +52,7 @@ public class ModelTestModel extends ModelBase {
 		GL11.glDisable(GL11.GL_LIGHTING);
 
 		GL11.glTranslated(x + .5, y - .5, z + .5);
-		FMLClientHandler.instance().getClient().renderEngine.func_98187_b(BlockData.TEXTURE_TESTMODEL);
+		FMLClientHandler.instance().getClient().renderEngine.bindTexture(BlockData.TEXTURE_TESTMODEL);
 
 		TopCube.render(scale);
 		MidTube.render(scale);

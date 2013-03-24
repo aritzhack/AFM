@@ -26,7 +26,7 @@ public class BlockSharedWorkbench extends BlockContainerAFM {
 	@Override
 	@SideOnly(Side.CLIENT)
 	// Do nothing because we don't need to register any icon
-	public void func_94332_a(IconRegister par1IconRegister) {}
+	public void registerIcons(IconRegister par1IconRegister) {}
 
 	public BlockSharedWorkbench() {
 		super(BlockData.ID_SHAREDWORKBENCH, BlockData.NAME_SHARED_WORKBENCH, Material.wood);

@@ -15,9 +15,9 @@ public class ItemTestModel extends ItemBlock {
 	
     @Override
     @SideOnly(Side.CLIENT)
-    public void func_94581_a(IconRegister iconRegister)
+    public void updateIcons(IconRegister iconRegister)
     {
-        this.iconIndex = iconRegister.func_94245_a("afm:" + BlockData.NAME_TESTMODEL + "_item");
+        this.iconIndex = iconRegister.registerIcon("afm:" + BlockData.NAME_TESTMODEL + "_item");
     }
 
 	@Override

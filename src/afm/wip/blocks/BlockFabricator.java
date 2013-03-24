@@ -64,8 +64,7 @@ public class BlockFabricator extends BlockContainerAFM {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94332_a(IconRegister par1IconRegister) {
-		// Do nothing, no need to register any icon
-	}
+	// Do nothing, no need to register any icon
+	public void registerIcons(IconRegister par1IconRegister) {}
 
 }

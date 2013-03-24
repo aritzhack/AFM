@@ -35,9 +35,9 @@ public class BlockGlassTinted extends BlockAFM {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94332_a(IconRegister iconRegister) {
+	public void registerIcons(IconRegister iconRegister) {
 		for(int meta = 0; meta < 16; meta++){
-			icons[meta] = iconRegister.func_94245_a(String.format("afm:%s-%s", BlockData.NAME_TINTEDGLASS, UtilAFM.colorNames[meta].toLowerCase().replace(" ", "")));
+			icons[meta] = iconRegister.registerIcon(String.format("afm:%s-%s", BlockData.NAME_TINTEDGLASS, UtilAFM.colorNames[meta].toLowerCase().replace(" ", "")));
 		}
 	}
 	
