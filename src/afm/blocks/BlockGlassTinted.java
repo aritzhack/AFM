@@ -29,7 +29,6 @@ public class BlockGlassTinted extends BlockAFM {
 
 	public BlockGlassTinted() {
 		super(BlockData.ID_TINTED_GLASS, BlockData.NAME_TINTEDGLASS, Material.glass);
-		this.hasMetadata = true;
 		this.init();
 	}
 

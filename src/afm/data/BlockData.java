@@ -18,28 +18,32 @@ public class BlockData {
 	private static final int ID_DEFAULT_TESTCHEST = 502;
 	private static final int ID_DEFAULT_SHAREDCRAFTING = 503;
 	private static final int ID_DEFAULT_TESTMODEL = 504;
-	private static final int ID_DEFAULT_FABRICATOR = 505;
 	private static final int ID_DEFAULT_LASER = 506;
 	private static final int ID_DEFAULT_TINTED_GLASS = 507;
 	private static final int ID_DEFAULT_PORTABLE_CHEST = 508;
+
+	private static final int ID_DEFAULT_FABRICATOR = 505;
+	private static final int ID_DEFAULT_TANK = 508;
 
 	public static int ID_COLOURED_GLASS = BlockData.ID_DEFAULT_COLOURED_GLASS;
 	public static int ID_ORE = BlockData.ID_DEFAULT_ORE;
 	public static int ID_TESTCHEST = BlockData.ID_DEFAULT_TESTCHEST;
 	public static int ID_SHAREDWORKBENCH = BlockData.ID_DEFAULT_SHAREDCRAFTING;
 	public static int ID_TESTMODEL = BlockData.ID_DEFAULT_TESTMODEL;
-	public static final int ID_FABRICATOR = BlockData.ID_DEFAULT_FABRICATOR;
 	public static int ID_LASER = BlockData.ID_DEFAULT_LASER;
 	public static int ID_TINTED_GLASS = BlockData.ID_DEFAULT_TINTED_GLASS;
 	public static int ID_PORTABLE_CHEST = BlockData.ID_DEFAULT_PORTABLE_CHEST;
+	public static int ID_FABRICATOR = BlockData.ID_DEFAULT_FABRICATOR;
+	public static int ID_TANK = BlockData.ID_DEFAULT_TANK;
 
 	public static final String NAME_LASER = "AFMLaser";
 	public static final String NAME_SHARED_WORKBENCH = "AFMSharedWorkbench";
 	public static final String NAME_TESTMODEL = "AFMTestModel";
 	public static final String NAME_TESTCHEST = "AFMTestChest";
 	public static final String NAME_ORE_AFM = "AFMOre";
-	public static final String NAME_FABRICATOR = "AFMFabricator";
 	public static final String NAME_PORTABLE_CHEST = "AFMPortableChest";
+	public static final String NAME_FABRICATOR = "AFMFabricator";
+	public static final String NAME_TANK = "AFMTank";
 
 	public static final String NAME_TINTEDGLASS = "AFMTintedGlass";
 	public static final String NAME_COLOUREDGLASS = "AFMColouredGlass";
@@ -56,5 +60,7 @@ public class BlockData {
 		BlockData.ID_TINTED_GLASS = config.getBlock("Blocks", "tintedGlass", BlockData.ID_DEFAULT_TINTED_GLASS).getInt();
 		BlockData.ID_TINTED_GLASS = config.getBlock("Blocks", "tintedGlass", BlockData.ID_DEFAULT_TINTED_GLASS).getInt();
 		BlockData.ID_PORTABLE_CHEST = config.getBlock("Blocks", "portableCrafting", BlockData.ID_DEFAULT_PORTABLE_CHEST).getInt();
+		BlockData.ID_FABRICATOR = config.getBlock("Blocks", "fabricator", BlockData.ID_DEFAULT_FABRICATOR).getInt();
+		BlockData.ID_TANK = config.getBlock("Blocks", "tank", BlockData.ID_DEFAULT_TANK).getInt();
 	}
 }

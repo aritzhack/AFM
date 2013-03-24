@@ -11,6 +11,7 @@ import afm.tileEntity.TESharedWorkbench;
 import afm.tileEntity.TETestChest;
 import afm.wip.gui.container.ContainerFabricator;
 import afm.wip.gui.gui.GUIFabricator;
+import afm.wip.tileEntity.TEAFMTank;
 import afm.wip.tileEntity.TEFabricator;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -34,6 +35,7 @@ public class GUIHandler implements IGuiHandler {
 		GameRegistry.registerTileEntity(TESharedWorkbench.class, "tileEntity.afm.sharedCrafting");
 		GameRegistry.registerTileEntity(TEFabricator.class, "tileEntity.afm.fabricator");
 		GameRegistry.registerTileEntity(TEPortableChest.class, "tileEntity.afm.portableChest");
+		GameRegistry.registerTileEntity(TEAFMTank.class, "tileEntity.afm.tank");
 	}
 
 	@Override

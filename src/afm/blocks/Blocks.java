@@ -7,6 +7,7 @@ import afm.items.ItemGlassTinted;
 import afm.items.ItemPortableChest;
 import afm.items.ItemTestModel;
 import afm.wip.blocks.BlockFabricator;
+import afm.wip.blocks.BlockTank;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
@@ -24,9 +25,10 @@ public class Blocks {
 	public static BlockTestChest dayDetector;
 	public static BlockSharedWorkbench sharedWorkbench;
 	public static BlockTestModel testModel;
-	public static BlockFabricator fabricator;
 	public static BlockLaser laser;
 	public static BlockPortableChest portableChest;
+	public static BlockFabricator fabricator;
+	public static BlockTank tank;
 
 	public static void init() {
 
@@ -41,6 +43,7 @@ public class Blocks {
 		Blocks.fabricator = new BlockFabricator();
 		Blocks.laser = new BlockLaser();
 		Blocks.portableChest = new BlockPortableChest();
+		Blocks.tank = new BlockTank();
 
 	}
 
@@ -53,9 +56,10 @@ public class Blocks {
 		GameRegistry.registerBlock(Blocks.dayDetector, BlockData.NAME_TESTCHEST);
 		GameRegistry.registerBlock(Blocks.sharedWorkbench, BlockData.NAME_SHARED_WORKBENCH);
 		GameRegistry.registerBlock(Blocks.testModel, ItemTestModel.class, BlockData.NAME_TESTMODEL);
-		GameRegistry.registerBlock(Blocks.fabricator, BlockData.NAME_FABRICATOR);
 		GameRegistry.registerBlock(Blocks.laser, BlockData.NAME_LASER);
 		GameRegistry.registerBlock(Blocks.portableChest, ItemPortableChest.class, BlockData.NAME_PORTABLE_CHEST);
+		GameRegistry.registerBlock(Blocks.fabricator, BlockData.NAME_FABRICATOR);
+		GameRegistry.registerBlock(Blocks.tank, BlockData.NAME_TANK);
 	}
 
 	public static void addRecipes(){
