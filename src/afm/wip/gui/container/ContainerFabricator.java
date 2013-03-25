@@ -29,6 +29,9 @@ public class ContainerFabricator extends Container {
 	InventoryCraftResult result;
 
 	ItemStack[] tempStorage;
+	
+	IInventory[] neighbors = new IInventory[6];
+	ItemStack[][] neighArrays = new ItemStack[6][];
 
 	public boolean fulfilled;
 
@@ -128,160 +131,169 @@ public class ContainerFabricator extends Container {
 
 		this.result.setInventorySlotContents(0, CraftingManager.getInstance()
 				.findMatchingRecipe(matrix, this.tileEntity.worldObj));
-		this.fulfilled = true;
 
-		AFMLogger.log("--------Start----------");
 		if (this.result.getStackInSlot(0) == null) {
-			AFMLogger.log("Not result");
-			AFMLogger.log("--------End-----------");
+			this.fulfilled = true;
 			return;
 		}
 
 		this.tryCraft();
-		AFMLogger.log("--------End-----------");
-
 	}
 
 	public void tryCraft() {
+		
+		updateArrays();
 
-		// Get result stack
-		ItemStack resultStack = this.result.getStackInSlot(0);
+		ItemStack resultStack = this.result.getStackInSlot(0).copy();
 
-		// Clone the storage, so that it can be modified without affecting the
-		// original one
-		this.tempStorage = this.cloneStorage();
-
-		// Iterate over every itemStack needed
 		for (int i = 0; i < 9; i++) {
-			// Get from the matrix
 			ItemStack neededStack = this.matrix.getStackInSlot(i);
 			if (neededStack == null) {
-				// AFMLogger.log("Stack in slot " + i + " is null");
-				continue; // If null, check next
+				continue;
 			}
 
-			// Iterate over every itemStack in the storage
-			if (!this.seekAndRemoveItem(neededStack)) {
-				AFMLogger.log("Cannot remove IS from tStorage, not fulfilled");
-				this.fulfilled = false; // If I didn't fulfill the needed,
-				return; // don't continue
+			ItemStack notFound = this.seekItem(neededStack.copy());
+			if (notFound != null) {
+				this.fulfilled = false;
+				return;
 			}
 		}
-		AFMLogger.log("Fulfilled every stack(?)");
 
-		// I have everything I need & can add stack to the storage
-		if (this.fulfilled && addToTempStorage(resultStack.copy())) {
-			AFMLogger.log("added to temp storage");
-			this.updateStorageFromTemp(); // Craft & remove needed items!
-			AFMLogger.log("Swapped storages");
+		// I have everything I need & can add stack to the storage7
+		if (addResult(resultStack)) {
+			this.updateInventories();
 		}
 	}
-
-	// TODO Make this modular, so that it accepts a IInventory as an argument
-	private ItemStack[] cloneStorage() {
-		ItemStack[] retArray = new ItemStack[9];
-		for (int i = 0; i < 9; i++) {
-			ItemStack itemStack = this.getSlot(i + 10).getStack();
-			retArray[i] = (itemStack == null ? null : itemStack.copy());
+	
+	private ItemStack[] invToISArray(IInventory inv, int startIndex, int length){
+		if(length <= 0 || length > inv.getSizeInventory()){ // Negative or zero length -> Whole inventory
+			length = inv.getSizeInventory();
+			startIndex = 0;
+		}
+		
+		ItemStack[] retArray = new ItemStack[length];
+		for (int i = startIndex; i < startIndex+length; i++) {
+			ItemStack itemStack = inv.getStackInSlot(i);
+			retArray[i-startIndex] = (itemStack == null ? null : itemStack.copy());
 		}
 		return retArray;
 	}
-
-	/**
-	 * Look for the IS in inventories, in this order:
-	 * Internal>North>South>West>East>Top>Bottom
-	 * @param needed ItemStack to look for
-	 * @return whether or not it was found
-	 */
-	private boolean seekAndRemoveItem(ItemStack needed){
-
-		return 	seekAndRemoveItemFromTempStorage(needed) ||
-				seekAndRemoveItemFromSide(needed, ForgeDirection.NORTH) ||
-				seekAndRemoveItemFromSide(needed, ForgeDirection.SOUTH) ||
-				seekAndRemoveItemFromSide(needed, ForgeDirection.WEST) ||
-				seekAndRemoveItemFromSide(needed, ForgeDirection.EAST) ||
-				seekAndRemoveItemFromSide(needed, ForgeDirection.UP) ||
-				seekAndRemoveItemFromSide(needed, ForgeDirection.DOWN);
+	
+	private void updateArrays() {
+		this.tempStorage = this.invToISArray(this.tileEntity, 10, 9);
+		
+		for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS){
+			IInventory inv = getInventoryInSide(dir);
+			if(inv == null) continue;
+			neighbors[dir.ordinal()] = inv;
+			neighArrays[dir.ordinal()] = invToISArray(inv, 0, 0);
+		}
 	}
 
-	private boolean seekAndRemoveItemFromSide(ItemStack needed, ForgeDirection dir) {
+	private IInventory getInventoryInSide(ForgeDirection dir) {
 		World w = this.tileEntity.worldObj;
 		int x = this.tileEntity.xCoord + dir.offsetX;
 		int y = this.tileEntity.yCoord + dir.offsetY;
 		int z = this.tileEntity.zCoord + dir.offsetZ;
 		
 		TileEntity te = w.getBlockTileEntity(x, y, z);
-		if(!(te instanceof IInventory)) return false;
-		
-		IInventory inv = (IInventory) te;
-		
-		for(int i = 0; i < inv.getSizeInventory(); i++){
-			ItemStack curr = inv.getStackInSlot(i);
-			// TODO Do the magic!
-			// if found return true
-		}
-		return false;
+		if(te instanceof IInventory) return (IInventory) te;
+		return null;
 	}
 
-	private boolean seekAndRemoveItemFromTempStorage(ItemStack needed) {
-
-		for (int i = 0; i < this.tempStorage.length; i++) {
-			ItemStack curr = this.tempStorage[i];
-			if (curr == null)
-				continue;
-			// Check if both itemStacks are equal, and if the stack in the
-			// storage is valid
-			// FIXME OreDict might lead to unwanted recipes. How to check??
-			if (UtilAFM.isSameItemOreDict(curr, needed) && curr.stackSize >= 1) {
-				// -1, so that if the stackSize of the recipe is bigger, it
-				// doesn't affect
-				curr.stackSize -= 1;
-				if (curr.stackSize < 1)
-					this.tempStorage[i] = null;
-				AFMLogger.log("Found it in slot " + i);
-				return true; // Found, stop looking for it!
+	/**
+	 * Look for the IS in inventories
+	 * @param needed ItemStack to look for
+	 * @return null if found, {@code needed} if not
+	 */
+	private ItemStack seekItem(ItemStack needed){
+		
+		needed = seekAndRemoveItemFromArray(needed, this.tempStorage);
+		if(needed == null) return null;
+		
+		for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS){
+			IInventory inv = this.neighbors[dir.ordinal()];
+			if(inv == null) continue;
+			if(seekAndRemoveItemFromArray(needed, this.neighArrays[dir.ordinal()]) == null){
+				return null;
 			}
 		}
-		return false;
+		return needed;
 	}
-
-	// TODO Make this modular, so that it accepts a IS array as argument
-	public boolean addToTempStorage(ItemStack itemStack) {
+	
+	/**
+	 * Looks for an ItemStack in a IS[], and removes it from the array.
+	 * @param stack The IS to bee looked for
+	 * @param inv The array into which look for the IS
+	 * @return if found, null. Else return {@code stack}
+	 */
+	private ItemStack seekAndRemoveItemFromArray(ItemStack stack, ItemStack[] inv){
+		for (int i = 0; i < inv.length; i++) {
+			ItemStack curr = inv[i];
+			if (curr == null) continue;
+			// FIXME OreDict might lead to unwanted recipes. How to check??
+			if (UtilAFM.isSameItemOreDict(curr, stack) && curr.stackSize >= 1) {
+				curr.stackSize -= 1;
+				if (curr.stackSize < 1) inv[i] = null;
+				return null;
+			}
+		}
+		return stack;
+	}
+	
+	private boolean addResult(ItemStack stack){
 		int firstEmpty = -1;
 		try {
-			for (int i = 8; i > 0; i--) {
+			for (int i = 0; i < 9; i++) {
 				ItemStack storageStack = this.tempStorage[i];
 				if (storageStack == null && firstEmpty == -1) {
 					firstEmpty = i;
 				}
+				// FIXME ItemStack.isItemEqual doesn't handle NBT!
 				else if ((storageStack != null
-						&& storageStack.isItemEqual(itemStack) && itemStack.stackSize
+						&& storageStack.isItemEqual(stack) && stack.stackSize
 						+ storageStack.stackSize <= this.tileEntity
 							.getInventoryStackLimit())) {
-					AFMLogger.log("Added result to already slot " + i + ". Prev size: " + storageStack.stackSize);
-					ItemStack stack = storageStack.copy();
-					stack.stackSize += itemStack.stackSize;
-					this.tempStorage[i] = stack;
+					ItemStack newStack = storageStack.copy();
+					newStack.stackSize += stack.stackSize;
+					this.tempStorage[i] = newStack;
 					return true;
 				}
 			}
-		} catch (IndexOutOfBoundsException e) {
-		}
+		} catch (IndexOutOfBoundsException e) {}
 		if (firstEmpty != -1 && firstEmpty < 9) {
-			this.tempStorage[firstEmpty] = itemStack;
-			AFMLogger.log("Added result to null slot " + firstEmpty);
+			AFMLogger.log("Last option: " + firstEmpty);
+			this.tempStorage[firstEmpty] = stack;
 			return true;
 		}
 		return false;
 	}
 
-	// TODO Make this modular, so that it accepts a IS array and IInventory as argument
-	private void updateStorageFromTemp() {
+	private void updateInventories() {
+		
+		// Update internal storage
 		for (int i = 0; i < 9; i++) {
 			try {
-				this.putStackInSlot(i + 10, this.tempStorage[i]);
+				this.tileEntity.setInventorySlotContents(i + 10, this.tempStorage[i]);
 			} catch (IndexOutOfBoundsException e) {
-				this.putStackInSlot(i + 10, null);
+				this.tileEntity.setInventorySlotContents(i + 10, null);
+			}
+		}
+		
+		// Update neighbors' inventories
+		for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS){
+			
+			IInventory inv = this.neighbors[dir.ordinal()];
+			ItemStack[] tempInv = this.neighArrays[dir.ordinal()];
+			
+			if(inv == null) continue;
+			
+			for(int i = 0; i<inv.getSizeInventory();i++){
+				try {
+					inv.setInventorySlotContents(i, tempInv[i]);
+				} catch (IndexOutOfBoundsException e) {
+					inv.setInventorySlotContents(i, null);
+				}
 			}
 		}
 	}
