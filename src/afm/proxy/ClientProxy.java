@@ -26,7 +26,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerTexuresAndRenderers() {
 
-		AFMLogger.log("Registering renderers");
+		AFMLogger.debug("Registering renderers");
 		ClientRegistry.bindTileEntitySpecialRenderer(TETestModel.class, new TESRTestModel());
 	}
 

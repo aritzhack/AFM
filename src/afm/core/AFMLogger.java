@@ -1,5 +1,6 @@
 package afm.core;
 
+import afm.data.Properties;
 import cpw.mods.fml.common.FMLLog;
 
 import java.util.logging.Level;
@@ -43,6 +44,10 @@ public class AFMLogger {
 
 	public static void log(Object o) {
 		AFMLogger.log(String.valueOf(o));
+	}
+	
+	public static void debug(String s){
+		if(Properties.DEBUG) AFMLogger.log(s);
 	}
 
 }

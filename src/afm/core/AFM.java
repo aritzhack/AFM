@@ -102,8 +102,8 @@ public class AFM {
 			b2 = b2 + (opening ? "-" : "=");
 		}
 
-		AFMLogger.log(b1);
-		AFMLogger.log(s);
-		AFMLogger.log(b2);
+		AFMLogger.debug(b1);
+		AFMLogger.debug(s);
+		AFMLogger.debug(b2);
 	}
 }

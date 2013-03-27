@@ -12,7 +12,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import afm.core.AFMLogger;
 import afm.core.util.UtilAFM;
 import afm.wip.tileEntity.BoundInvCrafting;
 import afm.wip.tileEntity.TEFabricator;
@@ -82,10 +81,6 @@ public class ContainerFabricator extends Container {
 
 	@Override
 	public ItemStack slotClick(int slotIndex, int button, int shift, EntityPlayer player) {
-
-		if (slotIndex < 19 && slotIndex >= 0 && this.getSlot(slotIndex).getHasStack()) {
-			AFMLogger.log("Slot stack id: " + this.getSlot(slotIndex).getStack().toString());
-		}
 
 		// Can't modify result slot
 		if (slotIndex == 9) return null;
@@ -284,7 +279,6 @@ public class ContainerFabricator extends Container {
 		} catch (IndexOutOfBoundsException e) {
 		}
 		if (firstEmpty != -1 && firstEmpty < 9) {
-			AFMLogger.log("Last option: " + firstEmpty);
 			this.tempStorage[firstEmpty] = stack;
 			return true;
 		}
@@ -350,7 +344,6 @@ public class ContainerFabricator extends Container {
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int slotIndex) {
 
 		Slot slot = (Slot) this.inventorySlots.get(slotIndex);
-		AFMLogger.log("Slot " + slotIndex);
 
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();

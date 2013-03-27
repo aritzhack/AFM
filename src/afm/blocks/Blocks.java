@@ -32,7 +32,7 @@ public class Blocks {
 
 	public static void init() {
 
-		AFMLogger.log("Initializing blocks");
+		AFMLogger.debug("Initializing blocks");
 
 		Blocks.colouredGlass = new BlockGlassColoured();
 		Blocks.tintedGlass = new BlockGlassTinted();
@@ -48,7 +48,7 @@ public class Blocks {
 	}
 
 	public static void registerBlocks(){
-		AFMLogger.log("Registering blocks");
+		AFMLogger.debug("Registering blocks");
 
 		GameRegistry.registerBlock(Blocks.colouredGlass, ItemGlassColoured.class, BlockData.NAME_COLOUREDGLASS);
 		GameRegistry.registerBlock(Blocks.tintedGlass, ItemGlassTinted.class, BlockData.NAME_TINTEDGLASS);

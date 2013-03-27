@@ -9,7 +9,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import afm.core.AFM;
-import afm.core.AFMLogger;
 import afm.data.BlockData;
 import afm.tileEntity.TEPortableChest;
 import cpw.mods.fml.relauncher.Side;
@@ -48,7 +47,7 @@ public class BlockPortableChest extends BlockChest {
 		EntityItem eItem = new EntityItem(world, x + dX, y + dY, z, ret);
 		eItem.getEntityItem().setTagCompound(ret.getTagCompound());
 		float var15 = 0.05F;
-		AFMLogger.log("Spawned chest drop?");
+		
 		eItem.motionX = (float) this.random.nextGaussian() * var15;
 		eItem.motionY = (float) this.random.nextGaussian() * var15 + 0.2F;
 		eItem.motionZ = (float) this.random.nextGaussian() * var15;

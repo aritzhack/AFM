@@ -15,7 +15,7 @@ public class Items {
 
 	public static void init() {
 
-		AFMLogger.log("Initializing items");
+		AFMLogger.debug("Initializing items");
 
 		Items.quartz = new ItemQuartz();
 	}
