@@ -343,17 +343,16 @@ public class ContainerFabricator extends Container {
 	// TODO Make this work
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int slotIndex) {
-
+		
 		Slot slot = (Slot) this.inventorySlots.get(slotIndex);
 
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 
-			if (slotIndex <= 9 && slotIndex > 19) // If storage
-			{
-				if (!this.mergeItemStack(itemstack1, 19, this.inventorySlots.size(), false)) return null;
+			if (slotIndex >= 10 && slotIndex < 19) {// If storage
+				if (!this.mergeItemStack(itemstack1, 19, this.inventorySlots.size(), true)) return null;
 			} else if (slotIndex > 18) { // If player inventory
-				if (!this.mergeItemStack(itemstack1, 10, 9, true)) return null;
+				if (!this.mergeItemStack(itemstack1, 10, 19, false)) return null;
 			}
 
 			if (itemstack1.stackSize <= 0) {
