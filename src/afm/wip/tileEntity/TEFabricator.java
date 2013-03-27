@@ -157,5 +157,13 @@ public class TEFabricator extends TEAFM {
 	public boolean isStackValidForSlot(int i, ItemStack itemstack) {
 		return false;
 	}
+
+	public void clearMatrix() {
+		for(int i = 0; i<9; i++){
+			this.setInventorySlotContents(i, null);
+		}
+		this.onInventoryChanged();
+		this.containerFabricator.onCraftMatrixChanged(this);
+	}
 	
 }

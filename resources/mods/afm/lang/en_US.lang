@@ -8,6 +8,7 @@ tile.AFMTestModel.name=Test Model Block
 tile.AFMTestChest.name=Test Chest
 tile.AFMOre.name=AFM Ore
 tile.AFMFabricator.name=Fabricator
+tile.AFMTank.name=Tank
 
 tile.AFMTintedGlass.white.name=White tinted glass
 tile.AFMTintedGlass.orange.name=Orange tinted glass

@@ -8,6 +8,7 @@ tile.AFMTestModel.name=Bloque con Test de Modelo
 tile.AFMTestChest.name=Test de Cofre
 tile.AFMOre.name=Mena AFM
 tile.AFMFabricator.name=Fabricador
+tile.AFMTank.name=Tanque
 
 tile.AFMTintedGlass.white.name=Cristal tintado de blanco
 tile.AFMTintedGlass.orange.name=Cristal tintado de naranja
