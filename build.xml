@@ -65,7 +65,7 @@
 
         <echo>Reobfuscating...</echo>
         <exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failifexecutionfails="true" failonerror="true">
-            <arg line="/c reobfuscate.bat"/>
+            <arg line="/c reobfuscate_srg.bat"/>
         </exec>
 
         <echo>Copying source and resources...</echo>
