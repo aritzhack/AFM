@@ -137,7 +137,7 @@ public class TEFabricator extends TEAFM {
 	}
 
 	public void dropItems() {
-		for (int i = 0; i < this.inventory.length; i++) {
+		for (int i = 9; i < this.inventory.length; i++) {
 			ItemStack stack = this.getStackInSlot(i);
 			if ((stack != null) && (stack.stackSize > 0))
 				UtilAFM.dropEntityItem(stack, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
