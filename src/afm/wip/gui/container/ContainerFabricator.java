@@ -122,6 +122,7 @@ public class ContainerFabricator extends Container {
 		}
 
 		this.tryCraft();
+		super.onCraftMatrixChanged(inv);
 	}
 
 	public void tryCraft() {

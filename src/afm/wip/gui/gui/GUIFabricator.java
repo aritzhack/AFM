@@ -37,7 +37,7 @@ public class GUIFabricator extends AFMGUI {
 	@Override
 	public void initGui() {
 		super.initGui();
-		this.buttonList.add(clearButton = new GuiButton(1, this.guiLeft + this.xSize/2 - 20, this.guiTop + this.ySize/2 - 20, 40, 20, "Clear"));
+		this.buttonList.add(clearButton = new GuiButton(1, this.guiLeft + this.xSize/2 - 20, this.guiTop + this.ySize/2 - 25, 40, 20, "Clear"));
 	}
 
 	@Override
