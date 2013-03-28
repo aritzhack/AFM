@@ -68,8 +68,7 @@ public final class UtilAFM {
 		EntityItem item = new EntityItem(world, x + xD, y + yD, z + zD, stack);
 		world.spawnEntityInWorld(item);
 	}
-
-
+	
 	/**
 	 * Compares two ItemStacks, and tells where the difference is
 	 *
@@ -82,14 +81,14 @@ public final class UtilAFM {
 	 *         1 If different ID <br />
 	 *         2 If different metadata (same id -> doesn't check OreDict) <br />
 	 *         3 If different NBTTag <br />
-	 *         4 If one is null (unless ) <br />
+	 *         4 If one is null <br />
 	 */
 	private static int compareItemStacks(ItemStack s1, ItemStack s2, boolean amountStrict, boolean notNull) {
 		if ((!notNull && (s1 == null && s2 == null)) || s1 == s2) return -1;
 		if ((s1 == null && s2 != null) || (s2 == null && s1 != null)) return 4;
 		if (s1.itemID == s2.itemID) {
 			if (s1.getItemDamage() == s2.getItemDamage()) {
-				if (s1.getTagCompound() == s2.getTagCompound()) {
+				if (s1.getTagCompound().equals(s2.getTagCompound())) {
 					if (s1.stackSize == s2.stackSize || !amountStrict) return -2;
 					return -1;
 				}
@@ -98,6 +97,10 @@ public final class UtilAFM {
 			return 2;
 		}
 		return 1;
+	}
+	
+	public static boolean isSameItem(ItemStack s1, ItemStack s2){
+		return compareItemStacks(s1, s2, false, true)==-1;
 	}
 
 	/**
