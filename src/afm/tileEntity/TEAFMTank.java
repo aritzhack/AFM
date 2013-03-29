@@ -1,4 +1,4 @@
-package afm.wip.tileEntity;
+package afm.tileEntity;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;

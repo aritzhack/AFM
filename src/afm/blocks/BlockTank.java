@@ -1,4 +1,4 @@
-package afm.wip.blocks;
+package afm.blocks;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -10,11 +10,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidStack;
-import afm.blocks.BlockContainerAFM;
 import afm.core.AFMLogger;
 import afm.data.BlockData;
 import afm.data.Properties;
-import afm.wip.tileEntity.TEAFMTank;
+import afm.tileEntity.TEAFMTank;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

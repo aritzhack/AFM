@@ -6,7 +6,6 @@ import afm.items.ItemGlassColoured;
 import afm.items.ItemGlassTinted;
 import afm.items.ItemPortableChest;
 import afm.items.ItemTestModel;
-import afm.wip.blocks.BlockTank;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /**

@@ -21,7 +21,6 @@ public class BlockData {
 	private static final int ID_DEFAULT_LASER = 506;
 	private static final int ID_DEFAULT_TINTED_GLASS = 507;
 	private static final int ID_DEFAULT_PORTABLE_CHEST = 508;
-
 	private static final int ID_DEFAULT_FABRICATOR = 505;
 	private static final int ID_DEFAULT_TANK = 508;
 
