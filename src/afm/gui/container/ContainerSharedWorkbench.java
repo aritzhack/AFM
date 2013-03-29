@@ -1,11 +1,16 @@
 package afm.gui.container;
 
-import afm.tileEntity.TESharedWorkbench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.*;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryCraftResult;
+import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.world.World;
+import afm.tileEntity.TESharedWorkbench;
 
 /**
  * ContainerSharedWorkbench
@@ -14,7 +19,7 @@ import net.minecraft.world.World;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  *
  */
-public class ContainerSharedWorkbench extends AFMContainer {
+public class ContainerSharedWorkbench extends Container {
 
 	public InventoryCrafting craftMatrix = new InventoryCrafting(this, 3, 3);
 	public IInventory craftResult = new InventoryCraftResult();

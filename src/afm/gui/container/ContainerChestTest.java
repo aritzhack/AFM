@@ -2,6 +2,7 @@ package afm.gui.container;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,7 +15,7 @@ import afm.tileEntity.TETestChest;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  *
  */
-public class ContainerChestTest extends AFMContainer {
+public class ContainerChestTest extends Container {
 
 	private TETestChest tileEntity;
 
