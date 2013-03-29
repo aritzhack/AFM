@@ -1,4 +1,4 @@
-package afm.wip.blocks;
+package afm.blocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -9,11 +9,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import afm.blocks.BlockContainerAFM;
 import afm.core.AFM;
 import afm.data.BlockData;
 import afm.data.GUIData;
-import afm.wip.tileEntity.TEFabricator;
+import afm.tileEntity.TEFabricator;
 
 /**
  * BlockFabricator

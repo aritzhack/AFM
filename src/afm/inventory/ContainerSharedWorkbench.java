@@ -1,4 +1,4 @@
-package afm.gui.container;
+package afm.inventory;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

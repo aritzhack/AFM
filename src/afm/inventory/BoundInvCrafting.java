@@ -1,6 +1,5 @@
-package afm.wip.tileEntity;
+package afm.inventory;
 
-import afm.wip.gui.container.ContainerFabricator;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;

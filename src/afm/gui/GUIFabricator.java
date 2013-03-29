@@ -1,4 +1,4 @@
-package afm.wip.gui.gui;
+package afm.gui;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -6,9 +6,8 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import afm.core.AFMLogger;
 import afm.data.GUIData;
-import afm.gui.gui.AFMGUI;
-import afm.wip.gui.container.ContainerFabricator;
-import afm.wip.tileEntity.TEFabricator;
+import afm.inventory.ContainerFabricator;
+import afm.tileEntity.TEFabricator;
 
 /**
  * GUIFabricator

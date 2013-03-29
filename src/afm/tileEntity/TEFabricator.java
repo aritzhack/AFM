@@ -1,4 +1,4 @@
-package afm.wip.tileEntity;
+package afm.tileEntity;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -10,8 +10,7 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import afm.core.util.UtilAFM;
-import afm.tileEntity.TEAFM;
-import afm.wip.gui.container.ContainerFabricator;
+import afm.inventory.ContainerFabricator;
 
 /**
  * TEFabricator

@@ -1,10 +1,10 @@
-package afm.gui.gui;
+package afm.gui;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import afm.data.GUIData;
-import afm.gui.container.ContainerSharedWorkbench;
+import afm.inventory.ContainerSharedWorkbench;
 import afm.tileEntity.TESharedWorkbench;
 
 /**

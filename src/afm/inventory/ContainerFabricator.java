@@ -1,4 +1,4 @@
-package afm.wip.gui.container;
+package afm.inventory;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -9,8 +9,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.world.World;
-import afm.wip.tileEntity.BoundInvCrafting;
-import afm.wip.tileEntity.TEFabricator;
+import afm.tileEntity.TEFabricator;
 
 /**
  * ContainerFabricator
