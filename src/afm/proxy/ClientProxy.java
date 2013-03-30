@@ -3,6 +3,7 @@ package afm.proxy;
 import net.minecraft.client.Minecraft;
 import afm.client.render.TESR.TESRTestModel;
 import afm.core.AFMLogger;
+import afm.data.RenderingData;
 import afm.tileEntity.TETestModel;
 import cpw.mods.fml.client.registry.ClientRegistry;
 
@@ -28,6 +29,7 @@ public class ClientProxy extends CommonProxy {
 
 		AFMLogger.debug("Registering renderers");
 		ClientRegistry.bindTileEntitySpecialRenderer(TETestModel.class, new TESRTestModel());
+		RenderingData.init();
 	}
 
 }

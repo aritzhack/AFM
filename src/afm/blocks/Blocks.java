@@ -6,6 +6,7 @@ import afm.items.ItemGlassColoured;
 import afm.items.ItemGlassTinted;
 import afm.items.ItemPortableChest;
 import afm.items.ItemTestModel;
+import afm.wip.blocks.BlockBetterTorch;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
@@ -27,6 +28,8 @@ public class Blocks {
 	public static BlockPortableChest portableChest;
 	public static BlockFabricator fabricator;
 	public static BlockTank tank;
+	
+	public static BlockBetterTorch betterTorch;
 
 	public static void init() {
 
@@ -42,6 +45,8 @@ public class Blocks {
 		Blocks.laser = new BlockLaser();
 		Blocks.portableChest = new BlockPortableChest();
 		Blocks.tank = new BlockTank();
+		
+		Blocks.betterTorch = new BlockBetterTorch();
 
 	}
 
@@ -58,6 +63,8 @@ public class Blocks {
 		GameRegistry.registerBlock(Blocks.portableChest, ItemPortableChest.class, BlockData.NAME_PORTABLE_CHEST);
 		GameRegistry.registerBlock(Blocks.fabricator, BlockData.NAME_FABRICATOR);
 		GameRegistry.registerBlock(Blocks.tank, BlockData.NAME_TANK);
+		
+		GameRegistry.registerBlock(Blocks.betterTorch, BlockData.NAME_BETTER_TORCH);
 	}
 
 	public static void addRecipes(){
