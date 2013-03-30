@@ -75,8 +75,9 @@ public final class UtilAFM {
 	 * @param s1           First stack to compare
 	 * @param s2           Second stack to compare
 	 * @param amountStrict Whether or not amount should be taken into account
+	 * @param notNull Whether or not both null should count as both equal
 	 * @return -2 If different amount (but same stack) <br />
-	 *         -1 If exactly equal (both null means equal) (NBT equal or both null)<br /> <br />
+	 *         -1 If exactly equal (both null means equal if notNull) (NBT equal or both null)<br /> <br />
 	 *         <p/>
 	 *         1 If different ID <br />
 	 *         2 If different metadata (same id -> doesn't check OreDict) <br />
@@ -86,17 +87,22 @@ public final class UtilAFM {
 	private static int compareItemStacks(ItemStack s1, ItemStack s2, boolean amountStrict, boolean notNull) {
 		if ((!notNull && (s1 == null && s2 == null)) || s1 == s2) return -1;
 		if ((s1 == null && s2 != null) || (s2 == null && s1 != null)) return 4;
-		if (s1.itemID == s2.itemID) {
-			if (s1.getItemDamage() == s2.getItemDamage()) {
-				if (!(s1.hasTagCompound()) && (!s2.hasTagCompound()) || s1.getTagCompound().equals(s2.getTagCompound())) {
-					if (s1.stackSize == s2.stackSize || !amountStrict) return -2;
-					return -1;
-				}
-				return 3;
-			}
-			return 2;
-		}
-		return 1;
+		
+		boolean id = false, meta = false, nbt = false, amount = false;
+		
+		id = s1.itemID == s2.itemID;
+		if(!id) return 1;
+		
+		meta = s1.getItemDamage() == s2.getItemDamage();
+		if(!meta) return 2;
+		
+		nbt = !s1.hasTagCompound() && !s2.hasTagCompound();
+		nbt |= s1.hasTagCompound() && s2.hasTagCompound() && s1.getTagCompound().equals(s2.getTagCompound());
+		if(!nbt) return 3;
+		
+		amount = s1.stackSize == s2.stackSize;
+		if(!amount && amountStrict) return -2;
+		return  -1;
 	}
 	
 	public static boolean isSameItem(ItemStack s1, ItemStack s2){
