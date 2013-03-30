@@ -11,9 +11,9 @@
 	<property name="mod.id" value="AFM"/>
 	
 	<!-- Folder properties -->
-	<property name="base.dir" value="${basedir}/.." />
+	<property name="base.dir" value="${basedir}/../.." />
 
-	<property name="mod.dir" value="${base.dir}/afm" />
+	<property name="mod.dir" value="${base.dir}/sources/afm" />
 	<property name="forge.dir" value="${base.dir}/forge" />
 	
     <property name="mcp.dir" value="${forge.dir}/mcp"/>
