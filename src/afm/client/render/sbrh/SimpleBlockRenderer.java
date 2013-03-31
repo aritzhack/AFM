@@ -1,7 +1,9 @@
 package afm.client.render.sbrh;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import afm.core.AFMLogger;
@@ -34,14 +36,74 @@ public class SimpleBlockRenderer implements ISimpleBlockRenderingHandler {
 	}
 	
 	private boolean renderBetterTorch(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer){
-		AFMLogger.debug("Rendering using my renderer!");
 		
 		int meta = world.getBlockMetadata(x, y, z);
-		if(meta!=0)	return renderer.renderBlockTorch(block, x, y, z);
-		else {
-			renderer.renderTorchAtAngle(block, (double)x + .5D, (double)y + .5D, (double)z + .5D, .5D, 0.0D, 0);
-			return true;
+		if(meta!=0){
+			AFMLogger.debug("Rendered with default");
+			return renderer.renderBlockTorch(block, x, y, z);
 		}
+		
+		AFMLogger.debug("Rendered with custom");
+		double par2 = x, par4 = y, par6 = z;
+		
+        Tessellator tessellator = Tessellator.instance;
+        Icon icon = block.getBlockTextureFromSideAndMetadata(0, 0);
+        
+        icon = (icon!=null)?icon:Minecraft.getMinecraft().renderEngine.getMissingIcon(0);
+
+        double texMinX = (double)icon.getMinU();
+        double texMinY = (double)icon.getMinV();
+        double texMaxX = (double)icon.getMaxU();
+        double texMaxY = (double)icon.getMaxV();
+        double d9 = (double)icon.getInterpolatedU(7.0D);
+        double d10 = (double)icon.getInterpolatedV(6.0D);
+        double d11 = (double)icon.getInterpolatedU(9.0D);
+        double d12 = (double)icon.getInterpolatedV(8.0D);
+        double d13 = (double)icon.getInterpolatedU(7.0D);
+        double d14 = (double)icon.getInterpolatedV(13.0D);
+        double d15 = (double)icon.getInterpolatedU(9.0D);
+        double d16 = (double)icon.getInterpolatedV(15.0D);
+        par2 += 0.5D;
+        par6 += 0.5D;
+        double d17 = par2 - 0.5D;
+        double d18 = par2 + 0.5D;
+        double d19 = par6 - 0.5D;
+        double d20 = par6 + 0.5D;
+        double d21 = 0.0625D;
+        
+        // Top (fire)
+        tessellator.addVertexWithUV(par2 + d21, par4+0.375D, par6 - d21, d11, d10);
+        tessellator.addVertexWithUV(par2 + d21, par4+0.375D, par6 + d21, d11, d12);
+        tessellator.addVertexWithUV(par2 - d21, par4+0.375D, par6 + d21, d9, d12);
+        tessellator.addVertexWithUV(par2 - d21, par4+0.375D, par6 - d21, d9, d10);
+        
+        // Bottom
+        tessellator.addVertexWithUV(par2 + d21, par4+1D, par6 - d21, d15, d14);
+        tessellator.addVertexWithUV(par2 + d21, par4+1D, par6 + d21, d15, d16);
+        tessellator.addVertexWithUV(par2 - d21, par4+1D, par6 + d21, d13, d16);
+        tessellator.addVertexWithUV(par2 - d21, par4+1D, par6 - d21, d13, d14);
+        
+        // West
+        tessellator.addVertexWithUV(par2 - d21, par4 + 1.0D, d19, texMaxX, texMaxY);
+        tessellator.addVertexWithUV(par2 - d21, par4, d19, texMaxX, texMinY);
+        tessellator.addVertexWithUV(par2 - d21, par4, d20, texMinX, texMinY);
+        tessellator.addVertexWithUV(par2 - d21, par4 + 1.0D, d20, texMinX, texMaxY);
+        
+        tessellator.addVertexWithUV(par2 + d21, par4 + 1.0D, d20, texMaxX, texMaxY);
+        tessellator.addVertexWithUV(par2 + d21, par4, d20, texMaxX, texMinY);
+        tessellator.addVertexWithUV(par2 + d21, par4, d19, texMinX, texMinY);
+        tessellator.addVertexWithUV(par2 + d21, par4 + 1.0D, d19, texMinX, texMaxY);
+        
+        tessellator.addVertexWithUV(d17, par4 + 1.0D, par6 + d21, texMaxX, texMaxY);
+        tessellator.addVertexWithUV(d17, par4, par6 + d21, texMaxX, texMinY);
+        tessellator.addVertexWithUV(d18, par4, par6 + d21, texMinX, texMinY);
+        tessellator.addVertexWithUV(d18, par4 + 1.0D, par6 + d21, texMinX, texMaxY);
+        
+        tessellator.addVertexWithUV(d18, par4 + 1.0D, par6 - d21, texMaxX, texMaxY);
+        tessellator.addVertexWithUV(d18, par4, par6 - d21, texMaxX, texMinY);
+        tessellator.addVertexWithUV(d17, par4, par6 - d21, texMinX, texMinY);
+        tessellator.addVertexWithUV(d17, par4 + 1.0D, par6 - d21, texMinX, texMaxY);
+        return true;
 	}
 
 }

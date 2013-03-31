@@ -1,5 +1,6 @@
 package afm.data;
 
+import afm.client.render.sbrh.SimpleBlockRenderer;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class RenderingData {
@@ -8,6 +9,8 @@ public class RenderingData {
 	
 	public static void init(){
 		RenderingData.RENDER_ID_BETTER_TORCH = RenderingRegistry.getNextAvailableRenderId();
+		
+		RenderingRegistry.registerBlockHandler(RENDER_ID_BETTER_TORCH, new SimpleBlockRenderer());
 	}
 
 }
