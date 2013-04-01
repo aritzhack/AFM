@@ -10,13 +10,10 @@ import afm.data.GUIData;
 import afm.inventory.ContainerChestTest;
 import afm.inventory.ContainerFabricator;
 import afm.inventory.ContainerSharedWorkbench;
-import afm.tileEntity.TEAFMTank;
 import afm.tileEntity.TEFabricator;
-import afm.tileEntity.TEPortableChest;
 import afm.tileEntity.TESharedWorkbench;
 import afm.tileEntity.TETestChest;
 import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
  * GUIHandler
@@ -25,14 +22,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class GUIHandler implements IGuiHandler {
-
-	public GUIHandler() {
-		GameRegistry.registerTileEntity(TETestChest.class, "tileEntity.afm.testChest");
-		GameRegistry.registerTileEntity(TESharedWorkbench.class, "tileEntity.afm.sharedCrafting");
-		GameRegistry.registerTileEntity(TEFabricator.class, "tileEntity.afm.fabricator");
-		GameRegistry.registerTileEntity(TEPortableChest.class, "tileEntity.afm.portableChest");
-		GameRegistry.registerTileEntity(TEAFMTank.class, "tileEntity.afm.tank");
-	}
 
 	@Override
 	public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {

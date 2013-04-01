@@ -75,6 +75,7 @@ public class AFM {
 		this.showDebugGroup(true, event.getSide().toString());
 
 		AFM.proxy.registerTexuresAndRenderers();
+		AFM.proxy.registerTileEntities();
 
 		Items.init();
 		Blocks.init();
