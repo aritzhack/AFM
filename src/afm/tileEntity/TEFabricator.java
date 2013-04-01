@@ -2,6 +2,7 @@ package afm.tileEntity;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -214,7 +215,7 @@ public class TEFabricator extends TEAFM {
 	}
 
 	private void updateArrays() {
-		this.tempStorage = this.invToISArray(this, 10, 9);
+		this.tempStorage = this.invToISArray(this, 10, 9, ForgeDirection.UNKNOWN);
 
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 			IInventory inv = this.getInventoryInSide(dir);
@@ -222,24 +223,27 @@ public class TEFabricator extends TEAFM {
 				continue;
 			}
 			this.neighbors[dir.ordinal()] = inv;
-			this.neighArrays[dir.ordinal()] = this.invToISArray(inv, 0, 0);
+			this.neighArrays[dir.ordinal()] = this.invToISArray(inv, 0, 0, dir.getOpposite());
 		}
 	}
 
-	private ItemStack[] invToISArray(IInventory inv, int startIndex, int length) {
+	private ItemStack[] invToISArray(IInventory inv, int startIndex, int length, ForgeDirection dir) {
 
 		TileEntityChest chest2 = null;
-
-		if ((length <= 0 || length > inv.getSizeInventory()) && !(inv instanceof TEFabricator)) { // Negative
-																									// or
-																									// zero
-																									// length
-																									// ->
-																									// Whole
-																									// inventory
+		
+		// Negative or zero length -> Whole inventory
+		if (inv instanceof TEFabricator) {
 			length = inv.getSizeInventory();
 			startIndex = 0;
-		} else if (inv instanceof TEFabricator) {
+		} else if (inv instanceof ISidedInventory){
+			int[] slots = ((ISidedInventory) inv).getSizeInventorySide(dir.ordinal());
+			ItemStack[] ret = new ItemStack[slots.length];
+			int i = 0;
+			for(int s : slots){
+				ret[i++] = inv.getStackInSlot(s);
+			}
+			return ret;
+		}else if ((length <= 0 || length > inv.getSizeInventory())) {
 			length = 9;
 			startIndex = 10;
 		}
