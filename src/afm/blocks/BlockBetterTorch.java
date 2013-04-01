@@ -1,4 +1,4 @@
-package afm.wip.blocks;
+package afm.blocks;
 
 import java.util.Random;
 
