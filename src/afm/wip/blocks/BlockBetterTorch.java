@@ -15,7 +15,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBetterTorch extends BlockTorch {
-	
+
 	Icon icon;
 
 	public BlockBetterTorch() {
@@ -70,6 +70,25 @@ public class BlockBetterTorch extends BlockTorch {
         
         world.spawnParticle("smoke", px, py, pz, 0.0D, 0.0D, 0.0D);
         world.spawnParticle("flame", px, py, pz, 0.0D, 0.0D, 0.0D);
+	}
+	
+	@Override
+	protected boolean dropTorchIfCantStay(World world, int x, int y, int z) {
+		if(world.getBlockMetadata(x, y, z) != 0) return super.dropTorchIfCantStay(world, x, y, z);
+        if (!this.canPlaceBlockAt(world, x, y, x))
+        {
+            if (!world.isBlockSolidOnSide(x, y+1, z, ForgeDirection.DOWN))
+            {
+                this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+                world.setBlockToAir(x, y, z);
+            }
+
+            return false;
+        }
+        else
+        {
+            return true;
+        }
 	}
 
 	@Override

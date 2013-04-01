@@ -6,7 +6,6 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
-import afm.core.AFMLogger;
 import afm.data.RenderingData;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
@@ -39,11 +38,8 @@ public class SimpleBlockRenderer implements ISimpleBlockRenderingHandler {
 		
 		int meta = world.getBlockMetadata(x, y, z);
 		if(meta!=0){
-			AFMLogger.debug("Rendered with default");
 			return renderer.renderBlockTorch(block, x, y, z);
 		}
-		
-		AFMLogger.debug("Rendered with custom");
 		double par2 = x, par4 = y, par6 = z;
 		
         Tessellator tessellator = Tessellator.instance;
@@ -78,12 +74,11 @@ public class SimpleBlockRenderer implements ISimpleBlockRenderingHandler {
         tessellator.addVertexWithUV(par2 - d21, par4+0.375D, par6 - d21, d9, d10);
         
         // Bottom
-        tessellator.addVertexWithUV(par2 + d21, par4+1D, par6 - d21, d15, d14);
-        tessellator.addVertexWithUV(par2 + d21, par4+1D, par6 + d21, d15, d16);
-        tessellator.addVertexWithUV(par2 - d21, par4+1D, par6 + d21, d13, d16);
         tessellator.addVertexWithUV(par2 - d21, par4+1D, par6 - d21, d13, d14);
-        
-        // West
+        tessellator.addVertexWithUV(par2 - d21, par4+1D, par6 + d21, d13, d16);
+        tessellator.addVertexWithUV(par2 + d21, par4+1D, par6 + d21, d15, d16);
+        tessellator.addVertexWithUV(par2 + d21, par4+1D, par6 - d21, d15, d14);
+
         tessellator.addVertexWithUV(par2 - d21, par4 + 1.0D, d19, texMaxX, texMaxY);
         tessellator.addVertexWithUV(par2 - d21, par4, d19, texMaxX, texMinY);
         tessellator.addVertexWithUV(par2 - d21, par4, d20, texMinX, texMinY);
