@@ -9,6 +9,8 @@ tile.AFMTestChest.name=Test Chest
 tile.AFMOre.name=AFM Ore
 tile.AFMFabricator.name=Fabricator
 tile.AFMTank.name=Tank
+tile.AFMPortableChest.name=Portable chest
+tile.AFMBetterTorch.name=Torch
 
 tile.AFMTintedGlass.white.name=White tinted glass
 tile.AFMTintedGlass.orange.name=Orange tinted glass
@@ -51,6 +53,7 @@ tile.AFMColouredGlass.black.name=Black coloured glass
 ###################################################
 
 item.quartz.name=Quartz
+item.AFMPortableChest.name=Portable chest
 #item..name=
 
 ###################################################

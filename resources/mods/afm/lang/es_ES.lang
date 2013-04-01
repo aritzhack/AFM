@@ -9,6 +9,8 @@ tile.AFMTestChest.name=Test de Cofre
 tile.AFMOre.name=Mena AFM
 tile.AFMFabricator.name=Fabricador
 tile.AFMTank.name=Tanque
+tile.AFMPortableChest.name=Cofre portatil
+tile.AFMBetterTorch.name=Antorcha
 
 tile.AFMTintedGlass.white.name=Cristal tintado de blanco
 tile.AFMTintedGlass.orange.name=Cristal tintado de naranja
@@ -51,6 +53,7 @@ tile.AFMColouredGlass.black.name=Cristal coloreado de negro
 ###################################################
 
 item.quartz.name=Cuarzo
+item.AFMPortableChest.name=Cofre portatil
 #item..name=
 
 ###################################################
