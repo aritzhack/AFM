@@ -108,9 +108,9 @@ public class ContainerFabricator extends Container {
 	public void onCraftMatrixChanged(IInventory inv) {
 
 		this.result.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this.matrix, this.tileEntity.worldObj));
-		
-		for(int i = 0; i<this.tileEntity.getSizeInventory(); i++){
-			if(this.getSlot(i).getHasStack()){
+
+		for (int i = 0; i < this.tileEntity.getSizeInventory(); i++) {
+			if (this.getSlot(i).getHasStack()) {
 				this.tileEntity.setInventorySlotContents(i, this.getSlot(i).getStack());
 			} else {
 				this.tileEntity.setInventorySlotContents(i, null);
@@ -120,11 +120,12 @@ public class ContainerFabricator extends Container {
 	}
 
 	/**
-	 * Called when putStackInSlot player shift-clicks on putStackInSlot slot. You must override this or you will crash when someone does that.
+	 * Called when putStackInSlot player shift-clicks on putStackInSlot slot. You must override this
+	 * or you will crash when someone does that.
 	 */
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int slotIndex) {
-		
+
 		Slot slot = (Slot) this.inventorySlots.get(slotIndex);
 
 		if (slot != null && slot.getHasStack()) {

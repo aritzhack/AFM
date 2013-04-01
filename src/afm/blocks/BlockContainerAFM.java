@@ -9,10 +9,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * BlockContainerAFM
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public abstract class BlockContainerAFM extends BlockContainer {
 
@@ -25,7 +24,7 @@ public abstract class BlockContainerAFM extends BlockContainer {
 	BlockContainerAFM(int id, String blockName) {
 		this(id, blockName, Material.rock);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public abstract void registerIcons(IconRegister par1IconRegister);

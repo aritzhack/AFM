@@ -1,19 +1,18 @@
 package afm.blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import afm.data.BlockData;
-import afm.tileEntity.TETestModel;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import afm.data.BlockData;
+import afm.tileEntity.TETestModel;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * BlockTestModel
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class BlockTestModel extends BlockContainerAFM {
 
@@ -44,5 +43,6 @@ public class BlockTestModel extends BlockContainerAFM {
 	@Override
 	@SideOnly(Side.CLIENT)
 	// No need to register any icon
-	public void registerIcons(IconRegister par1IconRegister) {}
+	public void registerIcons(IconRegister par1IconRegister) {
+	}
 }

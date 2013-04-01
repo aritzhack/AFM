@@ -12,31 +12,30 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * BlockLaser
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class BlockLaser extends BlockAFM {
-	
+
 	Icon icon;
 
 	public BlockLaser() {
 		super(BlockData.ID_LASER, BlockData.NAME_LASER);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister iconRegister) {
-			icon = iconRegister.registerIcon(String.format("afm:%s", BlockData.NAME_LASER));
+		this.icon = iconRegister.registerIcon(String.format("afm:%s", BlockData.NAME_LASER));
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
-		return icon;
+		return this.icon;
 	}
-	
+
 	@Override
 	public void onEntityCollidedWithBlock(World w, int x, int y, int z, Entity entity) {
 		if (entity instanceof EntityPlayerMP) {

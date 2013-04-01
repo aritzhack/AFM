@@ -1,5 +1,10 @@
 package afm.gui;
 
+import java.util.logging.Level;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import afm.core.AFMLogger;
 import afm.data.GUIData;
 import afm.inventory.ContainerChestTest;
@@ -12,18 +17,12 @@ import afm.tileEntity.TESharedWorkbench;
 import afm.tileEntity.TETestChest;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-
-import java.util.logging.Level;
 
 /**
  * GUIHandler
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class GUIHandler implements IGuiHandler {
 
@@ -42,16 +41,13 @@ public class GUIHandler implements IGuiHandler {
 
 		switch (id) {
 			case GUIData.ID_TESTCHEST:
-				if (tile_entity instanceof TETestChest)
-					return new ContainerChestTest((TETestChest) tile_entity, player.inventory);
+				if (tile_entity instanceof TETestChest) return new ContainerChestTest((TETestChest) tile_entity, player.inventory);
 				break;
 			case GUIData.ID_SHAREDWORKBENCH:
-				if (tile_entity instanceof TESharedWorkbench)
-					return new ContainerSharedWorkbench((TESharedWorkbench) tile_entity, player.inventory, world);
+				if (tile_entity instanceof TESharedWorkbench) return new ContainerSharedWorkbench((TESharedWorkbench) tile_entity, player.inventory, world);
 				break;
 			case GUIData.ID_FABRICATOR:
-				if (tile_entity instanceof TEFabricator)
-					return new ContainerFabricator((TEFabricator) tile_entity, player.inventory, world);
+				if (tile_entity instanceof TEFabricator) return new ContainerFabricator((TEFabricator) tile_entity, player.inventory, world);
 				break;
 			default:
 				AFMLogger.log(Level.SEVERE, "GUI with ID " + id + " could not be found");
@@ -67,16 +63,13 @@ public class GUIHandler implements IGuiHandler {
 
 		switch (id) {
 			case GUIData.ID_TESTCHEST:
-				if (tile_entity instanceof TETestChest)
-					return new GUIChestTest((TETestChest) tile_entity, player.inventory);
+				if (tile_entity instanceof TETestChest) return new GUIChestTest((TETestChest) tile_entity, player.inventory);
 				break;
 			case GUIData.ID_SHAREDWORKBENCH:
-				if (tile_entity instanceof TESharedWorkbench)
-					return new GUISharedWorkbench((TESharedWorkbench) tile_entity, player.inventory, world);
+				if (tile_entity instanceof TESharedWorkbench) return new GUISharedWorkbench((TESharedWorkbench) tile_entity, player.inventory, world);
 				break;
 			case GUIData.ID_FABRICATOR:
-				if (tile_entity instanceof TEFabricator)
-					return new GUIFabricator((TEFabricator) tile_entity, player.inventory, world);
+				if (tile_entity instanceof TEFabricator) return new GUIFabricator((TEFabricator) tile_entity, player.inventory, world);
 				break;
 			default:
 				AFMLogger.log(Level.SEVERE, "GUI with ID " + id + " could not be found");

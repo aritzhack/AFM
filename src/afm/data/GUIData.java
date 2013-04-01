@@ -4,10 +4,9 @@ import net.minecraftforge.common.Configuration;
 
 /**
  * GUIData
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class GUIData {
 	private static final String GUI_DIR = Properties.TEX_DIR + "gui/";

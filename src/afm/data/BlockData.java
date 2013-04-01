@@ -4,10 +4,9 @@ import net.minecraftforge.common.Configuration;
 
 /**
  * BlockData
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class BlockData {
 
@@ -23,7 +22,7 @@ public class BlockData {
 	private static final int ID_DEFAULT_PORTABLE_CHEST = 508;
 	private static final int ID_DEFAULT_FABRICATOR = 505;
 	private static final int ID_DEFAULT_TANK = 508;
-	
+
 	private static final int ID_DEFAULT_BETTER_TORCH = 509;
 
 	public static int ID_COLOURED_GLASS = BlockData.ID_DEFAULT_COLOURED_GLASS;
@@ -36,7 +35,7 @@ public class BlockData {
 	public static int ID_PORTABLE_CHEST = BlockData.ID_DEFAULT_PORTABLE_CHEST;
 	public static int ID_FABRICATOR = BlockData.ID_DEFAULT_FABRICATOR;
 	public static int ID_TANK = BlockData.ID_DEFAULT_TANK;
-	
+
 	public static int ID_BETTER_TORCH = BlockData.ID_DEFAULT_BETTER_TORCH;
 
 	public static final String NAME_LASER = "AFMLaser";
@@ -49,7 +48,7 @@ public class BlockData {
 	public static final String NAME_COLOUREDGLASS = "AFMColouredGlass";
 	public static final String NAME_FABRICATOR = "AFMFabricator";
 	public static final String NAME_TANK = "AFMTank";
-	
+
 	public static final String NAME_BETTER_TORCH = "AFMBetterTorch";
 
 	// public static final String NAME_ = "";
@@ -66,7 +65,7 @@ public class BlockData {
 		BlockData.ID_PORTABLE_CHEST = config.getBlock("Blocks", "portableCrafting", BlockData.ID_DEFAULT_PORTABLE_CHEST).getInt();
 		BlockData.ID_FABRICATOR = config.getBlock("Blocks", "fabricator", BlockData.ID_DEFAULT_FABRICATOR).getInt();
 		BlockData.ID_TANK = config.getBlock("Blocks", "tank", BlockData.ID_DEFAULT_TANK).getInt();
-		
+
 		BlockData.ID_BETTER_TORCH = config.getBlock("Blocks", "bTorch", BlockData.ID_DEFAULT_BETTER_TORCH).getInt();
 	}
 }

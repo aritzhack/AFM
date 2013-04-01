@@ -5,16 +5,16 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 /**
  * EventHandler
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class EventHandler {
 
 	@ForgeSubscribe
 	public void onPlayerInteractEvent(PlayerInteractEvent event) {
-		if(!event.entityPlayer.worldObj.isRemote)
+		if (!event.entityPlayer.worldObj.isRemote) {
 			AFM.proxy.writeChatMessageToPlayer(event.action.name());
+		}
 	}
 }

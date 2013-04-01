@@ -11,10 +11,9 @@ import afm.tileEntity.TEFabricator;
 
 /**
  * GUIFabricator
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class GUIFabricator extends AFMGUI {
 
@@ -29,14 +28,14 @@ public class GUIFabricator extends AFMGUI {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int i, int j) {
 		this.fontRenderer.drawString(StatCollector.translateToLocal(this.tileEntity.getInvName()), 6, 6, 0x404040);
-		this.fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 7, 73,0x404040);
+		this.fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 7, 73, 0x404040);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initGui() {
 		super.initGui();
-		this.buttonList.add(clearButton = new GuiButton(1, this.guiLeft + this.xSize/2 - 20, this.guiTop + this.ySize/2 - 25, 40, 20, "Clear"));
+		this.buttonList.add(this.clearButton = new GuiButton(1, this.guiLeft + this.xSize / 2 - 20, this.guiTop + this.ySize / 2 - 25, 40, 20, "Clear"));
 	}
 
 	@Override
@@ -47,7 +46,7 @@ public class GUIFabricator extends AFMGUI {
 
 	@Override
 	protected void actionPerformed(GuiButton button) {
-		if(button == clearButton){
+		if (button == this.clearButton) {
 			this.tileEntity.clearMatrix();
 			AFMLogger.debug("Width: " + this.width + ", Height: " + this.height);
 			AFMLogger.debug("XSize: " + this.xSize + ", YSize: " + this.ySize);

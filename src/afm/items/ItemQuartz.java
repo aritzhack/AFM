@@ -1,23 +1,22 @@
 package afm.items;
 
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import afm.core.AFM;
 import afm.core.util.UtilNBT;
 import afm.data.ItemData;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 /**
  * ItemQuartz
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class ItemQuartz extends ItemAFM {
 
@@ -25,13 +24,12 @@ public class ItemQuartz extends ItemAFM {
 		super(ItemData.ID_QUARTZ, ItemData.NAME_QUARTZ, AFM.tabAFM);
 		this.addRecipe();
 	}
-	
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void updateIcons(IconRegister iconRegister)
-    {
-        this.iconIndex = iconRegister.registerIcon("afm:" + ItemData.NAME_QUARTZ);
-    }
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void updateIcons(IconRegister iconRegister) {
+		this.iconIndex = iconRegister.registerIcon("afm:" + ItemData.NAME_QUARTZ);
+	}
 
 	@Override
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
@@ -44,8 +42,7 @@ public class ItemQuartz extends ItemAFM {
 
 		UtilNBT.addDescriptionToStack(out, "Funciona!!");
 
-		GameRegistry
-				.addShapelessRecipe(out, new ItemStack(Item.diamond), new ItemStack(Item.diamond), new ItemStack(Item.diamond), new ItemStack(Item.diamond));
+		GameRegistry.addShapelessRecipe(out, new ItemStack(Item.diamond), new ItemStack(Item.diamond), new ItemStack(Item.diamond), new ItemStack(Item.diamond));
 	}
 
 }

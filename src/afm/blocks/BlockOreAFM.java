@@ -17,30 +17,29 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * BlockOreAFM
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class BlockOreAFM extends BlockAFM {
-	
+
 	Icon icon;
 
 	public BlockOreAFM() {
 		super(BlockData.ID_ORE, BlockData.NAME_ORE_AFM);
 		this.setLightValue(1.0F);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister iconRegister) {
-			icon = iconRegister.registerIcon(String.format("afm:%s", BlockData.NAME_ORE_AFM));
+		this.icon = iconRegister.registerIcon(String.format("afm:%s", BlockData.NAME_ORE_AFM));
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
-		return icon;
+		return this.icon;
 	}
 
 	public void initRecipes() {

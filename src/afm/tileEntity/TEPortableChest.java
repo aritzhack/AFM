@@ -9,10 +9,9 @@ import afm.data.BlockData;
 
 /**
  * TEPortableChest
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class TEPortableChest extends TileEntityChest {
 
@@ -23,7 +22,9 @@ public class TEPortableChest extends TileEntityChest {
 			ItemStack chestStack = new ItemStack(0, 0, 0);
 			NBTTagCompound chestStackTag = (NBTTagCompound) stacksTag.tagAt(i);
 			chestStack.readFromNBT(chestStackTag);
-			if (chestStack.itemID <= 0 || chestStack.stackSize <= 0) continue;
+			if (chestStack.itemID <= 0 || chestStack.stackSize <= 0) {
+				continue;
+			}
 			String name = chestStackTag.getName();
 			int slot;
 			try {

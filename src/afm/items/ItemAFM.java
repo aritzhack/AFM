@@ -6,10 +6,9 @@ import afm.core.AFM;
 
 /**
  * ItemAFM
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 class ItemAFM extends Item {
 
@@ -18,7 +17,7 @@ class ItemAFM extends Item {
 		this.setCreativeTab(tab);
 		this.setUnlocalizedName(itemName);
 	}
-	
+
 	ItemAFM(int id, String itemName) {
 		this(id, itemName, AFM.tabAFM);
 	}

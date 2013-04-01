@@ -1,15 +1,14 @@
 package afm.data;
 
-import net.minecraftforge.common.Configuration;
-
 import java.io.File;
+
+import net.minecraftforge.common.Configuration;
 
 /**
  * Properties
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public final class Properties {
 
@@ -24,10 +23,10 @@ public final class Properties {
 	}
 
 	public static final boolean DEBUG = true;
-	
+
 	public static final String MOD_ID = "AFM";
 	public static final String VERSION = "%VERSION%";
-	public static final String MOD_NAME = MOD_ID + " v" + Properties.VERSION;
+	public static final String MOD_NAME = Properties.MOD_ID + " v" + Properties.VERSION;
 	public static final String MC_VERSION = "%MC_VERSION%";
 	public static final String FORGE_VERSION = "%FORGE_VERSION%";
 

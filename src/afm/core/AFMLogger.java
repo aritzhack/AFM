@@ -1,17 +1,16 @@
 package afm.core;
 
-import afm.data.Properties;
-import cpw.mods.fml.common.FMLLog;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import afm.data.Properties;
+import cpw.mods.fml.common.FMLLog;
+
 /**
  * AFMLogger
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class AFMLogger {
 
@@ -45,9 +44,11 @@ public class AFMLogger {
 	public static void log(Object o) {
 		AFMLogger.log(String.valueOf(o));
 	}
-	
-	public static void debug(String s){
-		if(Properties.DEBUG) AFMLogger.log(s);
+
+	public static void debug(String s) {
+		if (Properties.DEBUG) {
+			AFMLogger.log(s);
+		}
 	}
 
 }

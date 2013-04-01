@@ -18,10 +18,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * BlockGlassColoured
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class BlockGlassColoured extends BlockAFM {
 
@@ -30,21 +29,19 @@ public class BlockGlassColoured extends BlockAFM {
 	public BlockGlassColoured() {
 		super(BlockData.ID_COLOURED_GLASS, BlockData.NAME_COLOUREDGLASS, Material.glass);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister iconRegister) {
-		for(int meta = 0; meta < 16; meta++){
-			icons[meta] = iconRegister.registerIcon(String.format("afm:%s-%s", BlockData.NAME_COLOUREDGLASS, UtilAFM.colorNames[meta].toLowerCase().replace(" ", "")));
+		for (int meta = 0; meta < 16; meta++) {
+			this.icons[meta] = iconRegister.registerIcon(String.format("afm:%s-%s", BlockData.NAME_COLOUREDGLASS, UtilAFM.colorNames[meta].toLowerCase().replace(" ", "")));
 		}
 	}
-	
-	
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
-		return icons[meta];
+		return this.icons[meta];
 	}
 
 	@Override
@@ -54,7 +51,7 @@ public class BlockGlassColoured extends BlockAFM {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({"rawtypes", "unchecked"})
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void getSubBlocks(int unknown, CreativeTabs tab, List subItems) {
 		for (int ix = 0; ix < 16; ix++) {
 			subItems.add(new ItemStack(this, 1, ix));

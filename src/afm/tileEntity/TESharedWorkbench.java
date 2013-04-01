@@ -8,10 +8,9 @@ import net.minecraft.nbt.NBTTagList;
 
 /**
  * TESharedWorkbench
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class TESharedWorkbench extends TEAFM {
 
@@ -28,15 +27,13 @@ public class TESharedWorkbench extends TEAFM {
 
 	@Override
 	public ItemStack getStackInSlot(int slotIndex) {
-		if (slotIndex >= this.inventory.length)
-			return null;
+		if (slotIndex >= this.inventory.length) return null;
 		return this.inventory[slotIndex];
 	}
 
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
-		if (slot >= this.inventory.length)
-			return;
+		if (slot >= this.inventory.length) return;
 		this.inventory[slot] = stack;
 
 		if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {
@@ -46,8 +43,7 @@ public class TESharedWorkbench extends TEAFM {
 
 	@Override
 	public ItemStack decrStackSize(int slotIndex, int amount) {
-		if (slotIndex >= this.inventory.length)
-			return null;
+		if (slotIndex >= this.inventory.length) return null;
 		ItemStack stack = this.getStackInSlot(slotIndex);
 
 		if (stack != null) {
@@ -67,8 +63,7 @@ public class TESharedWorkbench extends TEAFM {
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int slotIndex) {
-		if (slotIndex >= this.inventory.length)
-			return null;
+		if (slotIndex >= this.inventory.length) return null;
 		ItemStack stack = this.getStackInSlot(slotIndex);
 
 		if (stack != null) {
@@ -85,8 +80,7 @@ public class TESharedWorkbench extends TEAFM {
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
-		return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) == this
-				&& player.getDistanceSq(this.xCoord + 0.5, this.yCoord + 0.5, this.zCoord + 0.5) < 64;
+		return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) == this && player.getDistanceSq(this.xCoord + 0.5, this.yCoord + 0.5, this.zCoord + 0.5) < 64;
 	}
 
 	@Override

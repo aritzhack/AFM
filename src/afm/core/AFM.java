@@ -1,5 +1,8 @@
 package afm.core;
 
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.MinecraftForge;
 import afm.blocks.Blocks;
 import afm.command.CommandAFM;
 import afm.core.util.UtilAFM;
@@ -22,19 +25,15 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.MinecraftForge;
 
 /**
  * AFM
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 @Mod(name = Properties.MOD_NAME, modid = Properties.MOD_ID, version = Properties.VERSION)
-@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = {Properties.Network.CHANNEL}, packetHandler = PacketHandler.class)
+@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { Properties.Network.CHANNEL }, packetHandler = PacketHandler.class)
 public class AFM {
 
 	Configuration config;
@@ -92,8 +91,7 @@ public class AFM {
 
 	private void showDebugGroup(boolean opening, String side) {
 
-		String s = String.format("%s Initialization for Minecraft %s and Forge %s %s in %s", Properties.MOD_NAME, Properties.MC_VERSION,
-				Properties.FORGE_VERSION, opening ? "started" : "finished", side);
+		String s = String.format("%s Initialization for Minecraft %s and Forge %s %s in %s", Properties.MOD_NAME, Properties.MC_VERSION, Properties.FORGE_VERSION, opening ? "started" : "finished", side);
 
 		// Just aesthetics...
 		String b1 = "", b2 = "";

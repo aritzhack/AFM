@@ -1,19 +1,18 @@
 package afm.network;
 
-import afm.core.AFMLogger;
-import afm.data.Properties;
-import cpw.mods.fml.common.network.Player;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import afm.core.AFMLogger;
+import afm.data.Properties;
+import cpw.mods.fml.common.network.Player;
+
 /**
  * RandomNumberPacket
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class RandomNumberPacket extends AFMPacket {
 

@@ -4,10 +4,9 @@ import net.minecraftforge.common.Configuration;
 
 /**
  * ItemData
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class ItemData {
 

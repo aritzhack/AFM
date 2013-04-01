@@ -1,16 +1,15 @@
 package afm.command;
 
+import java.util.List;
+
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 
-import java.util.List;
-
 /**
  * CommandAFM
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class CommandAFM extends CommandBase {
 
@@ -42,8 +41,7 @@ public class CommandAFM extends CommandBase {
 				return CommandSetAt.getTabCompletion(par1iCommandSender, args);
 			else if (args[0].equalsIgnoreCase("getAt"))
 				return CommandGetAt.getTabCompletion(par1iCommandSender, args);
-			else if (args[0].equalsIgnoreCase("killAll"))
-				return CommandGetAt.getTabCompletion(par1iCommandSender, args);
+			else if (args[0].equalsIgnoreCase("killAll")) return CommandGetAt.getTabCompletion(par1iCommandSender, args);
 		}
 		return CommandBase.getListOfStringsMatchingLastWord(args, "setAt", "getAt", "killAll");
 	}

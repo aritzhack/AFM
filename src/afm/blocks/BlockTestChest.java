@@ -19,38 +19,36 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * BlockTestChest
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class BlockTestChest extends BlockContainerAFM {
-	
+
 	Icon icon;
 
 	public BlockTestChest() {
 		super(BlockData.ID_TESTCHEST, BlockData.NAME_TESTCHEST);
 		this.setCreativeTab(AFM.tabAFM);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister iconRegister) {
-			icon = iconRegister.registerIcon(String.format("afm:%s", BlockData.NAME_TESTCHEST));
+		this.icon = iconRegister.registerIcon(String.format("afm:%s", BlockData.NAME_TESTCHEST));
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
-		return icon;
+		return this.icon;
 	}
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float f, float g, float t) {
 		TileEntity tile_entity = world.getBlockTileEntity(x, y, z);
 
-		if (tile_entity == null || player.isSneaking())
-			return false;
+		if (tile_entity == null || player.isSneaking()) return false;
 
 		player.openGui(AFM.afm, GUIData.ID_TESTCHEST, world, x, y, z);
 		return true;
@@ -67,8 +65,7 @@ public class BlockTestChest extends BlockContainerAFM {
 
 		TileEntity tile_entity = world.getBlockTileEntity(x, y, z);
 
-		if (!(tile_entity instanceof IInventory))
-			return;
+		if (!(tile_entity instanceof IInventory)) return;
 
 		IInventory inventory = (IInventory) tile_entity;
 

@@ -14,22 +14,20 @@ import afm.inventory.ContainerFabricator;
 
 /**
  * TEFabricator
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class TEFabricator extends TEAFM {
 
 	public ContainerFabricator containerFabricator;
 	private ItemStack[] inventory;
 	private int updateCount = 0;
-	
+
 	ItemStack[] tempStorage;
 
 	IInventory[] neighbors = new IInventory[6];
 	ItemStack[][] neighArrays = new ItemStack[6][];
-	
 
 	public TEFabricator() {
 		this.inventory = new ItemStack[19];
@@ -42,15 +40,13 @@ public class TEFabricator extends TEAFM {
 
 	@Override
 	public ItemStack getStackInSlot(int slotIndex) {
-		if (slotIndex >= this.inventory.length)
-			return null;
+		if (slotIndex >= this.inventory.length) return null;
 		return this.inventory[slotIndex];
 	}
 
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
-		if (slot >= this.inventory.length)
-			return;
+		if (slot >= this.inventory.length) return;
 		this.inventory[slot] = stack;
 
 		if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {
@@ -70,7 +66,7 @@ public class TEFabricator extends TEAFM {
 				this.setInventorySlotContents(slotIndex, null);
 			}
 		}
-		onInventoryChanged();
+		this.onInventoryChanged();
 		return stack;
 	}
 
@@ -89,16 +85,18 @@ public class TEFabricator extends TEAFM {
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
-		return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) == this
-				&& player.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) < 64D;
+		return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) == this && player.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) < 64D;
 	}
 
 	@Override
 	public void updateEntity() {
-		if(this.worldObj.isRemote) return;
+		if (this.worldObj.isRemote) return;
 		this.updateCount++;
-		if(updateCount == 100) updateCount = 0;
-		if (updateCount % 1 == 0 && this.containerFabricator != null){ // Every 1/20 sec, if tps if 100%
+		if (this.updateCount == 100) {
+			this.updateCount = 0;
+		}
+		if (this.updateCount % 1 == 0 && this.containerFabricator != null) { // Every 1/20 sec, if
+																				// tps if 100%
 			this.containerFabricator.onCraftMatrixChanged(this);
 			this.tryCraft();
 		}
@@ -150,15 +148,16 @@ public class TEFabricator extends TEAFM {
 	public void dropItems() {
 		for (int i = 9; i < this.inventory.length; i++) {
 			ItemStack stack = this.getStackInSlot(i);
-			if ((stack != null) && (stack.stackSize > 0))
+			if (stack != null && stack.stackSize > 0) {
 				UtilAFM.dropEntityItem(stack, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+			}
 		}
 	}
 
-	public void setContainer(ContainerFabricator container){
+	public void setContainer(ContainerFabricator container) {
 		this.containerFabricator = container;
 	}
-	
+
 	@Override
 	public boolean isInvNameLocalized() {
 		return true;
@@ -171,31 +170,31 @@ public class TEFabricator extends TEAFM {
 
 	// FIXME Doesn't save changes to NBT
 	public void clearMatrix() {
-		for(int i = 0; i<9; i++){
+		for (int i = 0; i < 9; i++) {
 			this.setInventorySlotContents(i, null);
 		}
 		this.onInventoryChanged();
 		this.containerFabricator.onCraftMatrixChanged(this);
 	}
-	
-	public ItemStack getResult(){
+
+	public ItemStack getResult() {
 		return this.getStackInSlot(9);
 	}
-	
-	public boolean hasResult(){
+
+	public boolean hasResult() {
 		return this.getResult() != null;
 	}
-	
-	public ItemStack getCraftSlot(int i){
+
+	public ItemStack getCraftSlot(int i) {
 		return this.getStackInSlot(i);
 	}
-	
+
 	public void tryCraft() {
 
 		this.updateArrays();
 
-		if(!hasResult()) return;
-		
+		if (!this.hasResult()) return;
+
 		ItemStack resultStack = this.getResult().copy();
 
 		for (int i = 0; i < 9; i++) {
@@ -205,9 +204,7 @@ public class TEFabricator extends TEAFM {
 			}
 
 			ItemStack notFound = this.seekItem(neededStack.copy());
-			if (notFound != null) {
-				return;
-			}
+			if (notFound != null) return;
 		}
 
 		// I have everything I need & can add stack to the storage7
@@ -215,7 +212,7 @@ public class TEFabricator extends TEAFM {
 			this.updateInventories();
 		}
 	}
-	
+
 	private void updateArrays() {
 		this.tempStorage = this.invToISArray(this, 10, 9);
 
@@ -228,12 +225,18 @@ public class TEFabricator extends TEAFM {
 			this.neighArrays[dir.ordinal()] = this.invToISArray(inv, 0, 0);
 		}
 	}
-	
+
 	private ItemStack[] invToISArray(IInventory inv, int startIndex, int length) {
 
 		TileEntityChest chest2 = null;
 
-		if ((length <= 0 || length > inv.getSizeInventory()) && !(inv instanceof TEFabricator)) { // Negative or zero length -> Whole inventory
+		if ((length <= 0 || length > inv.getSizeInventory()) && !(inv instanceof TEFabricator)) { // Negative
+																									// or
+																									// zero
+																									// length
+																									// ->
+																									// Whole
+																									// inventory
 			length = inv.getSizeInventory();
 			startIndex = 0;
 		} else if (inv instanceof TEFabricator) {
@@ -266,7 +269,7 @@ public class TEFabricator extends TEAFM {
 
 		return retArray;
 	}
-	
+
 	private IInventory getInventoryInSide(ForgeDirection dir) {
 		World w = this.worldObj;
 		int x = this.xCoord + dir.offsetX;
@@ -277,7 +280,7 @@ public class TEFabricator extends TEAFM {
 		if (te instanceof IInventory) return (IInventory) te;
 		return null;
 	}
-	
+
 	/**
 	 * Look for the IS in inventories
 	 * 
@@ -299,7 +302,7 @@ public class TEFabricator extends TEAFM {
 		}
 		return needed;
 	}
-	
+
 	/**
 	 * Looks for an ItemStack in a IS[], and removes it from the array.
 	 * 
@@ -326,7 +329,7 @@ public class TEFabricator extends TEAFM {
 		}
 		return stack;
 	}
-	
+
 	private boolean addResult(ItemStack stack) {
 		int firstEmpty = -1;
 		try {
@@ -334,8 +337,7 @@ public class TEFabricator extends TEAFM {
 				ItemStack storageStack = this.tempStorage[i];
 				if (storageStack == null && firstEmpty == -1) {
 					firstEmpty = i;
-				}
-				else if (storageStack != null && UtilAFM.isSameItem(storageStack, stack) && stack.stackSize + storageStack.stackSize <= this.getInventoryStackLimit()) {
+				} else if (storageStack != null && UtilAFM.isSameItem(storageStack, stack) && stack.stackSize + storageStack.stackSize <= this.getInventoryStackLimit()) {
 					ItemStack newStack = storageStack.copy();
 					newStack.stackSize += stack.stackSize;
 					this.tempStorage[i] = newStack;
@@ -350,7 +352,7 @@ public class TEFabricator extends TEAFM {
 		}
 		return false;
 	}
-	
+
 	private void updateInventories() {
 
 		// Update internal storage
@@ -401,5 +403,5 @@ public class TEFabricator extends TEAFM {
 			}
 		}
 	}
-	
+
 }

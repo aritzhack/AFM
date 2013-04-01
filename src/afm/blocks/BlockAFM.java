@@ -9,13 +9,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * BlockAFM
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public abstract class BlockAFM extends Block {
-	
+
 	public BlockAFM(int id, String blockName) {
 		this(id, blockName, Material.rock);
 	}

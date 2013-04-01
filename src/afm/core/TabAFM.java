@@ -1,19 +1,18 @@
 package afm.core;
 
+import java.util.List;
+
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 import afm.blocks.Blocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
-
-import java.util.List;
 
 /**
  * TabAFM
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class TabAFM extends CreativeTabs {
 

@@ -1,21 +1,20 @@
 package afm.command;
 
-import afm.core.util.UtilAFM;
+import java.util.Arrays;
+import java.util.List;
+
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
-
-import java.util.Arrays;
-import java.util.List;
+import afm.core.util.UtilAFM;
 
 /**
  * CommandKillAll
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class CommandKillAll {
 
@@ -28,14 +27,14 @@ public class CommandKillAll {
 			sender.sendChatToPlayer("Cannot be used from server console");
 		}
 		EntityPlayerMP player = UtilAFM.getPlayer(sender.getCommandSenderName());
-		if (player == null)
-			return;
+		if (player == null) return;
 		World w = player.worldObj;
-		if (w == null)
-			return;
+		if (w == null) return;
 
 		for (Object next : w.loadedEntityList) {
-			if (next == null || !(next instanceof Entity)) continue;
+			if (next == null || !(next instanceof Entity)) {
+				continue;
+			}
 			Entity entity = (Entity) next;
 			if (entityType == null) {
 				if (!(entity instanceof EntityPlayer)) {

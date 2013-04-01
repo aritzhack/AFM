@@ -10,10 +10,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
  * Blocks
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class Blocks {
 
@@ -27,7 +26,7 @@ public class Blocks {
 	public static BlockPortableChest portableChest;
 	public static BlockFabricator fabricator;
 	public static BlockTank tank;
-	
+
 	public static BlockBetterTorch betterTorch;
 
 	public static void init() {
@@ -44,12 +43,12 @@ public class Blocks {
 		Blocks.laser = new BlockLaser();
 		Blocks.portableChest = new BlockPortableChest();
 		Blocks.tank = new BlockTank();
-		
+
 		Blocks.betterTorch = new BlockBetterTorch();
 
 	}
 
-	public static void registerBlocks(){
+	public static void registerBlocks() {
 		AFMLogger.debug("Registering blocks");
 
 		GameRegistry.registerBlock(Blocks.colouredGlass, ItemGlassColoured.class, BlockData.NAME_COLOUREDGLASS);
@@ -62,11 +61,11 @@ public class Blocks {
 		GameRegistry.registerBlock(Blocks.portableChest, ItemPortableChest.class, BlockData.NAME_PORTABLE_CHEST);
 		GameRegistry.registerBlock(Blocks.fabricator, BlockData.NAME_FABRICATOR);
 		GameRegistry.registerBlock(Blocks.tank, BlockData.NAME_TANK);
-		
+
 		GameRegistry.registerBlock(Blocks.betterTorch, BlockData.NAME_BETTER_TORCH);
 	}
 
-	public static void addRecipes(){
+	public static void addRecipes() {
 		Blocks.colouredGlass.initRecipes();
 		Blocks.oreAFM.initRecipes();
 	}

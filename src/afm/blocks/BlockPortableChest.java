@@ -16,24 +16,23 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * BlockPortableChest
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class BlockPortableChest extends BlockChest {
 	final Random random = new Random();
 	Icon icon;
-	
+
 	public BlockPortableChest() {
 		super(BlockData.ID_PORTABLE_CHEST, 0); // 0 means not redstone when open AFAIK
 		this.setCreativeTab(AFM.tabAFM);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
-		return icon;
+		return this.icon;
 	}
 
 	@Override
@@ -47,13 +46,12 @@ public class BlockPortableChest extends BlockChest {
 		EntityItem eItem = new EntityItem(world, x + dX, y + dY, z, ret);
 		eItem.getEntityItem().setTagCompound(ret.getTagCompound());
 		float var15 = 0.05F;
-		
+
 		eItem.motionX = (float) this.random.nextGaussian() * var15;
 		eItem.motionY = (float) this.random.nextGaussian() * var15 + 0.2F;
 		eItem.motionZ = (float) this.random.nextGaussian() * var15;
 		world.spawnEntityInWorld(eItem);
 	}
-
 
 	@Override
 	public TileEntity createNewTileEntity(World var1) {

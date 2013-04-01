@@ -8,6 +8,12 @@ import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.liquids.LiquidTank;
 
+/**
+ * TEAFMTank
+ * 
+ * @author aritzh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ */
 public class TEAFMTank extends TileEntity implements ITankContainer {
 
 	LiquidTank liquid = new LiquidTank(LiquidContainerRegistry.BUCKET_VOLUME * 4);

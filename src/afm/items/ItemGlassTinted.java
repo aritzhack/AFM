@@ -1,16 +1,15 @@
 package afm.items;
 
-import afm.core.util.UtilAFM;
-import afm.data.BlockData;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import afm.core.util.UtilAFM;
+import afm.data.BlockData;
 
 /**
  * ItemGlassTinted
- *
+ * 
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class ItemGlassTinted extends ItemBlock {
 
