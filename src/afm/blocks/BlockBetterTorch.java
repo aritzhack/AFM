@@ -8,7 +8,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import afm.core.AFM;
+import afm.AFM;
 import afm.data.BlockData;
 import afm.data.RenderingData;
 import cpw.mods.fml.relauncher.Side;

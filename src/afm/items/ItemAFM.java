@@ -2,7 +2,7 @@ package afm.items;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import afm.core.AFM;
+import afm.AFM;
 
 /**
  * ItemAFM

@@ -1,10 +1,13 @@
-package afm.core;
+package afm;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import afm.blocks.Blocks;
 import afm.command.CommandAFM;
+import afm.core.AFMLogger;
+import afm.core.EventHandler;
+import afm.core.TabAFM;
 import afm.core.util.UtilAFM;
 import afm.data.Properties;
 import afm.gui.GUIHandler;

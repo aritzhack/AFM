@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import afm.core.AFM;
+import afm.AFM;
 import afm.data.BlockData;
 import afm.data.GUIData;
 import afm.tileEntity.TETestChest;

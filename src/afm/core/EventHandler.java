@@ -1,5 +1,6 @@
 package afm.core;
 
+import afm.AFM;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 

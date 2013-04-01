@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import afm.core.AFM;
+import afm.AFM;
 import afm.core.util.UtilNBT;
 import afm.data.ItemData;
 import cpw.mods.fml.common.registry.GameRegistry;
