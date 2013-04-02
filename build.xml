@@ -120,13 +120,6 @@
 				value="0"
 				default="0"
 				pattern="0" />
-			<entry
-				key="build"
-				type="int"
-				operation="="
-				value="0"
-				default="0"
-				pattern="0" />
 		</propertyfile>
 	</target>
 	
@@ -137,13 +130,6 @@
 				type="int"
 				operation="+"
 				value="1"
-				default="0"
-				pattern="0" />
-			<entry
-				key="build"
-				type="int"
-				operation="="
-				value="0"
 				default="0"
 				pattern="0" />
 		</propertyfile>
