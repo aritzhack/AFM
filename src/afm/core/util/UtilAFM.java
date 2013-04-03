@@ -11,6 +11,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 /**
  * UtilAFM
@@ -166,6 +167,15 @@ public final class UtilAFM {
 		String ret = UtilAFM.oreDictMap.get(is);
 		if (ret != null) return ret;
 		return UtilAFM.oreDictMap.get(new ItemStack(is.itemID, 1, -1));
+	}
+	
+	/**
+	 * Localize the given string
+	 * @param s The String to be localized
+	 * @return The localized string
+	 */
+	public static String localize(String s){
+		return LanguageRegistry.instance().getStringLocalization(s);
 	}
 
 	public static final String[] colorNames = { "White", "Orange", "Magenta", "Light Blue", "Yellow", "Light Green", "Pink", "Dark Grey", "Light Grey", "Cyan", "Purple", "Blue", "Brown", "Green", "Red", "Black" };

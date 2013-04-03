@@ -63,3 +63,14 @@ item.AFMPortableChest.name=Portable chest
 inventory.afm.portableChest=Portable chest
 inventory.afm.testChest=Test chest
 inventory.afm.fabricator=Fabricator
+#inventory.afm.=
+
+###################################################
+##################### Strings #####################
+###################################################
+
+string.version.forge.outdated=AFM was built using Forge v%s, and you are using v%s. Consider updating Forge in case of a crash
+string.version.forge.error=Ignore this message: Forge version could not be checked
+string.version.mod.uptodate=AFM is up to date
+string.version.mod.error=Remote version of AFM could not be retrieved for MC v%s. Please check your internet location and/or go to (Forum thread) and check the corresponding version
+string.version.mod.outdated=There is a new AFM version (%s) for MC v%s, consider updating if you find any bugs, or want to be up to date

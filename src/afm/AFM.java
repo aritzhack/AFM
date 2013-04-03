@@ -8,6 +8,7 @@ import afm.command.CommandAFM;
 import afm.core.AFMLogger;
 import afm.core.EventHandler;
 import afm.core.TabAFM;
+import afm.core.Version;
 import afm.core.util.UtilAFM;
 import afm.data.Properties;
 import afm.gui.GUIHandler;
@@ -35,7 +36,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-@Mod(name = Properties.MOD_NAME, modid = Properties.MOD_ID, version = Properties.VERSION)
+@Mod(name = Properties.MOD_NAME, modid = Properties.MOD_ID, version = Version.MOD_VERSION)
 @NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { Properties.Network.CHANNEL }, packetHandler = PacketHandler.class)
 public class AFM {
 
@@ -62,10 +63,10 @@ public class AFM {
 	public void preInit(FMLPreInitializationEvent event) {
 
 		AFMLogger.init();
+		
+		Localization.loadLocales();
 
 		Properties.init(event.getSuggestedConfigurationFile());
-
-		Localization.loadLocales();
 
 		MinecraftForge.EVENT_BUS.register(new EventHandler());
 
@@ -77,6 +78,8 @@ public class AFM {
 
 		this.showDebugGroup(true, event.getSide().toString());
 
+		Version.checkVersion();
+		
 		AFM.proxy.registerTexuresAndRenderers();
 		AFM.proxy.registerTileEntities();
 
@@ -95,7 +98,7 @@ public class AFM {
 
 	private void showDebugGroup(boolean opening, String side) {
 
-		String s = String.format("%s Initialization for Minecraft %s and Forge %s %s in %s", Properties.MOD_NAME, Properties.MC_VERSION, Properties.FORGE_VERSION, opening ? "started" : "finished", side);
+		String s = String.format("%s Initialization for Minecraft %s and Forge %s %s in %s", Properties.MOD_NAME, Version.C_MC_VERSION, Version.C_FORGE_VERSION, opening ? "started" : "finished", side);
 
 		// Just aesthetics...
 		String b1 = "", b2 = "";

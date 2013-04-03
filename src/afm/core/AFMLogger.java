@@ -3,6 +3,7 @@ package afm.core;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import afm.core.util.UtilAFM;
 import afm.data.Properties;
 import cpw.mods.fml.common.FMLLog;
 
@@ -49,6 +50,22 @@ public class AFMLogger {
 		if (Properties.DEBUG) {
 			AFMLogger.log(s);
 		}
+	}
+	
+	public static void localize(String s){
+		AFMLogger.log(UtilAFM.localize(s));
+	}
+	
+	public static void localize(Level l, String s){
+		AFMLogger.log(l, UtilAFM.localize(s));
+	}
+	
+	public static void localize(String s, Object... args){
+		AFMLogger.log(String.format(UtilAFM.localize(s), args));
+	}
+	
+	public static void localize(Level l, String s, Object... args){
+		AFMLogger.log(l, String.format(UtilAFM.localize(s), args));
 	}
 
 }

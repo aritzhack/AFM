@@ -2,6 +2,8 @@ package afm.data;
 
 import java.io.File;
 
+import afm.core.Version;
+
 import net.minecraftforge.common.Configuration;
 
 /**
@@ -22,13 +24,10 @@ public final class Properties {
 		public static final String CHANNEL = "AFMChannel";
 	}
 
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 
 	public static final String MOD_ID = "AFM";
-	public static final String VERSION = "%VERSION%";
-	public static final String MOD_NAME = Properties.MOD_ID + " v" + Properties.VERSION;
-	public static final String MC_VERSION = "%MC_VERSION%";
-	public static final String FORGE_VERSION = "%FORGE_VERSION%";
+	public static final String MOD_NAME = Properties.MOD_ID + " v" + Version.MOD_VERSION;
 
 	public static void init(File configFile) {
 		Properties.config = new Configuration(configFile);
@@ -44,7 +43,7 @@ public final class Properties {
 		config.addCustomCategoryComment("AFM", "Main category. Here are all the main configs");
 		config.addCustomCategoryComment("Blocks", "All block configs (ID's, worldgen,...)");
 		config.addCustomCategoryComment("Items", "All item configs (ID's,...)");
-
+		
 		BlockData.loadConfig(config);
 		ItemData.loadConfig(config);
 		GUIData.loadConfig(config);
