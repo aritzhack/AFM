@@ -2,9 +2,8 @@ package afm.data;
 
 import java.io.File;
 
-import afm.core.Version;
-
 import net.minecraftforge.common.Configuration;
+import afm.core.Version;
 
 /**
  * Properties
@@ -43,7 +42,7 @@ public final class Properties {
 		config.addCustomCategoryComment("AFM", "Main category. Here are all the main configs");
 		config.addCustomCategoryComment("Blocks", "All block configs (ID's, worldgen,...)");
 		config.addCustomCategoryComment("Items", "All item configs (ID's,...)");
-		
+
 		BlockData.loadConfig(config);
 		ItemData.loadConfig(config);
 		GUIData.loadConfig(config);

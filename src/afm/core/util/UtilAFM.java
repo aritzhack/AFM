@@ -168,13 +168,15 @@ public final class UtilAFM {
 		if (ret != null) return ret;
 		return UtilAFM.oreDictMap.get(new ItemStack(is.itemID, 1, -1));
 	}
-	
+
 	/**
 	 * Localize the given string
-	 * @param s The String to be localized
+	 * 
+	 * @param s
+	 *            The String to be localized
 	 * @return The localized string
 	 */
-	public static String localize(String s){
+	public static String localize(String s) {
 		return LanguageRegistry.instance().getStringLocalization(s);
 	}
 

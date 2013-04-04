@@ -51,20 +51,20 @@ public class AFMLogger {
 			AFMLogger.log(s);
 		}
 	}
-	
-	public static void localize(String s){
+
+	public static void localize(String s) {
 		AFMLogger.log(UtilAFM.localize(s));
 	}
-	
-	public static void localize(Level l, String s){
+
+	public static void localize(Level l, String s) {
 		AFMLogger.log(l, UtilAFM.localize(s));
 	}
-	
-	public static void localize(String s, Object... args){
+
+	public static void localize(String s, Object... args) {
 		AFMLogger.log(String.format(UtilAFM.localize(s), args));
 	}
-	
-	public static void localize(Level l, String s, Object... args){
+
+	public static void localize(Level l, String s, Object... args) {
 		AFMLogger.log(l, String.format(UtilAFM.localize(s), args));
 	}
 

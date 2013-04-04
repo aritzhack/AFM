@@ -35,16 +35,15 @@ public class CommandKillAll {
 		if (w == null) return;
 		List<Entity> unload = new ArrayList<Entity>();
 		try {
-	        for (int x = 0; x < w.loadedEntityList.size(); x++)
-	        {
-	        	Entity curr = (Entity)w.loadedEntityList.get(x); 
-	            if (entityType == null || EntityList.getEntityString(curr).equals(entityType))
-	            {
-	            	unload.add(curr);
-	            }
-	        }
-	        w.unloadEntities(unload);
-		} catch (Exception e){}
+			for (int x = 0; x < w.loadedEntityList.size(); x++) {
+				Entity curr = (Entity) w.loadedEntityList.get(x);
+				if (entityType == null || EntityList.getEntityString(curr).equals(entityType)) {
+					unload.add(curr);
+				}
+			}
+			w.unloadEntities(unload);
+		} catch (Exception e) {
+		}
 
 	}
 

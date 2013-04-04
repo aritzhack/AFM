@@ -230,20 +230,20 @@ public class TEFabricator extends TEAFM {
 	private ItemStack[] invToISArray(IInventory inv, int startIndex, int length, ForgeDirection dir) {
 
 		TileEntityChest chest2 = null;
-		
+
 		// Negative or zero length -> Whole inventory
 		if (inv instanceof TEFabricator) {
 			length = inv.getSizeInventory();
 			startIndex = 0;
-		} else if (inv instanceof ISidedInventory){
+		} else if (inv instanceof ISidedInventory) {
 			int[] slots = ((ISidedInventory) inv).getSizeInventorySide(dir.ordinal());
 			ItemStack[] ret = new ItemStack[slots.length];
 			int i = 0;
-			for(int s : slots){
+			for (int s : slots) {
 				ret[i++] = inv.getStackInSlot(s);
 			}
 			return ret;
-		}else if ((length <= 0 || length > inv.getSizeInventory())) {
+		} else if (length <= 0 || length > inv.getSizeInventory()) {
 			length = 9;
 			startIndex = 10;
 		}

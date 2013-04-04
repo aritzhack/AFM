@@ -63,7 +63,7 @@ public class AFM {
 	public void preInit(FMLPreInitializationEvent event) {
 
 		AFMLogger.init();
-		
+
 		Localization.loadLocales();
 
 		Properties.init(event.getSuggestedConfigurationFile());
@@ -79,7 +79,7 @@ public class AFM {
 		this.showDebugGroup(true, event.getSide().toString());
 
 		Version.checkVersion();
-		
+
 		AFM.proxy.registerTexuresAndRenderers();
 		AFM.proxy.registerTileEntities();
 
