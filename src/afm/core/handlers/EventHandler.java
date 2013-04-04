@@ -30,7 +30,7 @@ public class EventHandler implements IConnectionHandler {
 
 	@Override
 	public void playerLoggedIn(Player player, NetHandler netHandler, INetworkManager manager) {
-		if(player instanceof EntityPlayer){
+		if (player instanceof EntityPlayer) {
 			Version.sendChatToPlayer((EntityPlayer) player);
 		}
 	}
@@ -45,7 +45,7 @@ public class EventHandler implements IConnectionHandler {
 	}
 
 	@Override
-	public void connectionOpened(NetHandler netClientHandler, MinecraftServer server, INetworkManager manager) {	
+	public void connectionOpened(NetHandler netClientHandler, MinecraftServer server, INetworkManager manager) {
 	}
 
 	@Override

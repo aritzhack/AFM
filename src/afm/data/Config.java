@@ -43,7 +43,7 @@ public final class Config {
 		config.addCustomCategoryComment("AFM", "Main category. Here are all the main configs");
 		config.addCustomCategoryComment("Blocks", "All block configs (ID's, worldgen,...)");
 		config.addCustomCategoryComment("Items", "All item configs (ID's,...)");
-		
+
 		Config.debug = config.get("AFM", "debug", false, "Enables  debug mode (outputs more data)").getBoolean(false);
 		Config.displayVersionMessageInChat = config.get("AFM", "displayVersion", true, "Whether or not the player should receive a chat message telling if there's a new version of the mod").getBoolean(true);
 

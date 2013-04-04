@@ -180,8 +180,8 @@ public final class UtilAFM {
 	public static String localize(String s) {
 		return LanguageRegistry.instance().getStringLocalization(s);
 	}
-	
-	public static String localize(String s, Object... params){
+
+	public static String localize(String s, Object... params) {
 		return StatCollector.translateToLocalFormatted(s, params);
 	}
 

@@ -23,7 +23,7 @@ public class Version implements Runnable {
 	public enum State {
 		UPTODATE, OUTDATED, ERRORED, UNINITIALIZED
 	}
-	
+
 	// The player. This is set before the thread starts
 	private EntityPlayer player;
 
@@ -70,7 +70,7 @@ public class Version implements Runnable {
 
 		int compBuild = this.getBuildNumber(Version.MOD_VERSION);
 		int recBuild = this.getBuildNumber(this.recommendedAfmVersion);
-		if(compBuild == -1 || recBuild == -1){
+		if (compBuild == -1 || recBuild == -1) {
 			this.modState = State.ERRORED;
 		}
 		if (this.modState == State.ERRORED) {
@@ -79,7 +79,7 @@ public class Version implements Runnable {
 			this.modState = State.OUTDATED;
 			String s = UtilAFM.localize(Strings.OUTDATED_MOD, Version.MOD_VERSION, this.recommendedAfmVersion, this.mcVersion, this.recommendedAfmVersionURL);
 			AFMLogger.log(s);
-			return  "\u00a72" + s;
+			return "\u00a72" + s;
 		} else {
 			this.modState = State.UPTODATE;
 			AFMLogger.localize(Strings.UPTODATE_MOD);
@@ -109,8 +109,8 @@ public class Version implements Runnable {
 		if (lastIndex == -1) return -1;
 		return Integer.valueOf(verString.substring(lastIndex + 1));
 	}
-	
-	public Version(EntityPlayer player){
+
+	public Version(EntityPlayer player) {
 		this.player = player;
 	}
 
@@ -120,8 +120,8 @@ public class Version implements Runnable {
 
 	@Override
 	public void run() {
-		String s = checkVersion();
-		if (Config.displayVersionMessageInChat && !s.equals("")){
+		String s = this.checkVersion();
+		if (Config.displayVersionMessageInChat && !s.equals("")) {
 			this.player.sendChatToPlayer(s);
 		}
 	}

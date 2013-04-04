@@ -25,8 +25,8 @@ public class AFMLogger {
 	public static void log(Level level, String message) {
 		AFMLogger.logger.log(level, message);
 	}
-	
-	public static void log(Level l, String message, Throwable thrown){
+
+	public static void log(Level l, String message, Throwable thrown) {
 		AFMLogger.logger.log(AFMLogger.defaultLevel, message, thrown);
 	}
 
