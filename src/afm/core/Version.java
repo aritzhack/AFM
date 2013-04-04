@@ -5,7 +5,10 @@ import java.net.URL;
 import java.util.Properties;
 import java.util.logging.Level;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.ForgeVersion;
+import afm.core.util.UtilAFM;
+import afm.data.Config;
 import afm.data.Strings;
 import cpw.mods.fml.common.Loader;
 
@@ -15,11 +18,14 @@ import cpw.mods.fml.common.Loader;
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class Version {
+public class Version implements Runnable {
 
-	private enum State {
+	public enum State {
 		UPTODATE, OUTDATED, ERRORED, UNINITIALIZED
 	}
+	
+	// The player. This is set before the thread starts
+	private EntityPlayer player;
 
 	// Versions the mod was compiled with
 	public static final String MOD_VERSION = "%VERSION%";
@@ -27,76 +33,97 @@ public class Version {
 	public static final String C_FORGE_VERSION = "%FORGE_VERSION%";
 
 	// Versions the mod is running with
-	public static String mcVersion;
-	public static String FORGE_VERSION;
+	public String mcVersion;
+	public String FORGE_VERSION;
 
-	public static String recommendedAfmVersion;
-	public static String recommendedAfmVersionURL;
+	public String recommendedAfmVersion;
+	public String recommendedAfmVersionURL;
 
-	public static State modState = State.UNINITIALIZED;
+	public State modState = State.UNINITIALIZED;
 
-	private static final String REMOTE_VERSION_FILE = "https://raw.github.com/aritzhack/AFM/master/version.properties";
+	private final String REMOTE_VERSION_FILE = "https://raw.github.com/aritzhack/AFM/master/version.properties";
 
-	public static void checkVersion() {
+	public String checkVersion() {
 		// Version.checkForgeVersion();
 
-		Version.checkVersionState();
+		return this.checkModVersionState();
 	}
 
-	private static void checkForgeVersion() {
-		int builtWithBuildVersion = Version.getBuildNumber(Version.C_FORGE_VERSION);
-		Version.FORGE_VERSION = ForgeVersion.getVersion();
+	private void checkForgeVersion() {
+		int builtWithBuildVersion = this.getBuildNumber(Version.C_FORGE_VERSION);
+		this.FORGE_VERSION = ForgeVersion.getVersion();
 
 		if (builtWithBuildVersion == -1) {
 			AFMLogger.localize(Strings.ERROR_FORGE);
 			return;
 		}
 		if (ForgeVersion.buildVersion < builtWithBuildVersion) {
-			AFMLogger.localize(Strings.OUTDATED_FORGE, Version.C_FORGE_VERSION, Version.FORGE_VERSION);
+			AFMLogger.localize(Strings.OUTDATED_FORGE, Version.C_FORGE_VERSION, this.FORGE_VERSION);
 		} else {
 		}
 	}
 
-	private static void checkVersionState() {
-		Version.mcVersion = Loader.instance().getMCVersionString().split(" ")[1];
+	private String checkModVersionState() {
+		this.mcVersion = Loader.instance().getMCVersionString().split(" ")[1];
 
-		Version.getRecommendedVersion();
+		this.getRecommendedVersion();
 
-		int compBuild = Version.getBuildNumber(Version.MOD_VERSION);
-		int recBuild = Version.getBuildNumber(Version.recommendedAfmVersion);
-		
-		if (Version.modState == State.ERRORED || compBuild == -1 || recBuild == -1) {
-			AFMLogger.localize(Level.WARNING, Strings.ERROR_MOD, Version.mcVersion);
+		int compBuild = this.getBuildNumber(Version.MOD_VERSION);
+		int recBuild = this.getBuildNumber(this.recommendedAfmVersion);
+		if(compBuild == -1 || recBuild == -1){
+			this.modState = State.ERRORED;
+		}
+		if (this.modState == State.ERRORED) {
+			AFMLogger.log(Level.WARNING, UtilAFM.localize(Strings.ERROR_MOD, this.mcVersion));
 		} else if (compBuild <= recBuild) {
-			Version.modState = State.OUTDATED;
-			AFMLogger.localize(Strings.OUTDATED_MOD, Version.recommendedAfmVersion, Version.mcVersion, Version.recommendedAfmVersionURL);
+			this.modState = State.OUTDATED;
+			String s = UtilAFM.localize(Strings.OUTDATED_MOD, Version.MOD_VERSION, this.recommendedAfmVersion, this.mcVersion, this.recommendedAfmVersionURL);
+			AFMLogger.log(s);
+			return  "\u00a72" + s;
 		} else {
-			Version.modState = State.UPTODATE;
+			this.modState = State.UPTODATE;
 			AFMLogger.localize(Strings.UPTODATE_MOD);
 		}
+		return "";
 	}
 
-	private static void getRecommendedVersion() {
+	private void getRecommendedVersion() {
 		try {
 			Properties p = new Properties();
-			p.load(new URL(Version.REMOTE_VERSION_FILE).openStream());
-			if (p.containsKey(Version.mcVersion)) {
-				String[] split = p.getProperty(Version.mcVersion).split(":");
-				Version.recommendedAfmVersion = split[0];
-				Version.recommendedAfmVersionURL = split[1];
+			p.load(new URL(this.REMOTE_VERSION_FILE).openStream());
+			if (p.containsKey(this.mcVersion)) {
+				String[] split = p.getProperty(this.mcVersion).split(":");
+				this.recommendedAfmVersion = split[0];
+				this.recommendedAfmVersionURL = split[1];
 				return; // Just in case...
 			} else {
-				Version.modState = State.ERRORED;
+				this.modState = State.ERRORED;
 			}
 		} catch (IOException ioe) {
-			Version.modState = State.ERRORED;
+			this.modState = State.ERRORED;
 		}
 	}
 
-	private static int getBuildNumber(String verString) {
+	private int getBuildNumber(String verString) {
 		int lastIndex = verString.lastIndexOf(".");
 		if (lastIndex == -1) return -1;
 		return Integer.valueOf(verString.substring(lastIndex + 1));
+	}
+	
+	public Version(EntityPlayer player){
+		this.player = player;
+	}
+
+	public static void sendChatToPlayer(EntityPlayer player) {
+		new Thread(new Version(player)).start();
+	}
+
+	@Override
+	public void run() {
+		String s = checkVersion();
+		if (Config.displayVersionMessageInChat && !s.equals("")){
+			this.player.sendChatToPlayer(s);
+		}
 	}
 
 }

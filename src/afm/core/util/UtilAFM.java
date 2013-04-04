@@ -8,6 +8,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -178,6 +179,10 @@ public final class UtilAFM {
 	 */
 	public static String localize(String s) {
 		return LanguageRegistry.instance().getStringLocalization(s);
+	}
+	
+	public static String localize(String s, Object... params){
+		return StatCollector.translateToLocalFormatted(s, params);
 	}
 
 	public static final String[] colorNames = { "White", "Orange", "Magenta", "Light Blue", "Yellow", "Light Green", "Pink", "Dark Grey", "Light Grey", "Cyan", "Purple", "Blue", "Brown", "Green", "Red", "Black" };

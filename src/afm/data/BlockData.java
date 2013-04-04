@@ -10,7 +10,7 @@ import net.minecraftforge.common.Configuration;
  */
 public class BlockData {
 
-	public static final String TEXTURE_TESTMODEL = Properties.TEX_DIR + "models/testmodel.png";
+	public static final String TEXTURE_TESTMODEL = Config.TEX_DIR + "models/testmodel.png";
 
 	private static final int ID_DEFAULT_COLOURED_GLASS = 500;
 	private static final int ID_DEFAULT_ORE = 501;

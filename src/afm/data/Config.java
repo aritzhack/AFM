@@ -11,11 +11,11 @@ import afm.core.Version;
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public final class Properties {
+public final class Config {
 
 	public static final String RES_DIR = "/mods/afm/";
-	public static final String TEX_DIR = Properties.RES_DIR + "textures/";
-	public static final String LANG_DIR = Properties.RES_DIR + "lang/";
+	public static final String TEX_DIR = Config.RES_DIR + "textures/";
+	public static final String LANG_DIR = Config.RES_DIR + "lang/";
 	private static Configuration config;
 
 	public static class Network {
@@ -23,18 +23,19 @@ public final class Properties {
 		public static final String CHANNEL = "AFMChannel";
 	}
 
-	public static final boolean DEBUG = true;
+	public static boolean debug = false;
+	public static boolean displayVersionMessageInChat = true;
 
 	public static final String MOD_ID = "AFM";
-	public static final String MOD_NAME = Properties.MOD_ID + " v" + Version.MOD_VERSION;
+	public static final String MOD_NAME = Config.MOD_ID + " v" + Version.MOD_VERSION;
 
 	public static void init(File configFile) {
-		Properties.config = new Configuration(configFile);
-		Properties.config.load();
+		Config.config = new Configuration(configFile);
+		Config.config.load();
 
-		Properties.loadConfig(Properties.config);
+		Config.loadConfig(Config.config);
 
-		Properties.config.save();
+		Config.config.save();
 	}
 
 	private static void loadConfig(Configuration config) {
@@ -42,6 +43,9 @@ public final class Properties {
 		config.addCustomCategoryComment("AFM", "Main category. Here are all the main configs");
 		config.addCustomCategoryComment("Blocks", "All block configs (ID's, worldgen,...)");
 		config.addCustomCategoryComment("Items", "All item configs (ID's,...)");
+		
+		Config.debug = config.get("AFM", "debug", false, "Enables  debug mode (outputs more data)").getBoolean(false);
+		Config.displayVersionMessageInChat = config.get("AFM", "displayVersion", true, "Whether or not the player should receive a chat message telling if there's a new version of the mod").getBoolean(true);
 
 		BlockData.loadConfig(config);
 		ItemData.loadConfig(config);

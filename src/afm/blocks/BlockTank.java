@@ -12,7 +12,7 @@ import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidStack;
 import afm.core.AFMLogger;
 import afm.data.BlockData;
-import afm.data.Properties;
+import afm.data.Config;
 import afm.tileEntity.TEAFMTank;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -52,7 +52,7 @@ public class BlockTank extends BlockContainerAFM {
 
 				int amount = tank.fill(ForgeDirection.UNKNOWN, liquid, true);
 
-				if (amount != 0 && (!player.capabilities.isCreativeMode || Properties.DEBUG)) {
+				if (amount != 0 && (!player.capabilities.isCreativeMode || Config.debug)) {
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, current.getItem().getContainerItemStack(current));
 				}
 				if (ls != null) {
@@ -69,7 +69,7 @@ public class BlockTank extends BlockContainerAFM {
 					liquid = LiquidContainerRegistry.getLiquidForFilledItem(filled);
 
 					if (liquid != null) {
-						if (!player.capabilities.isCreativeMode || Properties.DEBUG) {
+						if (!player.capabilities.isCreativeMode || Config.debug) {
 							if (current.stackSize > 1) {
 								if (!player.inventory.addItemStackToInventory(filled)) {
 									AFMLogger.debug("After " + ls.amount + " - Nope");

@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import afm.data.Properties;
+import afm.data.Config;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 
@@ -33,7 +33,7 @@ public abstract class AFMPacket {
 		}
 
 		Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel = Properties.Network.CHANNEL;
+		packet.channel = Config.Network.CHANNEL;
 		packet.data = bos.toByteArray();
 		packet.length = bos.size();
 

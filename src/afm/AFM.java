@@ -6,11 +6,11 @@ import net.minecraftforge.common.MinecraftForge;
 import afm.blocks.Blocks;
 import afm.command.CommandAFM;
 import afm.core.AFMLogger;
-import afm.core.EventHandler;
 import afm.core.TabAFM;
 import afm.core.Version;
+import afm.core.handlers.EventHandler;
 import afm.core.util.UtilAFM;
-import afm.data.Properties;
+import afm.data.Config;
 import afm.gui.GUIHandler;
 import afm.i18n.Localization;
 import afm.items.Items;
@@ -36,15 +36,15 @@ import cpw.mods.fml.common.registry.GameRegistry;
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-@Mod(name = Properties.MOD_NAME, modid = Properties.MOD_ID, version = Version.MOD_VERSION)
-@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { Properties.Network.CHANNEL }, packetHandler = PacketHandler.class)
+@Mod(name = Config.MOD_NAME, modid = Config.MOD_ID, version = Version.MOD_VERSION)
+@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { Config.Network.CHANNEL }, packetHandler = PacketHandler.class)
 public class AFM {
 
 	Configuration config;
 
 	final WorldGenerator worldGen = new WorldGenerator();
 
-	@Instance(Properties.MOD_ID)
+	@Instance(Config.MOD_ID)
 	public static AFM afm = new AFM();
 
 	@SidedProxy(clientSide = "afm.proxy.ClientProxy", serverSide = "afm.proxy.CommonProxy")
@@ -66,9 +66,10 @@ public class AFM {
 
 		Localization.loadLocales();
 
-		Properties.init(event.getSuggestedConfigurationFile());
+		Config.init(event.getSuggestedConfigurationFile());
 
 		MinecraftForge.EVENT_BUS.register(new EventHandler());
+		NetworkRegistry.instance().registerConnectionHandler(new EventHandler());
 
 		NetworkRegistry.instance().registerGuiHandler(AFM.afm, AFM.guiHandler);
 	}
@@ -77,8 +78,6 @@ public class AFM {
 	public void init(FMLInitializationEvent event) {
 
 		this.showDebugGroup(true, event.getSide().toString());
-
-		Version.checkVersion();
 
 		AFM.proxy.registerTexuresAndRenderers();
 		AFM.proxy.registerTileEntities();
@@ -98,7 +97,7 @@ public class AFM {
 
 	private void showDebugGroup(boolean opening, String side) {
 
-		String s = String.format("%s Initialization for Minecraft %s and Forge %s %s in %s", Properties.MOD_NAME, Version.C_MC_VERSION, Version.C_FORGE_VERSION, opening ? "started" : "finished", side);
+		String s = String.format("%s Initialization for Minecraft %s and Forge %s %s in %s", Config.MOD_NAME, Version.C_MC_VERSION, Version.C_FORGE_VERSION, opening ? "started" : "finished", side);
 
 		// Just aesthetics...
 		String b1 = "", b2 = "";

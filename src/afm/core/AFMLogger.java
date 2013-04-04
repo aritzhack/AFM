@@ -4,7 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import afm.core.util.UtilAFM;
-import afm.data.Properties;
+import afm.data.Config;
 import cpw.mods.fml.common.FMLLog;
 
 /**
@@ -25,21 +25,25 @@ public class AFMLogger {
 	public static void log(Level level, String message) {
 		AFMLogger.logger.log(level, message);
 	}
+	
+	public static void log(Level l, String message, Throwable thrown){
+		AFMLogger.logger.log(AFMLogger.defaultLevel, message, thrown);
+	}
 
 	public static void log(Level level, String message, Object... params) {
-		AFMLogger.logger.log(level, String.format(message, params));
+		AFMLogger.log(level, String.format(message, params));
 	}
 
 	public static void log(String message) {
-		AFMLogger.logger.log(AFMLogger.defaultLevel, message);
+		AFMLogger.log(AFMLogger.defaultLevel, message);
 	}
 
 	public static void log(String message, Object... params) {
-		AFMLogger.logger.log(AFMLogger.defaultLevel, String.format(message, params));
+		AFMLogger.log(AFMLogger.defaultLevel, String.format(message, params));
 	}
 
 	public static void log(String message, Throwable thrown) {
-		AFMLogger.logger.log(AFMLogger.defaultLevel, message, thrown);
+		AFMLogger.log(AFMLogger.defaultLevel, message, thrown);
 	}
 
 	public static void log(Object o) {
@@ -47,13 +51,13 @@ public class AFMLogger {
 	}
 
 	public static void debug(String s) {
-		if (Properties.DEBUG) {
+		if (Config.debug) {
 			AFMLogger.log(s);
 		}
 	}
 
 	public static void localize(String s) {
-		AFMLogger.log(UtilAFM.localize(s));
+		AFMLogger.localize(AFMLogger.defaultLevel, s);
 	}
 
 	public static void localize(Level l, String s) {
@@ -61,11 +65,11 @@ public class AFMLogger {
 	}
 
 	public static void localize(String s, Object... args) {
-		AFMLogger.log(String.format(UtilAFM.localize(s), args));
+		AFMLogger.localize(AFMLogger.defaultLevel, s, args);
 	}
 
 	public static void localize(Level l, String s, Object... args) {
-		AFMLogger.log(l, String.format(UtilAFM.localize(s), args));
+		AFMLogger.log(l, UtilAFM.localize(s, args));
 	}
 
 }

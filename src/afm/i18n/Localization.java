@@ -1,6 +1,6 @@
 package afm.i18n;
 
-import afm.data.Properties;
+import afm.data.Config;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 /**
@@ -15,7 +15,7 @@ public class Localization {
 
 	public static void loadLocales() {
 		for (String locale : Localization.locales) {
-			LanguageRegistry.instance().loadLocalization(Properties.LANG_DIR + locale + ".lang", locale, false);
+			LanguageRegistry.instance().loadLocalization(Config.LANG_DIR + locale + ".lang", locale, false);
 		}
 	}
 

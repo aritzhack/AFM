@@ -5,7 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import afm.core.AFMLogger;
-import afm.data.Properties;
+import afm.data.Config;
 import cpw.mods.fml.common.network.Player;
 
 /**
@@ -28,7 +28,7 @@ public class RandomNumberPacket extends AFMPacket {
 
 	@Override
 	protected byte getPacketID() {
-		return Properties.Network.PCKT_ID_RANDOM_NUMBERS;
+		return Config.Network.PCKT_ID_RANDOM_NUMBERS;
 	}
 
 	@Override

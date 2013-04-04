@@ -9,7 +9,7 @@ import net.minecraftforge.common.Configuration;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class GUIData {
-	private static final String GUI_DIR = Properties.TEX_DIR + "gui/";
+	private static final String GUI_DIR = Config.TEX_DIR + "gui/";
 
 	public static final String BG_TESTCHEST = GUIData.GUI_DIR + "testchest.png";
 	public static final String BG_SHAREDCRAFTING = GUIData.GUI_DIR + "crafting.png";
