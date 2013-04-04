@@ -21,7 +21,7 @@ public abstract class BlockContainerAFM extends BlockContainer {
 		this.setCreativeTab(AFM.tabAFM);
 	}
 
-	BlockContainerAFM(int id, String blockName) {
+	protected BlockContainerAFM(int id, String blockName) {
 		this(id, blockName, Material.rock);
 	}
 
