@@ -73,4 +73,4 @@ string.version.forge.outdated=AFM fue construido con Forge v%s, y estás usando 
 string.version.forge.error=Ignora este mensaje: La versián de forge no pudo ser comprobada
 string.version.mod.uptodate=AFM está actualizado
 string.version.mod.error=La versión remota de AFM para MC v%s no pudo ser recuperada. Por favor, comprueba tu conexión a internet y/o ve a (Forum thread) y busca la versión correspondiente
-string.version.mod.outdated=Hay una nueva versión de AFM (%s) para MC v%s, considera actualizar si encuentras algun bug o quieres estar actualizado
+string.version.mod.outdated=Hay una nueva versión de AFM (%s) para MC v%s. Consiguela en (%s). Considera actualizar si encuentras algun bug o quieres estar actualizado

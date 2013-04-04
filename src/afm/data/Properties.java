@@ -23,7 +23,7 @@ public final class Properties {
 		public static final String CHANNEL = "AFMChannel";
 	}
 
-	public static final boolean DEBUG = false;
+	public static final boolean DEBUG = true;
 
 	public static final String MOD_ID = "AFM";
 	public static final String MOD_NAME = Properties.MOD_ID + " v" + Version.MOD_VERSION;

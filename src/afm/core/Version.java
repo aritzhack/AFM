@@ -31,6 +31,7 @@ public class Version {
 	public static String FORGE_VERSION;
 
 	public static String recommendedAfmVersion;
+	public static String recommendedAfmVersionURL;
 
 	public static State modState = State.UNINITIALIZED;
 
@@ -63,12 +64,12 @@ public class Version {
 
 		int compBuild = Version.getBuildNumber(Version.MOD_VERSION);
 		int recBuild = Version.getBuildNumber(Version.recommendedAfmVersion);
-
+		
 		if (Version.modState == State.ERRORED || compBuild == -1 || recBuild == -1) {
 			AFMLogger.localize(Level.WARNING, Strings.ERROR_MOD, Version.mcVersion);
-		} else if (compBuild < recBuild) {
+		} else if (compBuild <= recBuild) {
 			Version.modState = State.OUTDATED;
-			AFMLogger.localize(Strings.OUTDATED_MOD, Version.recommendedAfmVersion, Version.mcVersion);
+			AFMLogger.localize(Strings.OUTDATED_MOD, Version.recommendedAfmVersion, Version.mcVersion, Version.recommendedAfmVersionURL);
 		} else {
 			Version.modState = State.UPTODATE;
 			AFMLogger.localize(Strings.UPTODATE_MOD);
@@ -80,7 +81,9 @@ public class Version {
 			Properties p = new Properties();
 			p.load(new URL(Version.REMOTE_VERSION_FILE).openStream());
 			if (p.containsKey(Version.mcVersion)) {
-				Version.recommendedAfmVersion = p.getProperty(Version.mcVersion);
+				String[] split = p.getProperty(Version.mcVersion).split(":");
+				Version.recommendedAfmVersion = split[0];
+				Version.recommendedAfmVersionURL = split[1];
 				return; // Just in case...
 			} else {
 				Version.modState = State.ERRORED;
