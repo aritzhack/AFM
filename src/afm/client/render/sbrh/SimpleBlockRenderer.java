@@ -25,8 +25,6 @@ public class SimpleBlockRenderer implements ISimpleBlockRenderingHandler {
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 		if (modelId == RenderingData.RENDER_ID_BETTER_TORCH) {
 			this.renderBetterTorch(world, x, y, z, block, modelId, renderer);
-		} else if (modelId == RenderingData.RENDER_ID_WIRE) {
-			this.renderWire(world, x, y, z, block, modelId, renderer);
 		}
 
 		return false;
@@ -106,9 +104,5 @@ public class SimpleBlockRenderer implements ISimpleBlockRenderingHandler {
 		tessellator.addVertexWithUV(d17, par4, par6 - d21, texMinX, texMinY);
 		tessellator.addVertexWithUV(d17, par4 + 1.0D, par6 - d21, texMinX, texMaxY);
 		return true;
-	}
-
-	private void renderWire(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
-		// TODO Render the wire, depending on the neighbors
 	}
 }

@@ -12,14 +12,11 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 public class RenderingData {
 
 	public static int RENDER_ID_BETTER_TORCH = 0;
-	public static int RENDER_ID_WIRE = 0;
 
 	public static void init() {
 		RenderingData.RENDER_ID_BETTER_TORCH = RenderingRegistry.getNextAvailableRenderId();
-		RenderingData.RENDER_ID_WIRE = RenderingRegistry.getNextAvailableRenderId();
 
 		RenderingRegistry.registerBlockHandler(RenderingData.RENDER_ID_BETTER_TORCH, new SimpleBlockRenderer());
-		RenderingRegistry.registerBlockHandler(RenderingData.RENDER_ID_WIRE, new SimpleBlockRenderer());
 	}
 
 }
