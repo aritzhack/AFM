@@ -1,4 +1,4 @@
-package afm.gui;
+package afm.client.gui;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;

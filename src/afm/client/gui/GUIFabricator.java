@@ -1,4 +1,4 @@
-package afm.gui;
+package afm.client.gui;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.InventoryPlayer;

@@ -1,4 +1,4 @@
-package afm.gui;
+package afm.client.gui;
 
 import java.util.logging.Level;
 
