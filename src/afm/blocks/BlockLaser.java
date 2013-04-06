@@ -5,7 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import afm.AFM;
+import afm.core.AFMLogger;
 import afm.data.BlockData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -41,7 +41,7 @@ public class BlockLaser extends BlockAFM {
 		if (entity instanceof EntityPlayerMP) {
 			((EntityPlayerMP) entity).sendChatToPlayer("You touched it!");
 		}
-		AFM.proxy.writeChatMessageToPlayer("Entity: " + entity.getEntityName());
+		AFMLogger.debug("Entity touched it: " + entity.toString());
 	}
 
 }
