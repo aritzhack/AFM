@@ -4,6 +4,8 @@ import java.util.List;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.player.EntityPlayer;
+import afm.core.util.UtilAFM;
 
 /**
  * CommandAFM
@@ -25,23 +27,23 @@ public class CommandAFM extends CommandBase {
 
 	@Override
 	public boolean canCommandSenderUseCommand(ICommandSender commandSender) {
-		// Can just be used by people with ban-permission (OPs).
-		// This could be improved letting people handle permission per
-		// sub-command,
-		// Not having to make different commands for different permissions
-		return commandSender.canCommandSenderUseCommand(3, "ban");
+		return UtilAFM.isOp(commandSender.getCommandSenderName());
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<String> addTabCompletionOptions(ICommandSender par1iCommandSender, String[] args) {
+	public List<String> addTabCompletionOptions(ICommandSender commandSender, String[] args) {
+		if (!(commandSender instanceof EntityPlayer)) {
+			commandSender.sendChatToPlayer("Must be a player to issue this command!");
+		}
 
 		if (args.length > 0) {
+			EntityPlayer player = (EntityPlayer) commandSender;
 			if (args[0].equalsIgnoreCase("setAt"))
-				return CommandSetAt.getTabCompletion(par1iCommandSender, args);
+				return CommandSetAt.getTabCompletion(player, args);
 			else if (args[0].equalsIgnoreCase("getAt"))
-				return CommandGetAt.getTabCompletion(par1iCommandSender, args);
-			else if (args[0].equalsIgnoreCase("killAll")) return CommandGetAt.getTabCompletion(par1iCommandSender, args);
+				return CommandGetAt.getTabCompletion(player, args);
+			else if (args[0].equalsIgnoreCase("killAll")) return CommandKillAll.getTabCompletion(player, args);
 		}
 		return CommandBase.getListOfStringsMatchingLastWord(args, "setAt", "getAt", "killAll");
 	}
@@ -49,19 +51,24 @@ public class CommandAFM extends CommandBase {
 	@Override
 	public void processCommand(ICommandSender commandSender, String[] args) {
 
+		if (!(commandSender instanceof EntityPlayer)) {
+			commandSender.sendChatToPlayer("Must be a player to issue this command!");
+		}
+
 		if (args.length < 1) {
 			commandSender.sendChatToPlayer("Usage: " + this.getCommandUsage(commandSender));
 			return;
 		}
 		String command = args[0];
+		EntityPlayer player = (EntityPlayer) commandSender;
 		if (command.equalsIgnoreCase("setAt")) {
-			CommandSetAt.handle(commandSender, args);
+			CommandSetAt.handle(player, args);
 		} else if (command.equalsIgnoreCase("getAt")) {
-			CommandGetAt.handle(commandSender, args);
+			CommandGetAt.handle(player, args);
 		} else if (command.equalsIgnoreCase("killAll")) {
-			CommandKillAll.handle(commandSender, args);
+			CommandKillAll.handle(player, args);
 		} else {
-			commandSender.sendChatToPlayer("Usage: " + this.getCommandUsage(commandSender));
+			player.sendChatToPlayer("Usage: " + this.getCommandUsage(commandSender));
 		}
 	}
 

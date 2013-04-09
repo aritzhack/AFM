@@ -7,10 +7,9 @@ import java.util.List;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import afm.core.AFMLogger;
-import afm.core.util.UtilAFM;
 
 /**
  * CommandKillAll
@@ -20,17 +19,13 @@ import afm.core.util.UtilAFM;
  */
 public class CommandKillAll {
 
-	public static void handle(ICommandSender sender, String[] args) {
+	public static void handle(EntityPlayer player, String[] args) {
 		String entityType = null;
 		if (args.length >= 2) {
 			AFMLogger.debug("Input: " + args[1]);
 			entityType = args[1];
 		}
-		if (sender.getCommandSenderName().equalsIgnoreCase("Rcon")) {
-			sender.sendChatToPlayer("Cannot be used from server console");
-		}
-		EntityPlayerMP player = UtilAFM.getPlayer(sender.getCommandSenderName());
-		if (player == null) return;
+
 		World w = player.worldObj;
 		if (w == null) return;
 		List<Entity> unload = new ArrayList<Entity>();

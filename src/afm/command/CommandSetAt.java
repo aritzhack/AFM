@@ -4,9 +4,8 @@ import java.util.List;
 
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import afm.core.util.UtilAFM;
 
 /**
  * CommandSetAt
@@ -16,13 +15,12 @@ import afm.core.util.UtilAFM;
  */
 public class CommandSetAt {
 
-	public static void handle(ICommandSender sender, String[] args) {
-		if (args.length < 5) throw new WrongUsageException(CommandSetAt.getUsage());
-		if (sender.getCommandSenderName().equalsIgnoreCase("Rcon")) {
-			sender.sendChatToPlayer("Cannot be used from server console");
-		}
-		EntityPlayerMP player = UtilAFM.getPlayer(sender.getCommandSenderName());
+	public static void handle(EntityPlayer player, String[] args) {
 		if (player == null) return;
+		if (args.length < 5) throw new WrongUsageException(CommandSetAt.getUsage());
+		if (player.getCommandSenderName().equalsIgnoreCase("Rcon")) {
+			player.sendChatToPlayer("Cannot be used from server console");
+		}
 		World w = player.worldObj;
 		if (w == null) return;
 		int x = Integer.valueOf(args[1]);

@@ -3,11 +3,8 @@ package afm.core.util;
 import java.util.Comparator;
 import java.util.TreeMap;
 
-import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
@@ -49,14 +46,6 @@ public final class UtilAFM {
 				UtilAFM.oreDictMap.put(is, s);
 			}
 		}
-	}
-
-	public static EntityPlayerMP getPlayer(String username) {
-		MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
-		if (server == null) return null;
-		EntityPlayerMP ret = server.getConfigurationManager().getPlayerForUsername(username);
-		if (ret == null) throw new PlayerNotFoundException();
-		return ret;
 	}
 
 	public static void dropEntityItem(ItemStack stack, World world, int x, int y, int z) {
@@ -179,6 +168,10 @@ public final class UtilAFM {
 	 */
 	public static String localize(String s) {
 		return LanguageRegistry.instance().getStringLocalization(s);
+	}
+
+	public static boolean isOp(String nick) {
+		return FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().getOps().contains(nick.toLowerCase());
 	}
 
 	public static String localize(String s, Object... params) {
