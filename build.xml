@@ -1,150 +1,147 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project name="AFM" default="Build mod">
-    <description>
-        AFM (Aritzh's first mod) is, as it's name says, the first mod
-        aritzh develops, using the Forge/FML APIs, and implementing as
-        many things as possible, helping me (aritzh) making
-        better mods in the future.
-    </description>
-	
-	<property name="mod.id" value="AFM"/>
-	
-	<!-- Folder properties -->
-	<property name="base.dir" value="${basedir}/../.." />
+	    <description>
+		    AFM (Aritzh's first mod) is, as it's name says, the first mod
+		    aritzh develops, using the Forge/FML APIs, and implementing as
+		    many things as possible, helping me (aritzh) making
+		    better mods in the future.
+	    </description>
+		<property name="mod.id" value="${ant.project.name}"/>
+		
+		<!-- Folder properties -->
+		<property name="base.dir" value="${basedir}/../.." />
 
-	<property name="mod.dir" value="${base.dir}/sources/afm" />
-	<property name="forge.dir" value="${base.dir}/forge" />
-	
-    <property name="mcp.dir" value="${forge.dir}/mcp"/>
-    <property name="src.dir" value="${mod.dir}/src"/>
-    <property name="res.dir" value="${mod.dir}/resources"/>
-	
-	<!-- Forge/MCP/MC version properties -->
-	<loadproperties srcfile="${forge.dir}/forgeversion.properties"/>
-	<loadproperties srcfile="${forge.dir}/fml/common/fmlversion.properties"/>
-	
-    <property name="mcp.version" value="${fmlbuild.mcpversion}"/>
-    <property name="forge.version" value="${forge.major.number}.${forge.minor.number}.${forge.revision.number}.${forge.build.number}"/>
-    <property name="mc.version" value="${fmlbuild.mcversion}"/>
+		<property name="mod.dir" value="${base.dir}/sources/${mod.id}" />
+		<property name="forge.dir" value="${base.dir}/forge" />
+		
+	    <property name="mcp.dir" value="${forge.dir}/mcp"/>
+	    <property name="src.dir" value="${mod.dir}/src"/>
+	    <property name="res.dir" value="${mod.dir}/resources"/>
+		
+		<!-- Forge/MCP/MC version properties -->
+		<loadproperties srcfile="${forge.dir}/forgeversion.properties"/>
+		<loadproperties srcfile="${forge.dir}/fml/common/fmlversion.properties"/>
+		
+	    <property name="mcp.version" value="${fmlbuild.mcpversion}"/>
+	    <property name="forge.version" value="${forge.major.number}.${forge.minor.number}.${forge.revision.number}.${forge.build.number}"/>
+	    <property name="mc.version" value="${fmlbuild.mcversion}"/>
 
-    <!-- Output folders -->
-    <property name="distr.dir" value="${base.dir}/distr"/>
-	<property name="oldSource.dir" value="${distr.dir}/archive"/>
-	<property name="dropbox.dir" value="C:/Dropbox" />
-	
-	<condition property="shouldClean">
-		<available file="${mcp.dir}/src/minecraft/afm" type="dir" />
-	</condition>
-	
-	<target name="clean" if="shouldClean">
-		<echo>Cleaning output dir...</echo>
-		<delete dir="${mcp.dir}/src/minecraft/afm" />
-		<delete dir="${mcp.dir}/src/minecraft/mods" />
-	</target>
+	    <!-- Output folders -->
+	    <property name="distr.dir" value="${base.dir}/distr/${mod.id}"/>
+		<property name="oldSource.dir" value="${distr.dir}/archive"/>
+		<property name="dropbox.dir" value="C:/Dropbox/Mods" />
+		
+		<condition property="shouldClean">
+			<available file="${mcp.dir}/src/minecraft/${mod.id}" type="dir" />
+		</condition>
+		
+		<target name="clean" if="shouldClean">
+			<echo>Cleaning output dir...</echo>
+			<delete dir="${mcp.dir}/src/minecraft/${mod.id}" />
+			<delete dir="${mcp.dir}/src/minecraft/mods" />
+		</target>
 
-    <target name="Compile and Build" depends="Increment build number">
-    	<loadproperties srcfile="build.number"/>
-    	<property name="mod.version" value="${major}.${minor}.${build}" />
-    	
-        <echo>Compiling ${mod.id} v${mod.version} for Forge ${forge.version} and MC ${mc.version}, using MCP ${mcp.version}...</echo>
+	    <target name="Compile and Build" depends="Increment build number">
+	    	<loadproperties srcfile="build.number"/>
+	    	<property name="mod.version" value="${major}.${minor}.${build}" />
+	    	
+	        <echo>Compiling ${mod.id} v${mod.version} for Forge ${forge.version} and MC ${mc.version}, using MCP ${mcp.version}...</echo>
 
-    	<copy todir="${mcp.dir}/src/minecraft" >
-    		<fileset dir="${src.dir}" />
-    		<fileset dir="${res.dir}" />
-    	</copy>
+	    	<copy todir="${mcp.dir}/src/minecraft" overwrite="true" failonerror="false">
+	    		<fileset dir="${src.dir}" />
+	    		<fileset dir="${res.dir}" />
+	    	</copy>
 
-    	<replace dir="${mcp.dir}/src/minecraft/afm" token="%VERSION%" value="${mod.version}" />
-    	<replace dir="${mcp.dir}/src/minecraft/afm" token="%MC_VERSION%" value="${mc.version}" />
-    	<replace dir="${mcp.dir}/src/minecraft/afm" token="%FORGE_VERSION%" value="${forge.version}" />
+	    	<replace dir="${mcp.dir}/src/minecraft/${mod.id}" token="%VERSION%" value="${mod.version}" />
+	    	<replace dir="${mcp.dir}/src/minecraft/${mod.id}" token="%MC_VERSION%" value="${mc.version}" />
+	    	<replace dir="${mcp.dir}/src/minecraft/${mod.id}" token="%FORGE_VERSION%" value="${forge.version}" />
 
-        <echo>Recompiling...</echo>
-        <exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failifexecutionfails="true" failonerror="true">
-            <arg line="/c recompile.bat"/>
-        </exec>
+	        <echo>Recompiling...</echo>
+	        <exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failifexecutionfails="true" failonerror="true">
+	            <arg line="/c recompile.bat"/>
+	        </exec>
 
-        <echo>Reobfuscating...</echo>
-        <exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failifexecutionfails="true" failonerror="true">
-            <arg line="/c reobfuscate_srg.bat"/>
-        </exec>
+	        <echo>Reobfuscating...</echo>
+	        <exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failifexecutionfails="true" failonerror="true">
+	            <arg line="/c reobfuscate_srg.bat"/>
+	        </exec>
 
-        <echo>Copying source and resources...</echo>
-        <mkdir dir="${oldSource.dir}/${mod.version}"/>
+	        <echo>Copying source and resources...</echo>
+	        <mkdir dir="${oldSource.dir}/${mod.version}"/>
 
-        <copy todir="${oldSource.dir}/${mod.version}">
-    		<fileset dir="${src.dir}" />
-    		<fileset dir="${res.dir}" />
-        </copy>
-    	<replace dir="${mcp.dir}/src/minecraft/afm" token="%VERSION%" value="${mod.version}" />
-    	<replace dir="${mcp.dir}/src/minecraft/afm" token="%MC_VERSION%" value="${mc.version}" />
-    	<replace dir="${mcp.dir}/src/minecraft/afm" token="%FORGE_VERSION%" value="${forge.version}" />
+	        <copy todir="${oldSource.dir}/${mod.version}"  overwrite="true" failonerror="false">
+	    		<fileset dir="${src.dir}" />
+	    		<fileset dir="${res.dir}" />
+	        </copy>
+	    	<replace dir="${mcp.dir}/src/minecraft/${mod.id}" token="%VERSION%" value="${mod.version}" />
+	    	<replace dir="${mcp.dir}/src/minecraft/${mod.id}" token="%MC_VERSION%" value="${mc.version}" />
+	    	<replace dir="${mcp.dir}/src/minecraft/${mod.id}" token="%FORGE_VERSION%" value="${forge.version}" />
 
-        <echo>Building jar...</echo>
-    	<copy todir="${mcp.dir}/reobf/minecraft/">
-    		<fileset dir="${res.dir}" />
-    	</copy>
-        <jar destfile="${distr.dir}/${mod.id} v${mod.version}.jar" basedir="${mcp.dir}/reobf/minecraft">
-        </jar>
-    	
-    	<echo>Built</echo>
+	        <echo>Building jar...</echo>
+	    	<copy todir="${mcp.dir}/reobf/minecraft/"  overwrite="true" failonerror="false">
+	    		<fileset dir="${res.dir}" />
+	    	</copy>
+	        <jar destfile="${distr.dir}/${mod.id} v${mod.version}.jar" basedir="${mcp.dir}/reobf/minecraft">
+	        </jar>
+	    	
+	    	<echo>Built</echo>
 
-    	<echo>Cleaning temp files...</echo>
-    	<antcall target="clean" />
-    	
-        <echo>Done building. Thanks to the MCP team for such a great tool, and to the Forge/FML team for the awesome API</echo>
+	    	<echo>Cleaning temp files...</echo>
+	    	<antcall target="clean" />
+	    	
+	        <echo>Done building. Thanks to the MCP team for such a great tool, and to the Forge/FML team for the awesome API</echo>
 
-    </target>
-	
-	<target name="Copy distr to dropbox">
-		<echo>Copying distribuition files to dropbox...</echo>
-		<copy todir="${dropbox.dir}/AFM">
-			<fileset dir="${distr.dir}" />
-		</copy>
-	</target>
-	
-	<target name="Build mod" description="Builds the mod and copies jars and sources to the dropbox folder inside drive c:" depends="Compile and Build, Copy distr to dropbox"></target>
+	    </target>
+		
+		<target name="Copy distr to dropbox">
+			<echo>Copying distribuition files to dropbox...</echo>
+			<copy todir="${dropbox.dir}/${mod.id}">
+				<fileset dir="${distr.dir}" />
+			</copy>
+		</target>
+		
+		<target name="Build mod" description="Builds the mod and copies jars and sources to the dropbox folder inside drive c:" depends="Compile and Build, Copy distr to dropbox"></target>
 
-	<target name="Increment major version" description="Increases major version number (X.Y.Z-> X+1.Y.Z)">
-		<propertyfile file="build.number">
-			<entry
-				key="major"
-				type="int"
-				operation="+"
-				value="1"
-				default="0"
-				pattern="0" />
-			<entry
-				key="minor"
-				type="int"
-				operation="="
-				value="0"
-				default="0"
-				pattern="0" />
-		</propertyfile>
-	</target>
-	
-	<target name="Increment minor version" description="Increases minor version number (X.Y.Z-> X.Y+1.Z)">
-		<propertyfile file="build.number">
-			<entry
-				key="minor"
-				type="int"
-				operation="+"
-				value="1"
-				default="0"
-				pattern="0" />
-		</propertyfile>
-	</target>
+		<target name="Increment major version" description="Increases major version number (X.Y.Z-> X+1.Y.Z)">
+			<propertyfile file="build.number">
+				<entry
+					key="major"
+					type="int"
+					operation="+"
+					value="1"
+					default="0"
+					pattern="0" />
+				<entry
+					key="minor"
+					type="int"
+					operation="="
+					value="0"
+					default="0"
+					pattern="0" />
+			</propertyfile>
+		</target>
+		
+		<target name="Increment minor version" description="Increases minor version number (X.Y.Z-> X.Y+1.Z)">
+			<propertyfile file="build.number">
+				<entry
+					key="minor"
+					type="int"
+					operation="+"
+					value="1"
+					default="0"
+					pattern="0" />
+			</propertyfile>
+		</target>
 
-	<target name="Increment build number">
-		<propertyfile file="build.number">
-			<entry
-				key="build"
-				type="int"
-				operation="+"
-				value="1"
-				default="0"
-				pattern="0" />
-		</propertyfile>
-	</target>
-	
-</project>
+		<target name="Increment build number">
+			<propertyfile file="build.number">
+				<entry
+					key="build"
+					type="int"
+					operation="+"
+					value="1"
+					default="0"
+					pattern="0" />
+			</propertyfile>
+		</target>
+	</project>
