@@ -27,9 +27,9 @@
 	    <property name="mc.version" value="${fmlbuild.mcversion}"/>
 
 	    <!-- Output folders -->
-	    <property name="distr.dir" value="${base.dir}/distr/${mod.id}"/>
-		<property name="oldSource.dir" value="${distr.dir}/archive"/>
-		<property name="dropbox.dir" value="C:/Dropbox/Mods" />
+	    <property name="distr.dir" value="${base.dir}/distr/${mod.id}/MC ${mc.version}"/>
+		<property name="oldSource.dir" value="${base.dir}/distr/${mod.id}/sources/MC ${mc.version}"/>
+		<property name="dropbox.dir" value="C:/Dropbox/Mods/" />
 		
 		<condition property="shouldClean">
 			<available file="${mcp.dir}/src/minecraft/${mod.id}" type="dir" />
@@ -37,8 +37,8 @@
 		
 		<target name="clean" if="shouldClean">
 			<echo>Cleaning output dir...</echo>
-			<delete dir="${mcp.dir}/src/minecraft/${mod.id}" />
-			<delete dir="${mcp.dir}/src/minecraft/mods" />
+			<delete dir="${mcp.dir}/src/minecraft/${mod.id}" /><!-- Mod files (mod's base package should be the mod's id) -->
+			<delete dir="${mcp.dir}/src/minecraft/mods" /><!-- Resources -->
 		</target>
 
 	    <target name="Compile and Build" depends="Increment build number">
@@ -47,15 +47,20 @@
 	    	
 	        <echo>Compiling ${mod.id} v${mod.version} for Forge ${forge.version} and MC ${mc.version}, using MCP ${mcp.version}...</echo>
 
-	    	<copy todir="${mcp.dir}/src/minecraft" overwrite="true" failonerror="false">
+	    	<echo>Backing up sources</echo>
+	        <copy todir="${oldSource.dir}/${mod.version}"  overwrite="true" failonerror="false">
 	    		<fileset dir="${src.dir}" />
 	    		<fileset dir="${res.dir}" />
+	        </copy>
+	    	
+	    	<replace dir="${oldSource.dir}/${mod.version}" token="%VERSION%" value="${mod.version}" />
+	    	<replace dir="${oldSource.dir}/${mod.version}" token="%MC_VERSION%" value="${mc.version}" />
+	    	<replace dir="${oldSource.dir}/${mod.version}" token="%FORGE_VERSION%" value="${forge.version}" />
+
+	    	<copy todir="${mcp.dir}/src/minecraft" overwrite="true" failonerror="false">
+	    		<fileset dir="${oldSource.dir}/${mod.version}" />
 	    	</copy>
-
-	    	<replace dir="${mcp.dir}/src/minecraft/${mod.id}" token="%VERSION%" value="${mod.version}" />
-	    	<replace dir="${mcp.dir}/src/minecraft/${mod.id}" token="%MC_VERSION%" value="${mc.version}" />
-	    	<replace dir="${mcp.dir}/src/minecraft/${mod.id}" token="%FORGE_VERSION%" value="${forge.version}" />
-
+	    	
 	        <echo>Recompiling...</echo>
 	        <exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failifexecutionfails="true" failonerror="true">
 	            <arg line="/c recompile.bat"/>
@@ -69,19 +74,9 @@
 	        <echo>Copying source and resources...</echo>
 	        <mkdir dir="${oldSource.dir}/${mod.version}"/>
 
-	        <copy todir="${oldSource.dir}/${mod.version}"  overwrite="true" failonerror="false">
-	    		<fileset dir="${src.dir}" />
-	    		<fileset dir="${res.dir}" />
-	        </copy>
-	    	<replace dir="${mcp.dir}/src/minecraft/${mod.id}" token="%VERSION%" value="${mod.version}" />
-	    	<replace dir="${mcp.dir}/src/minecraft/${mod.id}" token="%MC_VERSION%" value="${mc.version}" />
-	    	<replace dir="${mcp.dir}/src/minecraft/${mod.id}" token="%FORGE_VERSION%" value="${forge.version}" />
-
 	        <echo>Building jar...</echo>
-	    	<copy todir="${mcp.dir}/reobf/minecraft/"  overwrite="true" failonerror="false">
-	    		<fileset dir="${res.dir}" />
-	    	</copy>
-	        <jar destfile="${distr.dir}/${mod.id} v${mod.version}.jar" basedir="${mcp.dir}/reobf/minecraft">
+	        <jar destfile="${distr.dir}/${mod.id} v${mod.version}.jar" basedir="${mcp.dir}/reobf/minecraft" >
+	        	<fileset dir="${res.dir}" erroronmissingdir="false"/>
 	        </jar>
 	    	
 	    	<echo>Built</echo>
@@ -95,8 +90,8 @@
 		
 		<target name="Copy distr to dropbox">
 			<echo>Copying distribuition files to dropbox...</echo>
-			<copy todir="${dropbox.dir}/${mod.id}">
-				<fileset dir="${distr.dir}" />
+			<copy todir="${dropbox.dir}">
+				<fileset dir="${base.dir}/distr" />
 			</copy>
 		</target>
 		
