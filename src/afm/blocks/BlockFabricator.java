@@ -56,8 +56,9 @@ public class BlockFabricator extends BlockContainerAFM {
 	}
 
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
-		return Block.workbench.getBlockTextureFromSideAndMetadata(side, meta);
+	@SideOnly(Side.CLIENT)
+	public Icon getIcon(int side, int metadata) {
+		return Block.workbench.getIcon(side, metadata);
 	}
 
 	@Override

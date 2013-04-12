@@ -27,8 +27,8 @@ public class ItemQuartz extends ItemAFM {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void updateIcons(IconRegister iconRegister) {
-		this.iconIndex = iconRegister.registerIcon("afm:" + ItemData.NAME_QUARTZ);
+	public void registerIcons(IconRegister iconRegister) {
+		this.itemIcon = iconRegister.registerIcon("afm:" + ItemData.NAME_QUARTZ);
 	}
 
 	@Override

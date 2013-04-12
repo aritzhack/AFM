@@ -7,6 +7,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import afm.AFM;
 import afm.data.BlockData;
@@ -22,7 +23,6 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 public class BlockPortableChest extends BlockChest {
 	final Random random = new Random();
-	Icon icon;
 
 	public BlockPortableChest() {
 		super(BlockData.ID_PORTABLE_CHEST, 0); // 0 means not redstone when open AFAIK
@@ -32,8 +32,8 @@ public class BlockPortableChest extends BlockChest {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
-		return this.icon;
+	public Icon getBlockTexture(IBlockAccess blockAccess, int x, int y, int z, int side) {
+		return super.getBlockTexture(blockAccess, x, y, z, side);
 	}
 
 	@Override

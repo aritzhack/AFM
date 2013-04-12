@@ -15,7 +15,7 @@ public class RenderingData {
 
 	public static void init() {
 		RenderingData.RENDER_ID_BETTER_TORCH = RenderingRegistry.getNextAvailableRenderId();
-		
+
 		SimpleBlockRenderer renderer = new SimpleBlockRenderer();
 
 		RenderingRegistry.registerBlockHandler(RenderingData.RENDER_ID_BETTER_TORCH, renderer);

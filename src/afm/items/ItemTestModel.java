@@ -21,14 +21,14 @@ public class ItemTestModel extends ItemBlock {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void updateIcons(IconRegister iconRegister) {
-		this.iconIndex = iconRegister.registerIcon("afm:" + BlockData.NAME_TESTMODEL + "_item");
+	public void registerIcons(IconRegister iconRegister) {
+		this.itemIcon = iconRegister.registerIcon("afm:" + BlockData.NAME_TESTMODEL + "_item");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getIconFromDamage(int par1) {
-		return this.iconIndex;
+		return this.itemIcon;
 	}
 
 }

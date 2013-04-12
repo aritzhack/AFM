@@ -22,8 +22,6 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 public class BlockBetterTorch extends BlockTorch {
 
-	Icon icon;
-
 	public BlockBetterTorch() {
 		super(BlockData.ID_BETTER_TORCH);
 		this.setUnlocalizedName(BlockData.NAME_BETTER_TORCH);
@@ -89,14 +87,14 @@ public class BlockBetterTorch extends BlockTorch {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTextureFromSideAndMetadata(int par1, int par2) {
-		return this.icon;
+	public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
+		return this.blockIcon;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister register) {
-		this.icon = register.registerIcon(String.format("afm:%s", BlockData.NAME_BETTER_TORCH));
+		this.blockIcon = register.registerIcon(String.format("afm:%s", BlockData.NAME_BETTER_TORCH));
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import afm.AFM;
 import afm.data.BlockData;
@@ -25,8 +26,6 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 public class BlockTestChest extends BlockContainerAFM {
 
-	Icon icon;
-
 	public BlockTestChest() {
 		super(BlockData.ID_TESTCHEST, BlockData.NAME_TESTCHEST);
 		this.setCreativeTab(AFM.tabAFM);
@@ -35,13 +34,13 @@ public class BlockTestChest extends BlockContainerAFM {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister iconRegister) {
-		this.icon = iconRegister.registerIcon(String.format("afm:%s", BlockData.NAME_TESTCHEST));
+		this.blockIcon = iconRegister.registerIcon(String.format("afm:%s", BlockData.NAME_TESTCHEST));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
-		return this.icon;
+	public Icon getBlockTexture(IBlockAccess blockAccess, int x, int y, int z, int side) {
+		return this.blockIcon;
 	}
 
 	@Override

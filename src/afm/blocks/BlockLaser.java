@@ -4,6 +4,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import afm.core.AFMLogger;
 import afm.data.BlockData;
@@ -18,8 +19,6 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 public class BlockLaser extends BlockAFM {
 
-	Icon icon;
-
 	public BlockLaser() {
 		super(BlockData.ID_LASER, BlockData.NAME_LASER);
 	}
@@ -27,13 +26,13 @@ public class BlockLaser extends BlockAFM {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister iconRegister) {
-		this.icon = iconRegister.registerIcon(String.format("afm:%s", BlockData.NAME_LASER));
+		this.blockIcon = iconRegister.registerIcon(String.format("afm:%s", BlockData.NAME_LASER));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
-		return this.icon;
+	public Icon getBlockTexture(IBlockAccess blockAccess, int x, int y, int z, int side) {
+		return this.blockIcon;
 	}
 
 	@Override

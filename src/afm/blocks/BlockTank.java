@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
@@ -24,8 +25,6 @@ import cpw.mods.fml.relauncher.SideOnly;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class BlockTank extends BlockContainerAFM {
-
-	Icon icon;
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float bx, float by, float bz) {
@@ -107,13 +106,13 @@ public class BlockTank extends BlockContainerAFM {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister iconRegister) {
-		this.icon = iconRegister.registerIcon(String.format("afm:%s", BlockData.NAME_TANK));
+		this.blockIcon = iconRegister.registerIcon(String.format("afm:%s", BlockData.NAME_TANK));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTextureFromSideAndMetadata(int par1, int par2) {
-		return this.icon;
+	public Icon getBlockTexture(IBlockAccess blockAccess, int x, int y, int z, int side) {
+		return this.blockIcon;
 	}
 
 	@Override

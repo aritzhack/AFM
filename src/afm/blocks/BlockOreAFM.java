@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import afm.data.BlockData;
 import afm.items.Items;
@@ -23,8 +24,6 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 public class BlockOreAFM extends BlockAFM {
 
-	Icon icon;
-
 	public BlockOreAFM() {
 		super(BlockData.ID_ORE, BlockData.NAME_ORE_AFM);
 		this.setLightValue(1.0F);
@@ -33,13 +32,13 @@ public class BlockOreAFM extends BlockAFM {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister iconRegister) {
-		this.icon = iconRegister.registerIcon(String.format("afm:%s", BlockData.NAME_ORE_AFM));
+		this.blockIcon = iconRegister.registerIcon(String.format("afm:%s", BlockData.NAME_ORE_AFM));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
-		return this.icon;
+	public Icon getBlockTexture(IBlockAccess blockAccess, int x, int y, int z, int side) {
+		return this.blockIcon;
 	}
 
 	public void initRecipes() {

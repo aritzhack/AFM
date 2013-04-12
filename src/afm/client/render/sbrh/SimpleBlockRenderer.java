@@ -48,7 +48,7 @@ public class SimpleBlockRenderer implements ISimpleBlockRenderingHandler {
 		double par2 = x, par4 = y, par6 = z;
 
 		Tessellator tessellator = Tessellator.instance;
-		Icon icon = block.getBlockTextureFromSideAndMetadata(0, 0);
+		Icon icon = block.getBlockTexture(world, x, y, z, 0);
 
 		icon = icon != null ? icon : Minecraft.getMinecraft().renderEngine.getMissingIcon(0);
 

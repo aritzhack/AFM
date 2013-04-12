@@ -41,8 +41,8 @@ public class BlockGlassTinted extends BlockAFM {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
-		return this.icons[meta];
+	public Icon getIcon(int side, int metadata) {
+		return this.icons[metadata];
 	}
 
 	@Override
