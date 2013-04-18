@@ -32,13 +32,12 @@
 		<property name="dropbox.dir" value="C:/Dropbox/Mods/" />
 		
 		<condition property="shouldClean">
-			<available file="${mcp.dir}/src/minecraft/${mod.id}" type="dir" />
+			<available file="${mcp.dir}/src/minecraft/aritzh" type="dir" />
 		</condition>
 		
 		<target name="clean" if="shouldClean">
 			<echo>Cleaning output dir...</echo>
-			<delete dir="${mcp.dir}/src/minecraft/${mod.id}" /><!-- Mod files (mod's base package should be the mod's id) -->
-			<delete dir="${mcp.dir}/src/minecraft/mods" /><!-- Resources -->
+			<delete dir="${mcp.dir}/src/minecraft/aritzh" />
 		</target>
 
 	    <target name="Compile and Build" depends="Increment build number">
