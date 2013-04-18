@@ -49,6 +49,7 @@ public class Version implements Runnable {
 		return this.checkModVersionState();
 	}
 
+	@SuppressWarnings("unused")
 	private void checkForgeVersion() {
 		int builtWithBuildVersion = this.getBuildNumber(Version.C_FORGE_VERSION);
 		this.FORGE_VERSION = ForgeVersion.getVersion();
