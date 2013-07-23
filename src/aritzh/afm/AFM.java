@@ -18,10 +18,7 @@ import aritzh.afm.network.PacketHandler;
 import aritzh.afm.proxy.CommonProxy;
 import aritzh.afm.world.WorldGenerator;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PreInit;
-import cpw.mods.fml.common.Mod.ServerStarting;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -47,19 +44,19 @@ public class AFM {
 	@Instance(Config.MOD_ID)
 	public static AFM afm = new AFM();
 
-	@SidedProxy(clientSide = "afm.proxy.ClientProxy", serverSide = "afm.proxy.CommonProxy")
+	@SidedProxy(clientSide = "aritzh.afm.proxy.ClientProxy", serverSide = "aritzh.afm.proxy.CommonProxy")
 	public static CommonProxy proxy;
 
 	public static final CreativeTabs tabAFM = new TabAFM(CreativeTabs.getNextID());
 
 	public static final GUIHandler guiHandler = new GUIHandler();
 
-	@ServerStarting
+	@cpw.mods.fml.common.Mod.EventHandler
 	public void serverStarting(FMLServerStartingEvent e) {
 		e.registerServerCommand(new CommandAFM());
 	}
 
-	@PreInit
+	@cpw.mods.fml.common.Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 
 		AFMLogger.init();
@@ -74,7 +71,7 @@ public class AFM {
 		NetworkRegistry.instance().registerGuiHandler(AFM.afm, AFM.guiHandler);
 	}
 
-	@Init
+	@cpw.mods.fml.common.Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
 
 		this.showDebugGroup(true, event.getSide().toString());

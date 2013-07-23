@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.world.World;
 
 /**
@@ -25,11 +26,11 @@ public class CommandGetAt {
 		int y = Integer.valueOf(args[2]);
 		int z = Integer.valueOf(args[3]);
 		if (!w.blockExists(x, y, z)) {
-			player.sendChatToPlayer("Block: Air");
+			player.sendChatToPlayer(new ChatMessageComponent().func_111079_a("Block: Air"));
 		}
 		int id = w.getBlockId(x, y, z);
 		int meta = w.getBlockMetadata(x, y, z);
-		player.sendChatToPlayer("Block: ID=" + id + ", meta=" + meta);
+		player.sendChatToPlayer(new ChatMessageComponent().func_111079_a("Block: ID=" + id + ", meta=" + meta));
 	}
 
 	public static String getUsage() {

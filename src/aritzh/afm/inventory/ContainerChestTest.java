@@ -25,7 +25,7 @@ public class ContainerChestTest extends Container {
 			for (int x = 0; x < 9; x++) {
 
 				Slot s = new Slot(tileEntity, x + y * 9, 8 + x * 18, 18 + y * 18);
-				s.setBackgroundIconIndex(Item.diamond.getIconFromDamage(0)); // Diamond with meta=0
+				s.setBackgroundIcon(Item.diamond.getIconFromDamage(0)); // Diamond with meta=0
 				this.addSlotToContainer(s);
 			}
 		}

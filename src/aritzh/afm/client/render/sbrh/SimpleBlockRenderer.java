@@ -1,7 +1,6 @@
 package aritzh.afm.client.render.sbrh;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.Icon;
@@ -50,7 +49,7 @@ public class SimpleBlockRenderer implements ISimpleBlockRenderingHandler {
 		Tessellator tessellator = Tessellator.instance;
 		Icon icon = block.getBlockTexture(world, x, y, z, 0);
 
-		icon = icon != null ? icon : Minecraft.getMinecraft().renderEngine.getMissingIcon(0);
+//		icon = icon != null ? icon : Minecraft.getMinecraft().renderEngine.func_110581_b(par1ResourceLocation)
 
 		double texMinX = icon.getMinU();
 		double texMinY = icon.getMinV();

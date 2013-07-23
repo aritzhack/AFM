@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.world.World;
 
 /**
@@ -19,7 +20,7 @@ public class CommandSetAt {
 		if (player == null) return;
 		if (args.length < 5) throw new WrongUsageException(CommandSetAt.getUsage());
 		if (player.getCommandSenderName().equalsIgnoreCase("Rcon")) {
-			player.sendChatToPlayer("Cannot be used from server console");
+			player.sendChatToPlayer(new ChatMessageComponent().func_111079_a("Cannot be used from server console"));
 		}
 		World w = player.worldObj;
 		if (w == null) return;

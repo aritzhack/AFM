@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatMessageComponent;
 import aritzh.afm.core.util.UtilAFM;
 
 /**
@@ -34,7 +35,7 @@ public class CommandAFM extends CommandBase {
 	@Override
 	public List<String> addTabCompletionOptions(ICommandSender commandSender, String[] args) {
 		if (!(commandSender instanceof EntityPlayer)) {
-			commandSender.sendChatToPlayer("Must be a player to issue this command!");
+			commandSender.sendChatToPlayer(new ChatMessageComponent().func_111079_a("Must be a player to issue this command!"));
 		}
 
 		if (args.length > 0) {
@@ -52,11 +53,11 @@ public class CommandAFM extends CommandBase {
 	public void processCommand(ICommandSender commandSender, String[] args) {
 
 		if (!(commandSender instanceof EntityPlayer)) {
-			commandSender.sendChatToPlayer("Must be a player to issue this command!");
+			commandSender.sendChatToPlayer(new ChatMessageComponent().func_111079_a("Must be a player to issue this command!"));
 		}
 
 		if (args.length < 1) {
-			commandSender.sendChatToPlayer("Usage: " + this.getCommandUsage(commandSender));
+			commandSender.sendChatToPlayer(new ChatMessageComponent().func_111079_a("Usage: " + this.getCommandUsage(commandSender)));
 			return;
 		}
 		String command = args[0];
@@ -68,7 +69,7 @@ public class CommandAFM extends CommandBase {
 		} else if (command.equalsIgnoreCase("killAll")) {
 			CommandKillAll.handle(player, args);
 		} else {
-			player.sendChatToPlayer("Usage: " + this.getCommandUsage(commandSender));
+			player.sendChatToPlayer(new ChatMessageComponent().func_111079_a("Usage: " + this.getCommandUsage(commandSender)));
 		}
 	}
 

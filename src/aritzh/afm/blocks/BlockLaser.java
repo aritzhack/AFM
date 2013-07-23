@@ -3,6 +3,7 @@ package aritzh.afm.blocks;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -38,7 +39,7 @@ public class BlockLaser extends BlockAFM {
 	@Override
 	public void onEntityCollidedWithBlock(World w, int x, int y, int z, Entity entity) {
 		if (entity instanceof EntityPlayerMP) {
-			((EntityPlayerMP) entity).sendChatToPlayer("You touched it!");
+			((EntityPlayerMP) entity).sendChatToPlayer(new ChatMessageComponent().func_111079_a("You touched it!"));
 		}
 		AFMLogger.debug("Entity touched it: " + entity.toString());
 	}

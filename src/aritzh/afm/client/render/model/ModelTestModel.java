@@ -1,12 +1,14 @@
 package aritzh.afm.client.render.model;
 
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
 
 import aritzh.afm.data.BlockData;
+import aritzh.afm.data.Config;
 import cpw.mods.fml.client.FMLClientHandler;
 
 /**
@@ -25,28 +27,9 @@ public class ModelTestModel extends ModelBase {
 	final float scale = 1F / 16F;
 
 	public ModelTestModel() {
-		model = AdvancedModelLoader.loadModel("/mods/afm/models/model.obj");
+		model = AdvancedModelLoader.loadModel(Config.MODEL_DIR + "/model.obj");
 		this.textureWidth = 64;
 		this.textureHeight = 64;
-
-//		this.TopCube = new ModelRenderer(this, 0, 0);
-//		this.TopCube.addBox(0F, 0F, 0F, 16, 1, 16);
-//		this.TopCube.setRotationPoint(-8F, 8F, -8F);
-//		this.TopCube.setTextureSize(64, 64);
-//		this.TopCube.mirror = true;
-//		this.setRotation(this.TopCube);
-//		this.MidTube = new ModelRenderer(this, 0, 34);
-//		this.MidTube.addBox(0F, 0F, 0F, 2, 14, 2);
-//		this.MidTube.setRotationPoint(-1F, 9F, -1F);
-//		this.MidTube.setTextureSize(64, 64);
-//		this.MidTube.mirror = true;
-//		this.setRotation(this.MidTube);
-//		this.BottomCube = new ModelRenderer(this, 0, 17);
-//		this.BottomCube.addBox(0F, 0F, 0F, 16, 1, 16);
-//		this.BottomCube.setRotationPoint(-8F, 23F, -8F);
-//		this.BottomCube.setTextureSize(64, 64);
-//		this.BottomCube.mirror = true;
-//		this.setRotation(this.BottomCube);
 	}
 
 	public void render(double x, double y, double z) {
@@ -55,7 +38,7 @@ public class ModelTestModel extends ModelBase {
 		GL11.glDisable(GL11.GL_LIGHTING);
 
 		GL11.glTranslated(x + .5, y - .5, z + .5);
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture(BlockData.TEXTURE_TESTMODEL);
+		FMLClientHandler.instance().getClient().renderEngine.func_110577_a(new ResourceLocation(Config.MOD_ID.toLowerCase(), BlockData.TEXTURE_TESTMODEL));
 
 		model.renderAll();
 		

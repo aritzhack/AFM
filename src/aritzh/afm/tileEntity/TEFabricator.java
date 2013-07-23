@@ -164,12 +164,7 @@ public class TEFabricator extends TEAFM {
 		return true;
 	}
 
-	@Override
-	public boolean isStackValidForSlot(int i, ItemStack itemstack) {
-		return false;
-	}
-
-	// FIXME Doesn't save changes to NBT
+	// FIXME: Doesn't save changes to NBT
 	public void clearMatrix() {
 		for (int i = 0; i < 9; i++) {
 			this.setInventorySlotContents(i, null);
@@ -236,7 +231,8 @@ public class TEFabricator extends TEAFM {
 			length = inv.getSizeInventory();
 			startIndex = 0;
 		} else if (inv instanceof ISidedInventory) {
-			int[] slots = ((ISidedInventory) inv).getSizeInventorySide(dir.ordinal());
+			int[] slots = ((ISidedInventory)inv).getAccessibleSlotsFromSide(dir.ordinal());
+			
 			ItemStack[] ret = new ItemStack[slots.length];
 			int i = 0;
 			for (int s : slots) {
@@ -406,6 +402,11 @@ public class TEFabricator extends TEAFM {
 				}
 			}
 		}
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+		return false;
 	}
 
 }

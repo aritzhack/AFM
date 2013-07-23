@@ -69,7 +69,7 @@ public class ContainerSharedWorkbench extends Container {
 	}
 
 	@Override
-	public void onCraftGuiClosed(EntityPlayer par1EntityPlayer) {
+	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
 		this.tileEntity.saveStacks(this.craftMatrix);
 	}
 

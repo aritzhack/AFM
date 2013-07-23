@@ -1,12 +1,11 @@
 package aritzh.afm.tileEntity;
 
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.liquids.ILiquidTank;
-import net.minecraftforge.liquids.ITankContainer;
-import net.minecraftforge.liquids.LiquidContainerRegistry;
-import net.minecraftforge.liquids.LiquidStack;
-import net.minecraftforge.liquids.LiquidTank;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.IFluidTank;
 
 /**
  * TEAFMTank
@@ -14,38 +13,38 @@ import net.minecraftforge.liquids.LiquidTank;
  * @author aritzh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class TEAFMTank extends TileEntity implements ITankContainer {
+public class TEAFMTank extends TileEntity implements IFluidTank {
 
-	LiquidTank liquid = new LiquidTank(LiquidContainerRegistry.BUCKET_VOLUME * 4);
+	FluidTank liquid = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 4);
 
 	@Override
-	public int fill(ForgeDirection from, LiquidStack resource, boolean doFill) {
+	public FluidStack getFluid() {
+		return this.liquid.getFluid();
+	}
+
+	@Override
+	public int getFluidAmount() {
+		return this.liquid.getFluidAmount();
+	}
+
+	@Override
+	public int getCapacity() {
+		return this.liquid.getFluidAmount();
+	}
+
+	@Override
+	public FluidTankInfo getInfo() {
+		return this.liquid.getInfo();
+	}
+
+	@Override
+	public int fill(FluidStack resource, boolean doFill) {
 		return this.liquid.fill(resource, doFill);
 	}
 
 	@Override
-	public int fill(int tankIndex, LiquidStack resource, boolean doFill) {
-		return this.liquid.fill(resource, doFill);
-	}
-
-	@Override
-	public LiquidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+	public FluidStack drain(int maxDrain, boolean doDrain) {
 		return this.liquid.drain(maxDrain, doDrain);
-	}
-
-	@Override
-	public LiquidStack drain(int tankIndex, int maxDrain, boolean doDrain) {
-		return this.liquid.drain(maxDrain, doDrain);
-	}
-
-	@Override
-	public ILiquidTank[] getTanks(ForgeDirection direction) {
-		return new ILiquidTank[] { this.liquid };
-	}
-
-	@Override
-	public ILiquidTank getTank(ForgeDirection direction, LiquidStack type) {
-		return this.liquid;
 	}
 
 }

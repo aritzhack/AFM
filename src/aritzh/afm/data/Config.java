@@ -14,9 +14,9 @@ import net.minecraftforge.common.Configuration;
  */
 public final class Config {
 
-	public static final String RES_DIR = "/mods/afm/";
-	public static final String TEX_DIR = Config.RES_DIR + "textures/";
-	public static final String LANG_DIR = Config.RES_DIR + "lang/";
+	public static final String MODEL_DIR = "/assets/afm/models";
+	public static final String MODEL_TEX_DIR = "textures/models";
+	public static final String LANG_DIR = "assets/afm/lang/";
 	private static Configuration config;
 
 	public static class Network {

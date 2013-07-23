@@ -1,6 +1,6 @@
 package aritzh.afm.proxy;
 
-import aritzh.afm.tileEntity.TEAFMTank;
+//import aritzh.afm.tileEntity.TEAFMTank;
 import aritzh.afm.tileEntity.TEFabricator;
 import aritzh.afm.tileEntity.TEPortableChest;
 import aritzh.afm.tileEntity.TESharedWorkbench;
@@ -28,7 +28,7 @@ public class CommonProxy {
 		GameRegistry.registerTileEntity(TESharedWorkbench.class, "tileEntity.afm.sharedCrafting");
 		GameRegistry.registerTileEntity(TEFabricator.class, "tileEntity.afm.fabricator");
 		GameRegistry.registerTileEntity(TEPortableChest.class, "tileEntity.afm.portableChest");
-		GameRegistry.registerTileEntity(TEAFMTank.class, "tileEntity.afm.tank");
+		//GameRegistry.registerTileEntity(TEAFMTank.class, "tileEntity.afm.tank");
 	}
 
 }

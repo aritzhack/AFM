@@ -6,6 +6,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatMessageComponent;
 import net.minecraftforge.common.ForgeVersion;
 import aritzh.afm.core.util.UtilAFM;
 import aritzh.afm.data.Config;
@@ -123,7 +124,7 @@ public class Version implements Runnable {
 	public void run() {
 		String s = this.checkVersion();
 		if (Config.displayVersionMessageInChat && !s.equals("")) {
-			this.player.sendChatToPlayer(s);
+			this.player.sendChatToPlayer(new ChatMessageComponent().func_111079_a(s));
 		}
 	}
 

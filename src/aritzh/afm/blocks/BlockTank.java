@@ -8,9 +8,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.liquids.LiquidContainerRegistry;
-import net.minecraftforge.liquids.LiquidStack;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import aritzh.afm.core.AFMLogger;
 import aritzh.afm.data.BlockData;
 import aritzh.afm.data.Config;
@@ -35,7 +34,7 @@ public class BlockTank extends BlockContainerAFM {
 
 		TEAFMTank tank = (TEAFMTank) te;
 
-		LiquidStack ls = tank.getTank(null, null).getLiquid();
+		FluidStack ls = tank.getFluid();
 
 		if (ls != null) {
 			AFMLogger.debug("Before " + ls.amount);
@@ -44,12 +43,12 @@ public class BlockTank extends BlockContainerAFM {
 		ItemStack current = player.inventory.getCurrentItem();
 		if (current != null) {
 
-			LiquidStack liquid = LiquidContainerRegistry.getLiquidForFilledItem(current);
+			FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(current);
 
 			// Handle filled containers
 			if (liquid != null) {
 
-				int amount = tank.fill(ForgeDirection.UNKNOWN, liquid, true);
+				int amount = tank.fill(liquid, true);
 
 				if (amount != 0 && (!player.capabilities.isCreativeMode || Config.debug)) {
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, current.getItem().getContainerItemStack(current));
@@ -59,13 +58,13 @@ public class BlockTank extends BlockContainerAFM {
 				}
 				return true;
 
-				// Handle empty containers
-			} else {
+				
+			} else { // Handle empty containers
 
 				if (ls != null) {
-					ItemStack filled = LiquidContainerRegistry.fillLiquidContainer(ls, current);
+					ItemStack filled = FluidContainerRegistry.fillFluidContainer(ls, current);
 
-					liquid = LiquidContainerRegistry.getLiquidForFilledItem(filled);
+					liquid = FluidContainerRegistry.getFluidForFilledItem(filled);
 
 					if (liquid != null) {
 						if (!player.capabilities.isCreativeMode || Config.debug) {
@@ -81,7 +80,7 @@ public class BlockTank extends BlockContainerAFM {
 								player.inventory.setInventorySlotContents(player.inventory.currentItem, filled);
 							}
 						}
-						tank.drain(ForgeDirection.UNKNOWN, liquid.amount, true);
+						tank.drain(liquid.amount, true);
 
 						AFMLogger.debug("After " + ls.amount);
 
