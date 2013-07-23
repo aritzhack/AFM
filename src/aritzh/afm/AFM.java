@@ -37,74 +37,74 @@ import cpw.mods.fml.common.registry.GameRegistry;
 @NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { Config.Network.CHANNEL }, packetHandler = PacketHandler.class)
 public class AFM {
 
-	Configuration config;
+    Configuration config;
 
-	final WorldGenerator worldGen = new WorldGenerator();
+    final WorldGenerator worldGen = new WorldGenerator();
 
-	@Instance(Config.MOD_ID)
-	public static AFM afm = new AFM();
+    @Instance(Config.MOD_ID)
+    public static AFM afm = new AFM();
 
-	@SidedProxy(clientSide = "aritzh.afm.proxy.ClientProxy", serverSide = "aritzh.afm.proxy.CommonProxy")
-	public static CommonProxy proxy;
+    @SidedProxy(clientSide = "aritzh.afm.proxy.ClientProxy", serverSide = "aritzh.afm.proxy.CommonProxy")
+    public static CommonProxy proxy;
 
-	public static final CreativeTabs tabAFM = new TabAFM(CreativeTabs.getNextID());
+    public static final CreativeTabs tabAFM = new TabAFM(CreativeTabs.getNextID());
 
-	public static final GUIHandler guiHandler = new GUIHandler();
+    public static final GUIHandler guiHandler = new GUIHandler();
 
-	@cpw.mods.fml.common.Mod.EventHandler
-	public void serverStarting(FMLServerStartingEvent e) {
-		e.registerServerCommand(new CommandAFM());
-	}
+    @cpw.mods.fml.common.Mod.EventHandler
+    public void serverStarting(final FMLServerStartingEvent e) {
+        e.registerServerCommand(new CommandAFM());
+    }
 
-	@cpw.mods.fml.common.Mod.EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
+    @cpw.mods.fml.common.Mod.EventHandler
+    public void preInit(final FMLPreInitializationEvent event) {
 
-		AFMLogger.init();
+        AFMLogger.init();
 
-		Localization.loadLocales();
+        Localization.loadLocales();
 
-		Config.init(event.getSuggestedConfigurationFile());
+        Config.init(event.getSuggestedConfigurationFile());
 
-		MinecraftForge.EVENT_BUS.register(new EventHandler());
-		NetworkRegistry.instance().registerConnectionHandler(new EventHandler());
+        MinecraftForge.EVENT_BUS.register(new EventHandler());
+        NetworkRegistry.instance().registerConnectionHandler(new EventHandler());
 
-		NetworkRegistry.instance().registerGuiHandler(AFM.afm, AFM.guiHandler);
-	}
+        NetworkRegistry.instance().registerGuiHandler(AFM.afm, AFM.guiHandler);
+    }
 
-	@cpw.mods.fml.common.Mod.EventHandler
-	public void init(FMLInitializationEvent event) {
+    @cpw.mods.fml.common.Mod.EventHandler
+    public void init(final FMLInitializationEvent event) {
 
-		this.showDebugGroup(true, event.getSide().toString());
+        this.showDebugGroup(true, event.getSide().toString());
 
-		AFM.proxy.registerTexuresAndRenderers();
-		AFM.proxy.registerTileEntities();
+        AFM.proxy.registerTexuresAndRenderers();
+        AFM.proxy.registerTileEntities();
 
-		Items.init();
-		Blocks.init();
+        Items.init();
+        Blocks.init();
 
-		Blocks.registerBlocks();
-		Blocks.addRecipes();
+        Blocks.registerBlocks();
+        Blocks.addRecipes();
 
-		UtilAFM.initOreDict();
+        UtilAFM.initOreDict();
 
-		GameRegistry.registerWorldGenerator(this.worldGen);
+        GameRegistry.registerWorldGenerator(this.worldGen);
 
-		this.showDebugGroup(false, event.getSide().toString());
-	}
+        this.showDebugGroup(false, event.getSide().toString());
+    }
 
-	private void showDebugGroup(boolean opening, String side) {
+    private void showDebugGroup(final boolean opening, final String side) {
 
-		String s = String.format("%s Initialization for Minecraft %s and Forge %s %s in %s", Config.MOD_NAME, Version.C_MC_VERSION, Version.C_FORGE_VERSION, opening ? "started" : "finished", side);
+        final String s = String.format("%s Initialization for Minecraft %s and Forge %s %s in %s", Config.MOD_NAME, Version.C_MC_VERSION, Version.C_FORGE_VERSION, opening ? "started" : "finished", side);
 
-		// Just aesthetics...
-		String b1 = "", b2 = "";
-		for (int i = 0; i < s.length(); i++) {
-			b1 = b1 + (opening ? "=" : "-");
-			b2 = b2 + (opening ? "-" : "=");
-		}
+        // Just aesthetics...
+        String b1 = "", b2 = "";
+        for (int i = 0; i < s.length(); i++) {
+            b1 = b1 + (opening ? "=" : "-");
+            b2 = b2 + (opening ? "-" : "=");
+        }
 
-		AFMLogger.debug(b1);
-		AFMLogger.debug(s);
-		AFMLogger.debug(b2);
-	}
+        AFMLogger.debug(b1);
+        AFMLogger.debug(s);
+        AFMLogger.debug(b2);
+    }
 }

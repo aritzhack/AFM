@@ -20,28 +20,28 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 public class BlockLaser extends BlockAFM {
 
-	public BlockLaser() {
-		super(BlockData.ID_LASER, BlockData.NAME_LASER);
-	}
+    public BlockLaser() {
+        super(BlockData.ID_LASER, BlockData.NAME_LASER);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister iconRegister) {
-		this.blockIcon = iconRegister.registerIcon(String.format("afm:%s", BlockData.NAME_LASER));
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(final IconRegister iconRegister) {
+        this.blockIcon = iconRegister.registerIcon(String.format("afm:%s", BlockData.NAME_LASER));
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Icon getBlockTexture(IBlockAccess blockAccess, int x, int y, int z, int side) {
-		return this.blockIcon;
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public Icon getBlockTexture(final IBlockAccess blockAccess, final int x, final int y, final int z, final int side) {
+        return this.blockIcon;
+    }
 
-	@Override
-	public void onEntityCollidedWithBlock(World w, int x, int y, int z, Entity entity) {
-		if (entity instanceof EntityPlayerMP) {
-			((EntityPlayerMP) entity).sendChatToPlayer(new ChatMessageComponent().func_111079_a("You touched it!"));
-		}
-		AFMLogger.debug("Entity touched it: " + entity.toString());
-	}
+    @Override
+    public void onEntityCollidedWithBlock(final World w, final int x, final int y, final int z, final Entity entity) {
+        if (entity instanceof EntityPlayerMP) {
+            ((EntityPlayerMP) entity).sendChatToPlayer(new ChatMessageComponent().func_111079_a("You touched it!"));
+        }
+        AFMLogger.debug("Entity touched it: " + entity.toString());
+    }
 
 }

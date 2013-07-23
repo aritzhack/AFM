@@ -15,36 +15,36 @@ import net.minecraftforge.fluids.IFluidTank;
  */
 public class TEAFMTank extends TileEntity implements IFluidTank {
 
-	FluidTank liquid = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 4);
+    FluidTank liquid = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 4);
 
-	@Override
-	public FluidStack getFluid() {
-		return this.liquid.getFluid();
-	}
+    @Override
+    public FluidStack getFluid() {
+        return this.liquid.getFluid();
+    }
 
-	@Override
-	public int getFluidAmount() {
-		return this.liquid.getFluidAmount();
-	}
+    @Override
+    public int getFluidAmount() {
+        return this.liquid.getFluidAmount();
+    }
 
-	@Override
-	public int getCapacity() {
-		return this.liquid.getFluidAmount();
-	}
+    @Override
+    public int getCapacity() {
+        return this.liquid.getFluidAmount();
+    }
 
-	@Override
-	public FluidTankInfo getInfo() {
-		return this.liquid.getInfo();
-	}
+    @Override
+    public FluidTankInfo getInfo() {
+        return this.liquid.getInfo();
+    }
 
-	@Override
-	public int fill(FluidStack resource, boolean doFill) {
-		return this.liquid.fill(resource, doFill);
-	}
+    @Override
+    public int fill(final FluidStack resource, final boolean doFill) {
+        return this.liquid.fill(resource, doFill);
+    }
 
-	@Override
-	public FluidStack drain(int maxDrain, boolean doDrain) {
-		return this.liquid.drain(maxDrain, doDrain);
-	}
+    @Override
+    public FluidStack drain(final int maxDrain, final boolean doDrain) {
+        return this.liquid.drain(maxDrain, doDrain);
+    }
 
 }

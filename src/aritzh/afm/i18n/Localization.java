@@ -11,12 +11,12 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
  */
 public class Localization {
 
-	private static final String[] locales = { "es_ES", "en_US", };
+    private static final String[] locales = { "es_ES", "en_US", };
 
-	public static void loadLocales() {
-		for (String locale : Localization.locales) {
-			LanguageRegistry.instance().loadLocalization(Config.LANG_DIR + locale + ".lang", locale, false);
-		}
-	}
+    public static void loadLocales() {
+        for (final String locale : Localization.locales) {
+            LanguageRegistry.instance().loadLocalization(Config.LANG_DIR + locale + ".lang", locale, false);
+        }
+    }
 
 }

@@ -20,26 +20,26 @@ import cpw.mods.fml.common.network.Player;
  */
 public class PacketHandler implements IPacketHandler {
 
-	Map<Byte, AFMPacket> packets = new Hashtable<Byte, AFMPacket>();
+    Map<Byte, AFMPacket> packets = new Hashtable<Byte, AFMPacket>();
 
-	RandomNumberPacket rnPacket = new RandomNumberPacket();
+    RandomNumberPacket rnPacket = new RandomNumberPacket();
 
-	public PacketHandler() {
-		this.packets.put(this.rnPacket.getPacketID(), this.rnPacket);
+    public PacketHandler() {
+        this.packets.put(this.rnPacket.getPacketID(), this.rnPacket);
 
-	}
+    }
 
-	@Override
-	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
+    @Override
+    public void onPacketData(final INetworkManager manager, final Packet250CustomPayload packet, final Player player) {
 
-		DataInputStream packetData = new DataInputStream(new ByteArrayInputStream(packet.data));
+        final DataInputStream packetData = new DataInputStream(new ByteArrayInputStream(packet.data));
 
-		try {
-			this.packets.get(packetData.readByte()).handle(packetData, player);
+        try {
+            this.packets.get(packetData.readByte()).handle(packetData, player);
 
-		} catch (IOException e) {
-			AFMLogger.log("Error handling packets: ", e);
-		}
-	}
+        } catch (final IOException e) {
+            AFMLogger.log("Error handling packets: ", e);
+        }
+    }
 
 }

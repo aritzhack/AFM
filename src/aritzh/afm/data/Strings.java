@@ -8,10 +8,10 @@ package aritzh.afm.data;
  */
 public class Strings {
 
-	public static final String OUTDATED_FORGE = "string.version.forge.outdated";
-	public static final String ERROR_FORGE = "string.version.forge.error";
-	public static final String ERROR_MOD = "string.version.mod.error";
-	public static final String OUTDATED_MOD = "string.version.mod.outdated";
-	public static final String UPTODATE_MOD = "string.version.mod.uptodate";
+    public static final String OUTDATED_FORGE = "string.version.forge.outdated";
+    public static final String ERROR_FORGE = "string.version.forge.error";
+    public static final String ERROR_MOD = "string.version.mod.error";
+    public static final String OUTDATED_MOD = "string.version.mod.outdated";
+    public static final String UPTODATE_MOD = "string.version.mod.uptodate";
 
 }

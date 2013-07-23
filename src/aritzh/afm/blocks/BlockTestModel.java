@@ -16,33 +16,33 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 public class BlockTestModel extends BlockContainerAFM {
 
-	public BlockTestModel() {
-		super(BlockData.ID_TESTMODEL, BlockData.NAME_TESTMODEL);
-	}
+    public BlockTestModel() {
+        super(BlockData.ID_TESTMODEL, BlockData.NAME_TESTMODEL);
+    }
 
-	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
+    @Override
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
 
-	@Override
-	public int getRenderType() {
-		return -1;
-	}
+    @Override
+    public int getRenderType() {
+        return -1;
+    }
 
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
+    }
 
-	@Override
-	public TileEntity createNewTileEntity(World var1) {
-		return new TETestModel();
-	}
+    @Override
+    public TileEntity createNewTileEntity(final World var1) {
+        return new TETestModel();
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	// No need to register any icon
-	public void registerIcons(IconRegister par1IconRegister) {
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    // No need to register any icon
+    public void registerIcons(final IconRegister par1IconRegister) {
+    }
 }

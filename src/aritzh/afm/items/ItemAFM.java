@@ -12,14 +12,14 @@ import aritzh.afm.AFM;
  */
 class ItemAFM extends Item {
 
-	ItemAFM(int id, String itemName, CreativeTabs tab) {
-		super(id);
-		this.setCreativeTab(tab);
-		this.setUnlocalizedName(itemName);
-	}
+    ItemAFM(final int id, final String itemName, final CreativeTabs tab) {
+        super(id);
+        this.setCreativeTab(tab);
+        this.setUnlocalizedName(itemName);
+    }
 
-	ItemAFM(int id, String itemName) {
-		this(id, itemName, AFM.tabAFM);
-	}
+    ItemAFM(final int id, final String itemName) {
+        this(id, itemName, AFM.tabAFM);
+    }
 
 }

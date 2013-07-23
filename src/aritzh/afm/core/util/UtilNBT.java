@@ -13,25 +13,25 @@ import net.minecraft.nbt.NBTTagString;
  */
 public class UtilNBT {
 
-	public static void addDescriptionToStack(ItemStack is, String description) {
-		NBTTagCompound stackTag = UtilNBT.getISTagCompound(is);
+    public static void addDescriptionToStack(final ItemStack is, final String description) {
+        final NBTTagCompound stackTag = UtilNBT.getISTagCompound(is);
 
-		if (!stackTag.hasKey("display")) {
-			stackTag.setCompoundTag("display", new NBTTagCompound());
-		}
+        if (!stackTag.hasKey("display")) {
+            stackTag.setCompoundTag("display", new NBTTagCompound());
+        }
 
-		NBTTagCompound display = stackTag.getCompoundTag("display");
-		if (!display.hasKey("Lore")) {
-			display.setTag("Lore", new NBTTagList());
-		}
-		display.getTagList("Lore").appendTag(new NBTTagString("AFMDisplayTag", "\u00a7r" + description));
-	}
+        final NBTTagCompound display = stackTag.getCompoundTag("display");
+        if (!display.hasKey("Lore")) {
+            display.setTag("Lore", new NBTTagList());
+        }
+        display.getTagList("Lore").appendTag(new NBTTagString("AFMDisplayTag", "\u00a7r" + description));
+    }
 
-	public static NBTTagCompound getISTagCompound(ItemStack is) {
-		if (!is.hasTagCompound()) {
-			is.stackTagCompound = new NBTTagCompound();
-		}
-		return is.getTagCompound();
-	}
+    public static NBTTagCompound getISTagCompound(final ItemStack is) {
+        if (!is.hasTagCompound()) {
+            is.stackTagCompound = new NBTTagCompound();
+        }
+        return is.getTagCompound();
+    }
 
 }

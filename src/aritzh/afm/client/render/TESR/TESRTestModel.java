@@ -12,14 +12,14 @@ import aritzh.afm.client.render.model.ModelTestModel;
  */
 public class TESRTestModel extends TileEntitySpecialRenderer {
 
-	ModelTestModel model;
+    ModelTestModel model;
 
-	public TESRTestModel() {
-		this.model = new ModelTestModel();
-	}
+    public TESRTestModel() {
+        this.model = new ModelTestModel();
+    }
 
-	@Override
-	public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick) {
-		this.model.render(x, y, z);
-	}
+    @Override
+    public void renderTileEntityAt(final TileEntity tileEntity, final double x, final double y, final double z, final float tick) {
+        this.model.render(x, y, z);
+    }
 }

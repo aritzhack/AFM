@@ -16,16 +16,16 @@ import cpw.mods.fml.common.IWorldGenerator;
  */
 public class WorldGenerator implements IWorldGenerator {
 
-	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+    @Override
+    public void generate(final Random random, final int chunkX, final int chunkZ, final World world, final IChunkProvider chunkGenerator, final IChunkProvider chunkProvider) {
 
-		int times = random.nextInt(4);
+        final int times = random.nextInt(4);
 
-		for (int x = 0; x < times; x++) {
+        for (int x = 0; x < times; x++) {
 
-			int coordX = chunkX * 16 + random.nextInt(16), coordY = random.nextInt(60), coordZ = chunkZ * 16 + random.nextInt(16);
+            final int coordX = chunkX * 16 + random.nextInt(16), coordY = random.nextInt(60), coordZ = chunkZ * 16 + random.nextInt(16);
 
-			new WorldGenMinable(Blocks.oreAFM.blockID, 20).generate(world, random, coordX, coordY, coordZ);
-		}
-	}
+            new WorldGenMinable(Blocks.oreAFM.blockID, 20).generate(world, random, coordX, coordY, coordZ);
+        }
+    }
 }

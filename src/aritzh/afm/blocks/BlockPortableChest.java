@@ -22,41 +22,41 @@ import cpw.mods.fml.relauncher.SideOnly;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class BlockPortableChest extends BlockChest {
-	final Random random = new Random();
+    final Random random = new Random();
 
-	public BlockPortableChest() {
-		super(BlockData.ID_PORTABLE_CHEST, 0); // 0 means not redstone when open AFAIK
-		this.setUnlocalizedName(BlockData.NAME_PORTABLE_CHEST);
-		this.setCreativeTab(AFM.tabAFM);
-	}
+    public BlockPortableChest() {
+        super(BlockData.ID_PORTABLE_CHEST, 0); // 0 means not redstone when open AFAIK
+        this.setUnlocalizedName(BlockData.NAME_PORTABLE_CHEST);
+        this.setCreativeTab(AFM.tabAFM);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Icon getBlockTexture(IBlockAccess blockAccess, int x, int y, int z, int side) {
-		return super.getBlockTexture(blockAccess, x, y, z, side);
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public Icon getBlockTexture(final IBlockAccess blockAccess, final int x, final int y, final int z, final int side) {
+        return super.getBlockTexture(blockAccess, x, y, z, side);
+    }
 
-	@Override
-	public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
-		TEPortableChest te = (TEPortableChest) world.getBlockTileEntity(x, y, z);
-		ItemStack ret = te.crateISFromContent();
+    @Override
+    public void breakBlock(final World world, final int x, final int y, final int z, final int par5, final int par6) {
+        final TEPortableChest te = (TEPortableChest) world.getBlockTileEntity(x, y, z);
+        final ItemStack ret = te.crateISFromContent();
 
-		float dX = this.random.nextFloat() * 0.8F + 0.1F;
-		float dY = this.random.nextFloat() * 0.8F + 0.1F;
+        final float dX = this.random.nextFloat() * 0.8F + 0.1F;
+        final float dY = this.random.nextFloat() * 0.8F + 0.1F;
 
-		EntityItem eItem = new EntityItem(world, x + dX, y + dY, z, ret);
-		eItem.getEntityItem().setTagCompound(ret.getTagCompound());
-		float var15 = 0.05F;
+        final EntityItem eItem = new EntityItem(world, x + dX, y + dY, z, ret);
+        eItem.getEntityItem().setTagCompound(ret.getTagCompound());
+        final float var15 = 0.05F;
 
-		eItem.motionX = (float) this.random.nextGaussian() * var15;
-		eItem.motionY = (float) this.random.nextGaussian() * var15 + 0.2F;
-		eItem.motionZ = (float) this.random.nextGaussian() * var15;
-		world.spawnEntityInWorld(eItem);
-	}
+        eItem.motionX = (float) this.random.nextGaussian() * var15;
+        eItem.motionY = (float) this.random.nextGaussian() * var15 + 0.2F;
+        eItem.motionZ = (float) this.random.nextGaussian() * var15;
+        world.spawnEntityInWorld(eItem);
+    }
 
-	@Override
-	public TileEntity createNewTileEntity(World var1) {
-		return new TEPortableChest();
-	}
+    @Override
+    public TileEntity createNewTileEntity(final World var1) {
+        return new TEPortableChest();
+    }
 
 }

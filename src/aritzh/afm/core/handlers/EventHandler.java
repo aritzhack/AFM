@@ -21,38 +21,38 @@ import cpw.mods.fml.common.network.Player;
  */
 public class EventHandler implements IConnectionHandler {
 
-	@ForgeSubscribe
-	public void onPlayerInteractEvent(PlayerInteractEvent event) {
-		if (!event.entityPlayer.worldObj.isRemote) {
-			AFM.proxy.writeChatMessageToPlayer(event.action.name());
-		}
-	}
+    @ForgeSubscribe
+    public void onPlayerInteractEvent(final PlayerInteractEvent event) {
+        if (!event.entityPlayer.worldObj.isRemote) {
+            AFM.proxy.writeChatMessageToPlayer(event.action.name());
+        }
+    }
 
-	@Override
-	public void playerLoggedIn(Player player, NetHandler netHandler, INetworkManager manager) {
-		if (player instanceof EntityPlayer) {
-			Version.sendChatToPlayer((EntityPlayer) player);
-		}
-	}
+    @Override
+    public void playerLoggedIn(final Player player, final NetHandler netHandler, final INetworkManager manager) {
+        if (player instanceof EntityPlayer) {
+            Version.sendChatToPlayer((EntityPlayer) player);
+        }
+    }
 
-	@Override
-	public String connectionReceived(NetLoginHandler netHandler, INetworkManager manager) {
-		return null;
-	}
+    @Override
+    public String connectionReceived(final NetLoginHandler netHandler, final INetworkManager manager) {
+        return null;
+    }
 
-	@Override
-	public void connectionOpened(NetHandler netClientHandler, String server, int port, INetworkManager manager) {
-	}
+    @Override
+    public void connectionOpened(final NetHandler netClientHandler, final String server, final int port, final INetworkManager manager) {
+    }
 
-	@Override
-	public void connectionOpened(NetHandler netClientHandler, MinecraftServer server, INetworkManager manager) {
-	}
+    @Override
+    public void connectionOpened(final NetHandler netClientHandler, final MinecraftServer server, final INetworkManager manager) {
+    }
 
-	@Override
-	public void connectionClosed(INetworkManager manager) {
-	}
+    @Override
+    public void connectionClosed(final INetworkManager manager) {
+    }
 
-	@Override
-	public void clientLoggedIn(NetHandler clientHandler, INetworkManager manager, Packet1Login login) {
-	}
+    @Override
+    public void clientLoggedIn(final NetHandler clientHandler, final INetworkManager manager, final Packet1Login login) {
+    }
 }

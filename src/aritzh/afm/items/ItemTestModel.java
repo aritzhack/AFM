@@ -15,20 +15,20 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 public class ItemTestModel extends ItemBlock {
 
-	public ItemTestModel(int par1) {
-		super(par1);
-	}
+    public ItemTestModel(final int par1) {
+        super(par1);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon("afm:" + BlockData.NAME_TESTMODEL + "_item");
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(final IconRegister iconRegister) {
+        this.itemIcon = iconRegister.registerIcon("afm:" + BlockData.NAME_TESTMODEL + "_item");
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Icon getIconFromDamage(int par1) {
-		return this.itemIcon;
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public Icon getIconFromDamage(final int par1) {
+        return this.itemIcon;
+    }
 
 }

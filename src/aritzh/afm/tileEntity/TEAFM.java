@@ -11,12 +11,12 @@ import net.minecraft.tileentity.TileEntity;
  */
 public abstract class TEAFM extends TileEntity implements IInventory {
 
-	@Override
-	public void openChest() {
-	}
+    @Override
+    public void openChest() {
+    }
 
-	@Override
-	public void closeChest() {
-	}
+    @Override
+    public void closeChest() {
+    }
 
 }

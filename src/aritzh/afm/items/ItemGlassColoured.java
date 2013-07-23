@@ -13,20 +13,20 @@ import aritzh.afm.data.BlockData;
  */
 public class ItemGlassColoured extends ItemBlock {
 
-	public ItemGlassColoured(int par1) {
-		super(par1);
-		this.setHasSubtypes(true);
-		this.setUnlocalizedName(BlockData.NAME_COLOUREDGLASS);
-	}
+    public ItemGlassColoured(final int par1) {
+        super(par1);
+        this.setHasSubtypes(true);
+        this.setUnlocalizedName(BlockData.NAME_COLOUREDGLASS);
+    }
 
-	@Override
-	public String getUnlocalizedName(ItemStack itemStack) {
-		return this.getUnlocalizedName() + "." + UtilAFM.colorNames[itemStack.getItemDamage()].toLowerCase().replace(" ", "");
-	}
+    @Override
+    public String getUnlocalizedName(final ItemStack itemStack) {
+        return this.getUnlocalizedName() + "." + UtilAFM.colorNames[itemStack.getItemDamage()].toLowerCase().replace(" ", "");
+    }
 
-	@Override
-	public int getMetadata(int damageValue) {
-		return damageValue;
-	}
+    @Override
+    public int getMetadata(final int damageValue) {
+        return damageValue;
+    }
 
 }

@@ -15,20 +15,20 @@ import cpw.mods.fml.client.registry.ClientRegistry;
  */
 public class ClientProxy extends CommonProxy {
 
-	@Override
-	public void writeChatMessageToPlayer(String s) {
-		Minecraft.getMinecraft().thePlayer.addChatMessage(s);
-	}
+    @Override
+    public void writeChatMessageToPlayer(final String s) {
+        Minecraft.getMinecraft().thePlayer.addChatMessage(s);
+    }
 
-	/**
-	 * Registers the textures for blocks and items
-	 */
-	@Override
-	public void registerTexuresAndRenderers() {
+    /**
+     * Registers the textures for blocks and items
+     */
+    @Override
+    public void registerTexuresAndRenderers() {
 
-		AFMLogger.debug("Registering renderers");
-		ClientRegistry.bindTileEntitySpecialRenderer(TETestModel.class, new TESRTestModel());
-		RenderingData.init();
-	}
+        AFMLogger.debug("Registering renderers");
+        ClientRegistry.bindTileEntitySpecialRenderer(TETestModel.class, new TESRTestModel());
+        RenderingData.init();
+    }
 
 }

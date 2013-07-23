@@ -15,17 +15,17 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 public abstract class BlockAFM extends Block {
 
-	public BlockAFM(int id, String blockName) {
-		this(id, blockName, Material.rock);
-	}
+    public BlockAFM(final int id, final String blockName) {
+        this(id, blockName, Material.rock);
+    }
 
-	public BlockAFM(int id, String blockName, Material material) {
-		super(id, material);
-		this.setUnlocalizedName(blockName);
-		this.setCreativeTab(AFM.tabAFM);
-	}
+    public BlockAFM(final int id, final String blockName, final Material material) {
+        super(id, material);
+        this.setUnlocalizedName(blockName);
+        this.setCreativeTab(AFM.tabAFM);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public abstract void registerIcons(IconRegister iconRegister);
+    @Override
+    @SideOnly(Side.CLIENT)
+    public abstract void registerIcons(IconRegister iconRegister);
 }

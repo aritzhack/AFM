@@ -16,31 +16,31 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 public class TabAFM extends CreativeTabs {
 
-	public TabAFM(int par1) {
-		super(par1, "tabAFM");
-	}
+    public TabAFM(final int par1) {
+        super(par1, "tabAFM");
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public String getTranslatedTabLabel() {
-		return "Tab AFM";
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public String getTranslatedTabLabel() {
+        return "Tab AFM";
+    }
 
-	@Override
-	public ItemStack getIconItemStack() {
-		return new ItemStack(Blocks.oreAFM);
-	}
+    @Override
+    public ItemStack getIconItemStack() {
+        return new ItemStack(Blocks.oreAFM);
+    }
 
-	@SuppressWarnings("rawtypes")
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void displayAllReleventItems(List list) {
-		super.displayAllReleventItems(list);
-		// Here are added the items that have some special properties
+    @SuppressWarnings("rawtypes")
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void displayAllReleventItems(final List list) {
+        super.displayAllReleventItems(list);
+        // Here are added the items that have some special properties
 
-		// ItemStack i1 = new ItemStack(Blocks.tintedGlass, 1, 0);
-		// UtilAFM.addDescriptionToStack(i1, i1.getItemName());
-		// list.add(i1);
-	}
+        // ItemStack i1 = new ItemStack(Blocks.tintedGlass, 1, 0);
+        // UtilAFM.addDescriptionToStack(i1, i1.getItemName());
+        // list.add(i1);
+    }
 
 }

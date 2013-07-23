@@ -1,6 +1,6 @@
 package aritzh.afm.proxy;
 
-//import aritzh.afm.tileEntity.TEAFMTank;
+// import aritzh.afm.tileEntity.TEAFMTank;
 import aritzh.afm.tileEntity.TEFabricator;
 import aritzh.afm.tileEntity.TEPortableChest;
 import aritzh.afm.tileEntity.TESharedWorkbench;
@@ -16,19 +16,19 @@ import cpw.mods.fml.common.registry.GameRegistry;
  */
 public class CommonProxy {
 
-	public void registerTexuresAndRenderers() {
-	}
+    public void registerTexuresAndRenderers() {
+    }
 
-	public void writeChatMessageToPlayer(String s) {
-	}
+    public void writeChatMessageToPlayer(final String s) {
+    }
 
-	public void registerTileEntities() {
-		GameRegistry.registerTileEntity(TETestModel.class, "AFMTETestModel");
-		GameRegistry.registerTileEntity(TETestChest.class, "tileEntity.afm.testChest");
-		GameRegistry.registerTileEntity(TESharedWorkbench.class, "tileEntity.afm.sharedCrafting");
-		GameRegistry.registerTileEntity(TEFabricator.class, "tileEntity.afm.fabricator");
-		GameRegistry.registerTileEntity(TEPortableChest.class, "tileEntity.afm.portableChest");
-		//GameRegistry.registerTileEntity(TEAFMTank.class, "tileEntity.afm.tank");
-	}
+    public void registerTileEntities() {
+        GameRegistry.registerTileEntity(TETestModel.class, "AFMTETestModel");
+        GameRegistry.registerTileEntity(TETestChest.class, "tileEntity.afm.testChest");
+        GameRegistry.registerTileEntity(TESharedWorkbench.class, "tileEntity.afm.sharedCrafting");
+        GameRegistry.registerTileEntity(TEFabricator.class, "tileEntity.afm.fabricator");
+        GameRegistry.registerTileEntity(TEPortableChest.class, "tileEntity.afm.portableChest");
+        // GameRegistry.registerTileEntity(TEAFMTank.class, "tileEntity.afm.tank");
+    }
 
 }

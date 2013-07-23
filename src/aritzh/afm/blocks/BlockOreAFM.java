@@ -24,36 +24,36 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 public class BlockOreAFM extends BlockAFM {
 
-	public BlockOreAFM() {
-		super(BlockData.ID_ORE, BlockData.NAME_ORE_AFM);
-		this.setLightValue(1.0F);
-	}
+    public BlockOreAFM() {
+        super(BlockData.ID_ORE, BlockData.NAME_ORE_AFM);
+        this.setLightValue(1.0F);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister iconRegister) {
-		this.blockIcon = iconRegister.registerIcon(String.format("afm:%s", BlockData.NAME_ORE_AFM));
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(final IconRegister iconRegister) {
+        this.blockIcon = iconRegister.registerIcon(String.format("afm:%s", BlockData.NAME_ORE_AFM));
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Icon getBlockTexture(IBlockAccess blockAccess, int x, int y, int z, int side) {
-		return this.blockIcon;
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public Icon getBlockTexture(final IBlockAccess blockAccess, final int x, final int y, final int z, final int side) {
+        return this.blockIcon;
+    }
 
-	public void initRecipes() {
-		GameRegistry.addSmelting(Blocks.oreAFM.blockID, new ItemStack(Items.quartz), 0.1F);
-	}
+    public void initRecipes() {
+        GameRegistry.addSmelting(Blocks.oreAFM.blockID, new ItemStack(Items.quartz), 0.1F);
+    }
 
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float f, float g, float t) {
+    @Override
+    public boolean onBlockActivated(final World world, final int x, final int y, final int z, final EntityPlayer player, final int i, final float f, final float g, final float t) {
 
-		Random r = new Random();
+        final Random r = new Random();
 
-		RandomNumberPacket rnPacket = new RandomNumberPacket(r.nextInt(), r.nextInt());
-		AFMPacket.sendPacketToServer(rnPacket);
+        final RandomNumberPacket rnPacket = new RandomNumberPacket(r.nextInt(), r.nextInt());
+        AFMPacket.sendPacketToServer(rnPacket);
 
-		return true;
-	}
+        return true;
+    }
 
 }

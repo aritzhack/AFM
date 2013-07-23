@@ -22,36 +22,36 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 public class BlockSharedWorkbench extends BlockContainerAFM {
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	// Do nothing because we don't need to register any icon
-	public void registerIcons(IconRegister par1IconRegister) {
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    // Do nothing because we don't need to register any icon
+    public void registerIcons(final IconRegister par1IconRegister) {
+    }
 
-	public BlockSharedWorkbench() {
-		super(BlockData.ID_SHAREDWORKBENCH, BlockData.NAME_SHARED_WORKBENCH, Material.wood);
-	}
+    public BlockSharedWorkbench() {
+        super(BlockData.ID_SHAREDWORKBENCH, BlockData.NAME_SHARED_WORKBENCH, Material.wood);
+    }
 
-	@Override
-	public TileEntity createNewTileEntity(World var1) {
-		return new TESharedWorkbench();
-	}
+    @Override
+    public TileEntity createNewTileEntity(final World var1) {
+        return new TESharedWorkbench();
+    }
 
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float f, float g, float t) {
+    @Override
+    public boolean onBlockActivated(final World world, final int x, final int y, final int z, final EntityPlayer player, final int i, final float f, final float g, final float t) {
 
-		TileEntity te = world.getBlockTileEntity(x, y, z);
+        final TileEntity te = world.getBlockTileEntity(x, y, z);
 
-		if (te == null || player.isSneaking()) return false;
+        if (te == null || player.isSneaking()) return false;
 
-		player.openGui(AFM.afm, GUIData.ID_SHAREDWORKBENCH, world, x, y, z);
-		return true;
-	}
+        player.openGui(AFM.afm, GUIData.ID_SHAREDWORKBENCH, world, x, y, z);
+        return true;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int metadata) {
-		return Block.workbench.getIcon(side, metadata);
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public Icon getIcon(final int side, final int metadata) {
+        return Block.workbench.getIcon(side, metadata);
+    }
 
 }

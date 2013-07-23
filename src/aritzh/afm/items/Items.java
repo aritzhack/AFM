@@ -10,12 +10,12 @@ import aritzh.afm.core.AFMLogger;
  */
 public class Items {
 
-	public static ItemQuartz quartz;
+    public static ItemQuartz quartz;
 
-	public static void init() {
+    public static void init() {
 
-		AFMLogger.debug("Initializing items");
+        AFMLogger.debug("Initializing items");
 
-		Items.quartz = new ItemQuartz();
-	}
+        Items.quartz = new ItemQuartz();
+    }
 }
