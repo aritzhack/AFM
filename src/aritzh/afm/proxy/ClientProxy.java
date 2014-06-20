@@ -1,5 +1,7 @@
 package aritzh.afm.proxy;
 
+import aritzh.afm.client.render.TESR.TESRWireless;
+import aritzh.afm.tileEntity.TEWireless;
 import net.minecraft.client.Minecraft;
 import aritzh.afm.client.render.TESR.TESRTestModel;
 import aritzh.afm.core.AFMLogger;
@@ -28,6 +30,7 @@ public class ClientProxy extends CommonProxy {
 
         AFMLogger.debug("Registering renderers");
         ClientRegistry.bindTileEntitySpecialRenderer(TETestModel.class, new TESRTestModel());
+        ClientRegistry.bindTileEntitySpecialRenderer(TEWireless.class, new TESRWireless());
         RenderingData.init();
     }
 

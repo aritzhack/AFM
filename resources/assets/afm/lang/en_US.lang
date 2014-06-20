@@ -11,6 +11,9 @@ tile.AFMFabricator.name=Fabricator
 tile.AFMTank.name=Tank
 tile.AFMPortableChest.name=Portable chest
 tile.AFMBetterTorch.name=Torch
+tile.AFMFrameMotor.name=Frame Motor
+tile.AFMWireless.name=Wireless
+tile.AFMFrame.name=Frame
 
 tile.AFMTintedGlass.white.name=White tinted glass
 tile.AFMTintedGlass.orange.name=Orange tinted glass
@@ -52,8 +55,9 @@ tile.AFMColouredGlass.black.name=Black coloured glass
 ###################### Items ######################
 ###################################################
 
-item.quartz.name=Quartz
+item.AFMQuartz.name=Quartz
 item.AFMPortableChest.name=Portable chest
+item.AFMScrewdriver.name=Screwdriver
 #item..name=
 
 ###################################################

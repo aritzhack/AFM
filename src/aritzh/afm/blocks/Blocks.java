@@ -26,6 +26,9 @@ public class Blocks {
     public static BlockPortableChest portableChest;
     public static BlockFabricator fabricator;
     public static BlockTank tank;
+    public static BlockFrameMotor frameMotor;
+    public static BlockWireless wireless;
+    public static BlockFrame frame;
 
     public static BlockBetterTorch betterTorch;
 
@@ -43,6 +46,10 @@ public class Blocks {
         Blocks.laser = new BlockLaser();
         Blocks.portableChest = new BlockPortableChest();
         Blocks.tank = new BlockTank();
+
+        Blocks.frameMotor = new BlockFrameMotor();
+        Blocks.wireless = new BlockWireless();
+        Blocks.frame = new BlockFrame();
 
         Blocks.betterTorch = new BlockBetterTorch();
 
@@ -63,6 +70,9 @@ public class Blocks {
         GameRegistry.registerBlock(Blocks.tank, BlockData.NAME_TANK);
 
         GameRegistry.registerBlock(Blocks.betterTorch, BlockData.NAME_BETTER_TORCH);
+        GameRegistry.registerBlock(Blocks.frameMotor, BlockData.NAME_FRAME_MOTOR);
+        GameRegistry.registerBlock(Blocks.wireless, BlockData.NAME_WIRELESS);
+        GameRegistry.registerBlock(Blocks.frame, BlockData.NAME_FRAME);
     }
 
     public static void addRecipes() {

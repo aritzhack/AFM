@@ -1,9 +1,9 @@
 package aritzh.afm.data;
 
-import java.io.File;
-
-import net.minecraftforge.common.Configuration;
 import aritzh.afm.core.Version;
+import net.minecraftforge.common.Configuration;
+
+import java.io.File;
 
 /**
  * Properties
@@ -13,8 +13,6 @@ import aritzh.afm.core.Version;
  */
 public final class Config {
 
-    public static final String MODEL_DIR = "/assets/afm/models";
-    public static final String MODEL_TEX_DIR = "textures/models";
     public static final String LANG_DIR = "assets/afm/lang/";
     private static Configuration config;
 

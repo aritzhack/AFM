@@ -94,7 +94,7 @@
 			</copy>
 		</target>
 		
-		<target name="Build mod" description="Builds the mod and copies jars and sources to the dropbox folder inside drive c:" depends="Compile and Build, Copy distr to dropbox"></target>
+		<target name="Build mod" description="Builds the mod and copies jars and sources to the dropbox folder inside drive c:" depends="Compile and Build, Copy distr to dropbox" />
 
 		<target name="Increment major version" description="Increases major version number (X.Y.Z-> X+1.Y.Z)">
 			<propertyfile file="build.number">

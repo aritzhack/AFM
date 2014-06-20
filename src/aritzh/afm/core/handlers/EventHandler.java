@@ -1,17 +1,17 @@
 package aritzh.afm.core.handlers;
 
+import aritzh.afm.core.Version;
+import cpw.mods.fml.common.network.IConnectionHandler;
+import cpw.mods.fml.common.network.Player;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.NetLoginHandler;
 import net.minecraft.network.packet.NetHandler;
 import net.minecraft.network.packet.Packet1Login;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ChatMessageComponent;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import aritzh.afm.AFM;
-import aritzh.afm.core.Version;
-import cpw.mods.fml.common.network.IConnectionHandler;
-import cpw.mods.fml.common.network.Player;
 
 /**
  * EventHandler
@@ -24,7 +24,7 @@ public class EventHandler implements IConnectionHandler {
     @ForgeSubscribe
     public void onPlayerInteractEvent(final PlayerInteractEvent event) {
         if (!event.entityPlayer.worldObj.isRemote) {
-            AFM.proxy.writeChatMessageToPlayer(event.action.name());
+            event.entityPlayer.sendChatToPlayer(new ChatMessageComponent().func_111079_a(event.action.name()));
         }
     }
 

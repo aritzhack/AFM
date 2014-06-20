@@ -1,17 +1,18 @@
 package aritzh.afm.core;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.Properties;
-import java.util.logging.Level;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatMessageComponent;
-import net.minecraftforge.common.ForgeVersion;
+import aritzh.afm.core.util.Formatting;
 import aritzh.afm.core.util.UtilAFM;
 import aritzh.afm.data.Config;
 import aritzh.afm.data.Strings;
 import cpw.mods.fml.common.Loader;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatMessageComponent;
+import net.minecraftforge.common.ForgeVersion;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.Properties;
+import java.util.logging.Level;
 
 /**
  * Version
@@ -61,14 +62,13 @@ public class Version implements Runnable {
         }
         if (ForgeVersion.buildVersion < builtWithBuildVersion) {
             AFMLogger.localize(Strings.OUTDATED_FORGE, Version.C_FORGE_VERSION, this.FORGE_VERSION);
-        } else {
         }
     }
 
     private String checkModVersionState() {
         this.mcVersion = Loader.instance().getMCVersionString().split(" ")[1];
 
-        this.getRecommendedVersion();
+        if(com.google.common.base.Strings.isNullOrEmpty(this.getRecommendedVersion())) return "";
 
         final int compBuild = this.getBuildNumber(Version.MOD_VERSION);
         final int recBuild = this.getBuildNumber(this.recommendedAfmVersion);
@@ -81,7 +81,7 @@ public class Version implements Runnable {
             this.modState = State.OUTDATED;
             final String s = UtilAFM.localize(Strings.OUTDATED_MOD, Version.MOD_VERSION, this.recommendedAfmVersion, this.mcVersion, this.recommendedAfmVersionURL);
             AFMLogger.log(s);
-            return "\u00a72" + s;
+            return Formatting.DARK_GREEN + s;
         } else {
             this.modState = State.UPTODATE;
             AFMLogger.localize(Strings.UPTODATE_MOD);
@@ -89,7 +89,7 @@ public class Version implements Runnable {
         return "";
     }
 
-    private void getRecommendedVersion() {
+    private String getRecommendedVersion() {
         try {
             final Properties p = new Properties();
             p.load(new URL(this.REMOTE_VERSION_FILE).openStream());
@@ -97,13 +97,14 @@ public class Version implements Runnable {
                 final String[] split = p.getProperty(this.mcVersion).split(":");
                 this.recommendedAfmVersion = split[0];
                 this.recommendedAfmVersionURL = split[1];
-                return; // Just in case...
+                return this.recommendedAfmVersion;
             } else {
                 this.modState = State.ERRORED;
             }
         } catch (final IOException ioe) {
             this.modState = State.ERRORED;
         }
+        return null;
     }
 
     private int getBuildNumber(final String verString) {
@@ -117,13 +118,13 @@ public class Version implements Runnable {
     }
 
     public static void sendChatToPlayer(final EntityPlayer player) {
-        new Thread(new Version(player)).start();
+        new Thread(new Version(player), Config.MOD_ID + "-Version").start();
     }
 
     @Override
     public void run() {
         final String s = this.checkVersion();
-        if (Config.displayVersionMessageInChat && !s.equals("")) {
+        if (Config.displayVersionMessageInChat && !com.google.common.base.Strings.isNullOrEmpty(s)) {
             this.player.sendChatToPlayer(new ChatMessageComponent().func_111079_a(s));
         }
     }
